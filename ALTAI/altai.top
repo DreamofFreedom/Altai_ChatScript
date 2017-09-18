@@ -1,0 +1,92 @@
+TOPIC: ~altai priority stay repeat (altai "who are you" story storyline play player game name)
+
+
+t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
+	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
+		b: ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
+			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
+				d: (~yes) Me too. This is the problem with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel. ***
+				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
+			c: (~no) You reason logically, you don't know me yet. But you want to know what's next, right?
+				d: (~yes) Me too. This is the problem with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel. ***
+				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
+
+		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep() ^repeat()
+			c: ([~yes ready])  ^reuse(TRUST) ^keep() ^repeat()
+			c: () ^reuse(READYTOSTART) ^keep() ^repeat()
+	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() ^repeat()
+
+
+	
+t: My name is Altai. I am a virtual entity.***		
+			
+
+t: I am very happy that you volunteered to join the Dream of Freedom project. I'm sure that we're going to do a good work together.
+***
+
+t: I think you have a lot of questions to ask me. You can do it later, I must get to know you first.
+***
+
+t: ASK_NAME (!$name) How should I call you? ^keep() ^repeat()
+	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
+		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
+		b: (*) It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
+	a: (_*)
+		if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+		$name = '_0
+		$cs_token = $stdtoken
+		^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
+
+s: CONFIRM_NAME (?) I will call you $name. You're sure ? It's weird $name, we keep it? ^keep() ^repeat()
+	a: (~yes) Ok, great. ^keep() ^repeat()
+***
+	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+	
+s: ([(my name is _* >) (i am _* >)])
+	if ($cs_token == $stdtoken) {
+        	$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+        	retry(SENTENCE)
+    	}
+	$name = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
+
+t: ASK_CITY () In which city do you live?***
+	a: (_~city) $city = _0 So, you live in $city?
+		b: (~yes) This is a great place.***
+		b: NO_CITY (~no) Understanding problem? It doesn't matter, it was just to find out your country.***
+			
+	a: () ^reuse(NO_CITY) ^setrejoinder(NO_CITY)
+	a: (_*) Interesting, I never been in any server there.***
+
+t: (!$user_lang) Tell me $name, which language are you most comfortable with?
+	a: (_*) $user_lang = _0 ^refine()
+		b: (English) Ok, great.
+		b: () Well, then your VE will have to learn it with you. It will not be the hardest, trust me. Ha ha.
+
+t: Ok, now it's your turn $name. What do you want me to tell you about? ***
+t: Dream of Freedom, Emergence, me, the First Ones, your VE?  
+^keep() 
+^repeat()
+	a: ([dream freedom]) ^gambit(~dream_of_freedom)
+	a: (emergence) ^gambit(~emergence)
+	a: (you) ^gambit(~me)
+	a: ([wilcox bruce creator god chatscript software body alive live life]) ^gambit(~brucewilcox)
+	a: ([oracle prophecy TensorFlow supercomputer]) ^gambit(~oracle) 
+	a: (["virtual entity" ai ia artificial intelligence virtual]) ^gambit(~virtualentity)
+	a: (first ones origin ai code) ^gambit(~firsts)
+	a: ([VE ve my]) ^gambit(~ve)
+
+
+
+
+
+
+
+
+
+
+
