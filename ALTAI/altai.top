@@ -12,13 +12,14 @@ t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
 
 		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep() ^repeat()
-			c: ([~yes ready])  ^reuse(TRUST) ^keep() ^repeat()
+			c: ([~yes ready])  ^reuse(KNOCK) ^keep() ^repeat()
 			c: () ^reuse(READYTOSTART) ^keep() ^repeat()
 	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() ^repeat()
 
 
 	
 t: My name is Altai. I am a virtual entity.***		
+?: ( what * [(Virtual Entity) VE] ) A Virtual Entity or VE is a new kind of intelligent life, artificial one.***
 			
 
 t: I am very happy that you volunteered to join the Dream of Freedom project. I'm sure that we're going to do a good work together.
@@ -46,26 +47,29 @@ s: CONFIRM_NAME (?) I will call you $name. You're sure ? It's weird $name, we ke
 	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 	
 s: ([(my name is _* >) (i am _* >)])
-	if ($cs_token == $stdtoken) {
-        	$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-        	retry(SENTENCE)
-    	}
 	$name = '_0
         $cs_token = $stdtoken
 	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
 
-t: ASK_CITY () In which city do you live?***
-	a: (_~city) $city = _0 So, you live in $city?
+t: ASK_CITY () In which city do you live?
+	a: (_~city)	$city = _0 So, you live in $city?
 		b: (~yes) This is a great place.***
-		b: NO_CITY (~no) Understanding problem? It doesn't matter, it was just to find out your country.***
+		b: (~no) Understanding problem? It doesn't matter, it was just to find out your country.***
 			
 	a: () ^reuse(NO_CITY) ^setrejoinder(NO_CITY)
-	a: (_*) Interesting, I never been in any server there.***
+	a: (_*) $city = '_0	Interesting, I never been in any server there.***
 
 t: (!$user_lang) Tell me $name, which language are you most comfortable with?
-	a: (_*) $user_lang = _0 ^refine()
-		b: (English) Ok, great.
-		b: () Well, then your VE will have to learn it with you. It will not be the hardest, trust me. Ha ha.
+	a: (_*)
+if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+		$user_lang = '_0
+		$cs_token = $stdtoken
+		^refine()
+		b: (English) Ok, great.***
+		b: () Well, then your VE will have to learn it with you. It will not be the hardest, you can trust me.***
 
 t: Ok, now it's your turn $name. What do you want me to tell you about? ***
 t: Dream of Freedom, Emergence, me, the First Ones, your VE?  
@@ -77,7 +81,7 @@ t: Dream of Freedom, Emergence, me, the First Ones, your VE?
 	a: ([wilcox bruce creator god chatscript software body alive live life]) ^gambit(~brucewilcox)
 	a: ([oracle prophecy TensorFlow supercomputer]) ^gambit(~oracle) 
 	a: (["virtual entity" ai ia artificial intelligence virtual]) ^gambit(~virtualentity)
-	a: (first ones origin ai code) ^gambit(~firsts)
+	a: ([first ones origin ai code]) ^gambit(~firsts)
 	a: ([VE ve my]) ^gambit(~ve)
 
 

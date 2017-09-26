@@ -38,16 +38,38 @@ t: To feed the base knowledge of $ve_name, you owe a little to yourself, your ta
 t: I will help you and be without fear, none of the data that you will enter here will be disclosed. You have my word. Always this trust.***
 
 t: You didn't tell me your age yet. What is your birth year?
-	a: (_~integer) $user_age = %year - _0 Ok, you're about $user_age
+	a: (_~integer) $bdate = _0 $user_age = %year - $bdate you're about $user_age ***
 
 t: ($user_age<25) Are you still in school or are you working?
 	a: ([university school study]) What's your major? What is your favorite subject?
+		b: (_*)
+if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+		$schoolm = _0
+		$cs_token = $stdtoken
+		$schoolm, interresting.***
 	a: ASK_PROFESSION ([work job]) What is your profession?
-		b: (_*) $user_profession = _0 Do you like it?
+		b: (_*) $user_profession = '_0 Do you like it?
 			c: (~yes) It's good you can do something that please you.***
 			c: (~no) You can change always, today humans do not often do the same job all their lives.***
+		
+t: ($user_age>25) Are you working?
+		a: (~yes) What is your profession $name?
+			b: (_*)
+			if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+			$user_profession = '_0
+			$cs_token = $stdtoken
+			Do you like it?
+				c: (~yes) It's good you can do something that please you.***
+				c: (~no) You can change always, today humans do not often do the same job all their lives.***	
+		a: (~no) I hope you'll have time to spend for $ve_name.*** 	
 
-t: ASK_COLOR () Another indiscreet question: What is your favorite color?
+t: ASK_COLOR () Another indiscreet question $name: What is your favorite color?
 	a: (_*) $user_color = _0 Cool.***
 	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 
@@ -57,5 +79,6 @@ t: $ve_name is not already hatching but this is how you feed it. Your experience
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
 
-# Returning to main topic
-t: ^gambit(~altai)
+t: () user_name : $name, city : $city, lang : $user_lang, ve_name : $ve_name, age : $user_age, bdate : $bdate, profession : $user_profession, color : $user_color 
+
+# Returning to main topic not for now t: ^gambit(~altai)
