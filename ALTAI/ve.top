@@ -94,14 +94,7 @@ $$jsonmyvar.profession = $user_profession
 $$jsonmyvar.color = $user_color
 $$jsonmyvar.schoolm = $schoolm
 
-outputmacro: ^postMyMessage($_data)
-{
-$_url = ^"https://utopia-35a8b.firebaseio.com/users.json?auth=<lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd>"
-$_response = ^jsonopen(transient POST $_data $_url) 
-^return($_response)
-}
-
-$_response = ^postMyMessage($$jsontest) 
+^jsonopen(transient POST $$jsonmyvar 'https://utopia-35a8b.firebaseio.com/users.json?auth=<lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd>') 
 
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
