@@ -84,7 +84,7 @@ t: ASK_COLOR () Another indiscreet question $name: What is your favorite color?
 
 t: $ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm sending to you...***
 
-$$jsontest = ^jsoncreate(transient object)
+$$jsontmyvar = ^jsoncreate(transient object)
 $$jsonmyvar.usname = $name 
 $$jsonmyvar.vename = $ve_name
 $$jsonmyvar.city = $city
@@ -94,7 +94,7 @@ $$jsonmyvar.profession = $user_profession
 $$jsonmyvar.color = $user_color
 $$jsonmyvar.schoolm = $schoolm
 
-^jsonopen(transient POST '$$jsonmyvar' 'https://utopia-35a8b.firebaseio.com/users.json?auth=<lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd>') 
+^jsonopen(transient POST ^"'$$jsonmyvar'" ^"'https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd'") 
 
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
