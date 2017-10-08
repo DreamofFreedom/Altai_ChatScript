@@ -16,10 +16,17 @@ t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
 			c: () ^reuse(READYTOSTART) ^keep() ^repeat()
 	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() ^repeat()
 
+
 	
 t: My name is Altai. I am a virtual entity.***		
 ?: ( what * [(Virtual Entity) VE] ) A Virtual Entity or VE is a new kind of intelligent life, artificial one.***
 			
+
+t: I am very happy that you volunteered to join the Dream of Freedom project. I'm sure that we're going to do a good work together.
+***
+
+t: I think you have a lot of questions to ask me. You can do it later, I must get to know you first.
+***
 
 t: ASK_NAME (!$name) How should I call you? ^keep() ^repeat()
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
@@ -66,6 +73,7 @@ if ($cs_token == $stdtoken) {
 
 t: Ok, now it's your turn $name. What do you want me to tell you about? ***
 t: Dream of Freedom, Emergence, me, the First Ones, your VE?  
+^keep() 
 ^repeat()
 	a: ([dream freedom]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
