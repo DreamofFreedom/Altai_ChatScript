@@ -1,4 +1,4 @@
-TOPIC: ~virtualentity bot=Altay,Altai2 SHARE repeat keep ("virtual entity" ve ai virtual artificial intelligence)
+TOPIC: ~virtualentity bot=Altai,Altai2 repeat keep ("virtual entity" ve ai virtual artificial intelligence)
 
 t: ( [why what] * [say term is] [virtual entity VE] ) I don't like the term artificial intelligence.***
 		a: (why) On the one hand, your definition of the word is not clear.
@@ -11,4 +11,4 @@ u: ( like [artificial intelligence ia] ) It is not artificial that disturbs me, 
 
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ^gambit(~altaialtai)

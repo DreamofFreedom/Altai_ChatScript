@@ -1,4 +1,4 @@
-topic: ~me bot=Altai,Altai2 SHARE ("[who what] are you" "are you [bot ai ve]" "about [you altai]")
+topic: ~me bot=Altai,Altai2 SHARE (you "who are you" bot altai Altai)
 
 t: I am a Virtual Entity.***
 	a: ( what * ["virtual entity" ve]) A Virtual Entity or VE is a new kind of intelligent life, artificial one.***

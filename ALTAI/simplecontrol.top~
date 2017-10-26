@@ -16,6 +16,8 @@ harry
 
 topic: ~control system ()
 
+# on startup check if altai is finish
+
 # on startup, do introduction
 u: ( %input<%userfirstline) 
 	gambit(~altai)

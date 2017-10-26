@@ -1,7 +1,7 @@
 # this is the topic for anything that has no obvious topic. 
 # it is called directly from the control script when everything else fails.
 
-topic: ~keywordless bot=Altai nostay()
+topic: ~keywordlessa nostay()
 
 u: (< say _*) keep() repeat() '_0
 
@@ -12,7 +12,7 @@ u: (< say _*) keep() repeat() '_0
 #! yes, if user just says OK or yes or continue, then move along and give control to bot
 u: ( < [~yesanswer ~more]>) ^keep() gambit($$currenttopic) # current topic gets to continue
 
-?: (what is a _*1 >) keep() $$tmp = _0
+?: (!oracle what is a _*1 >) keep() $$tmp = _0
 	 $$url = ^"\"https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&exintro=&explaintext=&format=json&titles=$$tmp\""
 	 $$user_agent = ^"myemail@hotmail.com User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)"
 	 $$tmp = ^jsonopen(GET $$url "" $$user_agent)

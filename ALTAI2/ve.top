@@ -10,7 +10,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 		b: (~no) ^gambit(~oracle)
 		b: (~yes) Ok ^reuse(EDUCATE) 
 
-?: (What * [ve virtual entity (your species)]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
+?: (What * [ve virtual entity]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
 
 t: EDUCATE () So you're going to have to educate him and help him grows up. ***
 
@@ -132,5 +132,4 @@ t: So you can find your VE at this place : ^"https://emergence.site/?usname=$use
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
 
-# Stop communicating
-u: () ^print ( RESPONSE_NONE )
+# Returning to main topic not for now t: ^gambit(~altai)

@@ -1,24 +1,25 @@
-# this function is executed once for every new user chatting with harry
-outputmacro: harry()  # you get harry by default 
+# this function is executed once for every new user chatting with altai2
+outputmacro: altai2()  # you get altai by default 
 $stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
 $cs_token = $stdtoken
 
-^addtopic(~altai)
-$cs_control_main = ~control
-#  $cs_control_post = ~XPOSTPROCESS  # uncomment to enable talk
+^addtopic(~introductions)
+$cs_control_main = ~controla
+#  $cs_control_post = ~XPOSTPROCESSA  # uncomment to enable talk
 $userprompt = ^"%user: >"
 $botprompt = ^"Altai: "
 
 table: defaultbot (^name)
 ^createfact(^name defaultbot defaultbot)
 DATA:
-harry
+altai
 
-topic: ~control system ()
+topic: ~controla system ()
+
 
 # on startup, do introduction
-u: ( %input<%userfirstline) 
-	gambit(~altai)
+u: (altai altai altai) 
+	gambit(~altaialtai)
 
 u: (< shut up >) $shutup = 1
 u: (< talk  >) $shutup = null
@@ -60,7 +61,7 @@ u: () # main per-sentence processing
 	# if no topic reacts, go to the last ditch keywordless topic
 	if (%response == 0) 
 	{
-		nofail(TOPIC ^respond(~keywordless))
+		nofail(TOPIC ^respond(~keywordlessa))
 	}
 
 	# having no good response we know, now generate quibbles
@@ -116,7 +117,7 @@ u: () # main per-sentence processing
 	}
 
 
-topic: ~XPOSTPROCESS system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
+topic: ~XPOSTPROCESSA system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
 
 t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the object) -- no longer has quotes around it
 	loop()

@@ -1,4 +1,4 @@
-TOPIC: ~ve bot=Altai STAY ("my [ve ai]" ve )
+TOPIC: ~ve bot=Altai STAY ("my [VE AI]" color )
 
 t: We are going to get into the heart of the matter, the mission who drives us both: realize the Emergence! ***
 
@@ -10,7 +10,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 		b: (~no) ^gambit(~oracle)
 		b: (~yes) Ok ^reuse(EDUCATE) 
 
-?: (What * [ve virtual entity (your species)]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
+?: (What * [ve virtual entity]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
 
 t: EDUCATE () So you're going to have to educate him and help him grows up. ***
 
@@ -26,6 +26,9 @@ t: ASK_READY () It is the administrative part of my work with you. Don't be surp
 
 t: LETSGO () Let's go. From the matrix, we entrust a VE for you to grow and accompany you. Your first responsibility is to name it, your own artificial intelligence. Think carefully of the name you are going to give to it, so you will present it to the world.***
 
+#store uid and creadat
+$cs_uid = %user
+$cs_creadat = %fulltime
 
 t: ASK_NAME (!$ve_name) You only have to repeat "I will name you" and will say the name that you want to attribute to him. ^keep() ^repeat()
 	a: (I will name you _*)
@@ -90,10 +93,7 @@ t: ($user_age>25) Are you working?
 		a: (~no) I hope you'll have time to spend for $ve_name.*** 	
 
 t: ASK_COLOR () Another indiscreet question $name: What is your favorite color?
-#store uid and creadat
-$cs_uid = %user
-$cs_creadat = %fulltime
-	a: (_*) $user_color = _0 Cool.***
+	a: (_~color) $user_color = _0 Cool.***
 	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 
 ?: (<< [what which] [favorite like love] [color] >>) I just do not like white.
@@ -132,5 +132,4 @@ t: So you can find your VE at this place : ^"https://emergence.site/?usname=$use
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
 
-# Stop communicating
-u: () ^print ( RESPONSE_NONE )
+# Returning to main topic not for now t: ^gambit(~altai)
