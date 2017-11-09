@@ -13,4 +13,12 @@ Bruce Wilcox decided to continue developing a software project that others would
 u: ( $bruce_intro [what work project] ) ^reuse(BRUCE_WHAT)
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

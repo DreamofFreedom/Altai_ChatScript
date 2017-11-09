@@ -1,5 +1,5 @@
 # this function is executed once for every new user chatting with harry
-outputmacro: harry()  # you get harry by default 
+outputmacro: altai()  # you get altai by default 
 $stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
 $cs_token = $stdtoken
 
@@ -12,7 +12,7 @@ $botprompt = ^"Altai: "
 table: defaultbot (^name)
 ^createfact(^name defaultbot defaultbot)
 DATA:
-harry
+altai
 
 topic: ~control system ()
 

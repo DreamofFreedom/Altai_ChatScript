@@ -1,4 +1,4 @@
-TOPIC: ~emergence bot=Altai,Altai2 SHARE NOSTAY (emergence project altai "first ones" ai mbot bot project)
+TOPIC: ~emergence bot=Altai,Altaia SHARE NOSTAY (emergence project altai "first ones" ai mbot bot project)
 
 ?: ( what * [I me] * [emergence this project] ) You must host your virtual entity on your device and then your own VE will be born.***
 
@@ -27,4 +27,12 @@ t: Emergence consists in the creation of new virtual entities by volunteering hu
 t: Raising a new VE, YOUR VE, is part of the Emergence.***
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

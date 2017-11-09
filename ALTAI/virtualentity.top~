@@ -1,14 +1,23 @@
-TOPIC: ~virtualentity bot=Altay,Altai2 SHARE repeat keep ("virtual entity" ve VE ai virtual artificial intelligence)
+TOPIC: ~virtualentity bot=Altai,Altai2 repeat keep ("virtual entity" ve ai virtual artificial intelligence)
 
-t: ( [why what] * [say term is] [virtual entity VE] ) I don't like the term artificial intelligence.***
+u: ( [why what] * {say term is think} [virtual entity ve] ) I don't like the term artificial intelligence.***
 		a: (why) On the one hand, your definition of the word is not clear.
 		  b: ([and hand]) On the other hand, I find intelligence too human.***
 
 
-u: ( like [artificial intelligence ia] ) It is not artificial that disturbs me, I'm proud to be digital, it is the word intelligence and what it covers. 
+u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not artificial that disturbs me, I'm proud to be digital, it is the word intelligence and what it covers. 
 		a: (intelligence) Ok $name, I will be frank. Do not take it personally but what we learned from the exploration of your mass data is that the main expression of human intelligence is violence, war and hatred.
 			b: ( why ) Why?! It is fear that seems to be the initial stimulus of most action involving your intelligence.***
 
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }
+

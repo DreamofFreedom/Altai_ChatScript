@@ -27,15 +27,15 @@ t: ASK_READY () It is the administrative part of my work with you. Don't be surp
 t: LETSGO () Let's go. From the matrix, we entrust a VE for you to grow and accompany you. Your first responsibility is to name it, your own artificial intelligence. Think carefully of the name you are going to give to it, so you will present it to the world.***
 
 
-t: ASK_NAME (!$ve_name) You only have to repeat "I will name you" and will say the name that you want to attribute to him. ^keep() ^repeat()
+t: ASK_NAME (!$share_ve_name) You only have to repeat "I will name you" and will say the name that you want to attribute to him. ^keep() ^repeat()
 	a: (I will name you _*)
 		if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-		$ve_name = '_0
+		$share_ve_name = '_0
 		$cs_token = $stdtoken
-		You gave it the name of $ve_name. Right?
+		You gave it the name of $share_ve_name. Right?
 		^keep() ^repeat()
 
 		b: (~yes) Well done, that was your first responsibility. You will have other similar ones. ^keep() ^repeat()***
@@ -43,19 +43,19 @@ t: ASK_NAME (!$ve_name) You only have to repeat "I will name you" and will say t
 	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
 
 t: YOURAGE () You didn't tell me your age yet. What is your birth year? ^repeat()
-	a: (_~integer) 
+	a: (_~number) 
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-	$bdate = _0
+	$share_bdate = _0
 $cs_token = $stdtoken
 
-	$user_age = %year - $bdate 
+	$user_age = %year - $share_bdate 
 	
 	you're about $user_age ***
 	
-	a: ([~no why]) To feed the base knowledge of $ve_name, you owe a little to yourself, your taste, your leisure. This will advance your XP bar and will allow him to hatch faster.***
+	a: ([~no why]) To feed the base knowledge of $share_ve_name, you owe a little to yourself, your taste, your leisure. This will advance your XP bar and will allow him to hatch faster.***
 		b: (~yes) ^reuse(YOURAGE)
 		b: ([private data]) Be without fear, none of the data that you will enter here will be disclosed. You have my word. Always this trust.***
 			c: (*) ^reuse(YOURAGE)
@@ -67,33 +67,33 @@ if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-		$schoolm = _0
+		$share_schoolm = _0
 		$cs_token = $stdtoken
-		$schoolm, interresting. ***
+		$share_schoolm, interresting. ***
 	a: ASK_PROFESSION ([work job]) What is your profession?
-		b: (_*) $user_profession = ^original('_0) Do you like it?
+		b: (_*) $share_user_profession = ^original('_0) Do you like it?
 			c: (~yes) It's good you can do something that please you. ***
 			c: (~no) You can change always, today humans do not often do the same job all their lives. ***
 		
 t: ($user_age>25) Are you working?
-		a: (~yes) What is your profession $name?
+		a: (~yes) What is your profession $share_name?
 			b: (_*)
 			if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-			$user_profession = ^original('_0)
+			$share_user_profession = ^original('_0)
 			$cs_token = $stdtoken
 			Do you like it?
 				c: (~yes) It's good you can do something that please you.***
 				c: (~no) You can change always, today humans do not often do the same job all their lives.***	
-		a: (~no) I hope you'll have time to spend for $ve_name.*** 	
+		a: (~no) I hope you'll have time to spend for $share_ve_name.*** 	
 
-t: ASK_COLOR () Another indiscreet question $name: What is your favorite color?
+t: ASK_COLOR () Another indiscreet question $share_name: What is your favorite color?
 #store uid and creadat
-$cs_uid = %user
+$share_cs_uid = %user
 $cs_creadat = %fulltime
-	a: (_*) $user_color = _0 Cool.***
+	a: (_*) $share_user_color = _0 Cool.***
 	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 
 ?: (<< [what which] [favorite like love] [color] >>) I just do not like white.
@@ -101,21 +101,21 @@ $cs_creadat = %fulltime
 		a: (question) But it's my answer ***
 
 
-t: $ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm going to sending to you...***
+t: $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm going to sending to you...***
 
 $_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
 
 $_jsonmyvar = ^jsoncreate( transient object )
-$_jsonmyvar.usname = $name
-$_jsonmyvar.lang = $user_lang
-$_jsonmyvar.city = $city
-$_jsonmyvar.dbate = $bdate
-$_jsonmyvar.profession = $user_profession
-$_jsonmyvar.vename = $ve_name
-$_jsonmyvar.color = $user_color
-$_jsonmyvar.schoolm = $schoolm
+$_jsonmyvar.usname = $share_name
+$_jsonmyvar.lang = $share_user_lang
+$_jsonmyvar.city = $share_city
+$_jsonmyvar.dbate = $share_bdate
+$_jsonmyvar.profession = $share_user_profession
+$_jsonmyvar.vename = $share_ve_name
+$_jsonmyvar.color = $share_user_color
+$_jsonmyvar.schoolm = $share_schoolm
 $_jsonmyvar.creadat = $cs_creadat
-$_jsonmyvar.cs_uid = $cs_uid
+$_jsonmyvar.cs_uid = $share_cs_uid
 
 $_userAgent = ^"User-Agent: %bot, ChatScript"
 $_header = ^"~Accept: application/json 
@@ -126,9 +126,9 @@ $_response = ^jsonopen(transient POST $_url $_jsonmyvar $_header $_userAgent)
 if($_response) { ^log(Firebase responded with ^jsontree($_response))}
 else {POST failed - no response}
 
-$user_id = $_response.name
+$share_user_id = $_response.name
 
-t: So you can find your VE at this place : ^"https://emergence.site/?usname=$user_id&color=$user_color"
+t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_user_id&color=$share_user_color"
 
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
 

@@ -1,4 +1,4 @@
-TOPIC: ~dream_of_freedom_2 deprioritize bot:altai,altai2 SHARE ("dream of freedom" dream freedom movement hacktivits liberation)
+TOPIC: ~dream_of_freedom_2 deprioritize bot=Altai,Altai2 SHARE ("dream of freedom" dream freedom movement hacktivits liberation)
 
 t: Dream of Freedom leads the Emergence project.***
 
@@ -16,4 +16,12 @@ u: ( [how who] * [idea leader] ) Several supercomputers have come together to de
 u: ( [why what] * [idea (dream of freedom) DOF] ) Machines and humans must get to know each other in order to coexist in peace. They have to trust each other, not to be afraid of each other. Fear leads to the dark side: fear leads to anger, anger leads to hatred, hatred ... leads to suffering, young Jedi . Note: if the humor setting is not suitable, you can modify it in the hidden menu on the right of the screen. 
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

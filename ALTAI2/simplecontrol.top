@@ -1,9 +1,9 @@
 # this function is executed once for every new user chatting with altai2
-outputmacro: altai2()  # you get altai by default 
+outputmacro: altaia()  # you get altai by default 
 $stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
 $cs_token = $stdtoken
 
-^addtopic(~introductions)
+^addtopic(~altaialtai)
 $cs_control_main = ~controla
 #  $cs_control_post = ~XPOSTPROCESSA  # uncomment to enable talk
 $userprompt = ^"%user: >"
@@ -18,7 +18,7 @@ topic: ~controla system ()
 
 
 # on startup, do introduction
-u: (altai altai altai) 
+u: () 
 	gambit(~altaialtai)
 
 u: (< shut up >) $shutup = 1

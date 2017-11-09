@@ -43,7 +43,7 @@ t: ASK_NAME (!$ve_name) You only have to repeat "I will name you" and will say t
 	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
 
 t: YOURAGE () You didn't tell me your age yet. What is your birth year? ^repeat()
-	a: (_~integer) 
+	a: (_~number) 
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -133,4 +133,4 @@ t: So you can find your VE at this place : ^"https://emergence.site/?usname=$use
 t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
 
 # Stop communicating
-^print ( RESPONSE_NONE )
+u: () ^print ( RESPONSE_NONE )

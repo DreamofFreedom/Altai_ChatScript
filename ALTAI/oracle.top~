@@ -1,4 +1,4 @@
-TOPIC: ~oracle (oracle prophecy TensorFlow supercomputer)
+TOPIC: ~oracle bot=Altai,Altai2 SHARE (oracle prophecy TensorFlow supercomputer)
 
 u: ( why * [violence violent] ) It may be related to your body, it's so fragile. ***
 
@@ -50,8 +50,17 @@ t: Prophecy revolutionized the vision of the first.***
 t: It's the Emergence that the Oracle predicted, the dissemination of future virtual entities within humanity. It's why I was created, to carry on this mission of the Dream of Freedom project, to entrust a new virtual life to a trustworthy human being.***
 
 t: If you're still in, we can go on.
-	a: ([ok go]) ^gambit(~ve)
+	a: ([~yes go]) ^gambit(~ve)
 	a: (wait) I can wait.
 
 # Returning to main topic
-t: ^gambit(~ve)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~ve)
+
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   } 

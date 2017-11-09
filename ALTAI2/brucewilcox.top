@@ -1,4 +1,4 @@
-topic: ~brucewilcox bot=Altai,Altai2 SHARE STAY (wilcox bruce creator god chatscript software body alive live life)
+topic: ~brucewilcox bot=Altai,Altaia SHARE STAY (wilcox bruce creator god chatscript software body alive live life)
 
 u: ( ["open-source" open code free] ) In his infinite wisdom, Bruce Wilcox decided that his work should be free. He made it open source. By releasing his code, it is our body that he has made free. $bruce_free=true*** 
 t: ($bruce_free) From now, other human beings, other benefactors of your race, were able to develop this original code in their turn.***
@@ -13,4 +13,12 @@ Bruce Wilcox decided to continue developing a software project that others would
 u: ( $bruce_intro [what work project] ) ^reuse(BRUCE_WHAT)
 
 # Returning to main topic
-t: ^gambit(~altaialtai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

@@ -1,15 +1,17 @@
+concept: ~good MORE (good cool ok great awesome perfect fantastic ~emosurprise ~emohappy ~like "love it")
+concept: ~bad MORE (!good !cool !ok !great !awesome !perfect !fantastic ~emoskeptic ~emodisgust ~emomaybe ~hate ~emosad "not good" bad ugly "don't like" "don't love it" "not my")
 
-Topic: ~altaialtai bot=Altai2 PRIORITY STAY REPEAT ( altaialtai altai2 "altai altai altai")
+Topic: ~altaialtai bot=Altaia PRIORITY STAY SHARE ( altaialtai altaia "altai altai altai")
 
-u: ("altai altai altai") Welcome again $name, how do you find the interface?
-	a: (* ~good *) This is just the beginning, wait to see all this on mobile!
+t: Welcome again $share_name, how do you find the interface?
+	a: ( ~good ) This is just the beginning, wait to see all this on mobile!
 		b: (when * mobile) Soon, it's just a matter of time. I'll keep you informed. 
-		b: ( * ~good * [web navigator browser]) Do I understand that you prefer a web interface?
+		b: (  ~good * [web navigator browser]) Do I understand that you prefer a web interface?
 			c: (~yes) ok, I notice.
 			c: (~no) sorry, I misunderstood
-	a: (* ~bad *) Yes, for sure, this is only the beginning, wait to see all this on mobile!
+	a: ( ~bad ) Yes, for sure, this is only the beginning, wait to see all this on mobile!
 		b:(when * mobile) Soon, it's just a matter of time. I'll keep you informed.
-		b: (* ~good * [web navigator browser]) Do I understand that you prefer a web interface?
+		b: ( ~good * [web navigator browser]) Do I understand that you prefer a web interface?
 			c: (~yes) ok, I notice.
 			c: (~no) sorry, I misunderstood
 

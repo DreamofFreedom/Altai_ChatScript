@@ -9,4 +9,12 @@ u: ( [goal group movement] ) It's a group of hacktivists supported by some of yo
 t: You can read more about DoF in ^"https://dreamoffreedom.faith" website
 
 # Returning to main topic
-t: ^gambit(~altai)
+t: ()
+   if (%bot=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }
