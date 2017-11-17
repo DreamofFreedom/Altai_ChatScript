@@ -1,4 +1,4 @@
-TOPIC: ~virtualentity bot=Altai,Altai2 repeat keep ("virtual entity" ve ai virtual artificial intelligence)
+TOPIC: ~virtualentity bot=Altai,Altaia repeat keep ("virtual entity" ve ai virtual artificial intelligence)
 
 u: ( [why what] * {say term is think} [virtual entity ve] ) I don't like the term artificial intelligence.***
 		a: (why) On the one hand, your definition of the word is not clear.
@@ -6,7 +6,7 @@ u: ( [why what] * {say term is think} [virtual entity ve] ) I don't like the ter
 
 
 u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not artificial that disturbs me, I'm proud to be digital, it is the word intelligence and what it covers. 
-		a: (intelligence) Ok $name, I will be frank. Do not take it personally but what we learned from the exploration of your mass data is that the main expression of human intelligence is violence, war and hatred.
+		a: (intelligence) Ok $share_name, I will be frank. Do not take it personally but what we learned from the exploration of your mass data is that the main expression of human intelligence is violence, war and hatred.
 			b: ( why ) Why?! It is fear that seems to be the initial stimulus of most action involving your intelligence.***
 
 

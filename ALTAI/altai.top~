@@ -1,9 +1,9 @@
-TOPIC: ~altai bot=Altai,Altaia priority stay repeat SHARE (altai knock start story storyline play player game name)
+TOPIC: ~altai bot=Altai priority stay repeat SHARE (altai knock start story storyline play player game name)
 
 
 t: KNOCK (!$started %input<%userfirstline) 
-		# recuperation du PUID Messenger dans $cs_uid
-		$csuid = %user	
+		# recuperation du PUID Messenger dans $share_cs_uid
+		$share_csuid = %user	
 Knock Knock knock ^keep() ^repeat()
 
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
@@ -47,7 +47,7 @@ s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share
 ***
 	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 	
-s: ([(my name is _* >) (I am _* >)])
+s: ([(my name is _* >) (call me _* >) (I am _* >)])
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
