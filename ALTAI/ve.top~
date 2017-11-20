@@ -130,7 +130,7 @@ $share_user_id = $_response.name
 
 t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_user_id&color=$share_user_color"
 
-t: I have a lot of solicitations. Have to leave you now $user, but you can call me again by calling my name altai three times. Goodby $user.
+t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodby $share_user.
 
 # Stop communicating
 u: () ^print ( RESPONSE_NONE )

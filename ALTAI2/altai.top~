@@ -1,9 +1,9 @@
-TOPIC: ~altai priority stay repeat (altai "who are you" story storyline play player game name)
+TOPIC: ~altai bot=Altai priority stay repeat (altai "who are you" story storyline play player game name)
 
 
 t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
-		b: ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
+		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
 				d: (~yes) Me too. This is the problem with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel. ***
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
@@ -42,6 +42,10 @@ s: CONFIRM_NAME (?) I will call you $name. You're sure ? It's weird $name, we ke
 	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 	
 s: ([(my name is _* >) (I am _* >)])
+	if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
 	$name = '_0
         $cs_token = $stdtoken
 	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()

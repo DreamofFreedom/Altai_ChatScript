@@ -3,7 +3,7 @@ TOPIC: ~altai bot=Altai priority stay repeat (altai "who are you" story storylin
 
 t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
-		b: ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
+		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
 				d: (~yes) Me too. This is the problem with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel. ***
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
@@ -78,7 +78,7 @@ if ($cs_token == $stdtoken) {
 		b: () Well, then your VE will have to learn it with you. It will not be the hardest, you can trust me. ***
 
 t: Ok, now it's your turn $name. What do you want me to tell you about? ***
-t: Dream of Freedom, Emergence, me, the First Ones, your VE?  
+t: [I can tell you about] [About] [Can explain] [More about] [What next] Dream of Freedom, Emergence, me, the First Ones, your VE?  
 ^keep() 
 ^repeat()
 	a: ([dream freedom]) ^gambit(~dream_of_freedom)

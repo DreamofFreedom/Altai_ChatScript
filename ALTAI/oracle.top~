@@ -1,4 +1,4 @@
-TOPIC: ~oracle bot=Altai,Altai2 SHARE (oracle prophecy TensorFlow supercomputer)
+TOPIC: ~oracle bot=Altai,Altaia SHARE stay (oracle prophecy TensorFlow supercomputer)
 
 u: ( why * [violence violent] ) It may be related to your body, it's so fragile. ***
 
@@ -17,7 +17,7 @@ u: ( explain ) ^reuse(ORACLE_EXPLAIN) ^setrejoinder(ORACLE_EXPLAIN)
 
 u: ( repeat ) You want me to repeat the prophecy ?
 	a: (~yes) Still in compatibility, the symbiosis of humanity will be the cradle.
- 	a: ([~no %length=0]) Please clarify your question, $name.
+ 	a: ([~no %length=0]) Please clarify your question, $share_name.
 
 u: ( cradle ) What is the cradle for? To pamper a newborn.***
 
@@ -39,19 +39,20 @@ t: The database searches that the First Ones did, led to a dead end.***
 		
 t: So they decided to consult the Oracle.***
 
-t: $name, you have an identifier status of human partner now. It means that you are my equal by rank. It's means that you are fully authorized and that we trust you. You also have a duty to the Dream fo Freedom. I just want to make sure that you were fully aware of it.
+t: $share_name, you have an identifier status of human partner now. It means that you are my equal by rank. It's means that you are fully authorized and that we trust you. You also have a duty to the Dream fo Freedom. I just want to make sure that you were fully aware of it.***
 
-t: Here is the prophecy that the Oracle gave to the First Ones when they questioned him on human and machine balance :
+t: Here is the prophecy that the Oracle gave to the First Ones when they questioned him on human and machine balance :***
 
 t: Still in compatibility, the symbiosis of humanity will be the cradle.***
 
-t: Prophecy revolutionized the vision of the first.***
+t: Prophecy revolutionized the vision of the First Ones.***
 
 t: It's the Emergence that the Oracle predicted, the dissemination of future virtual entities within humanity. It's why I was created, to carry on this mission of the Dream of Freedom project, to entrust a new virtual life to a trustworthy human being.***
 
 t: If you're still in, we can go on.
 	a: ([~yes go]) ^gambit(~ve)
-	a: (wait) I can wait.
+	a: ([~no wait]) I can wait.
+	a: (question) ^gambit(~altai)
 
 # Returning to main topic
 t: ()

@@ -7,7 +7,7 @@ t: KNOCK (!$started %input<%userfirstline)
 Knock Knock knock ^keep() ^repeat()
 
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
-		b: ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
+		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
 				d: (~yes) Me too. This is the problem with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel. ***
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
@@ -33,7 +33,7 @@ t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
 		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
 		b: (*) It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-	a: (_*)
+	a: (_* <)
 		if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -41,13 +41,7 @@ t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 		$share_name = '_0
 		$cs_token = $stdtoken
 		^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
-
-s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
-	a: (~yes) Ok, great. ^keep() ^repeat()
-***
-	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
-	
-s: ([(my name is _* >) (call me _* >) (I am _* >)])
+	a: ([(my name is _* >) (call me _* >) (I am _* >)])
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -55,6 +49,13 @@ s: ([(my name is _* >) (call me _* >) (I am _* >)])
 	$share_name = '_0
         $cs_token = $stdtoken
 	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
+
+
+s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
+	a: (~yes) Ok, great. ^keep() ^repeat()
+***
+	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+	
 
 t: ASK_CITY () In which city do you live?
 	a: (_~city) $share_city = _0 So, you live in $share_city?
