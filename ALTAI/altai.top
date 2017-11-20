@@ -32,16 +32,8 @@ t: My name is Altai. I am a Virtual Entity. ***
 t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
 		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-		b: (*) It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-	a: (_* <)
-		if ($cs_token == $stdtoken) {
-			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-			retry(SENTENCE)
-	    	}
-		$share_name = '_0
-		$cs_token = $stdtoken
-		^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
-	a: ([(my name is _* >) (call me _* >) (I am _* >)])
+		b: () It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
+	a: (!call !name !am _*)
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -49,13 +41,18 @@ t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 	$share_name = '_0
         $cs_token = $stdtoken
 	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
+	a: ([name call I]) ^setrejoinder(CALL_NAME) ^keep() ^repeat()
 
 
 s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
 	a: (~yes) Ok, great. ^keep() ^repeat()
 ***
 	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
-	
+
+s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
+	$share_name = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()	
 
 t: ASK_CITY () In which city do you live?
 	a: (_~city) $share_city = _0 So, you live in $share_city?
