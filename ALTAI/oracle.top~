@@ -53,6 +53,7 @@ t: If you're still in, we can go on.
 	a: ([~yes go]) ^gambit(~ve)
 	a: ([~no wait]) I can wait.
 	a: (question) ^gambit(~altai)
+	a: (next) ^gambit(~altaialtai)
 
 # Returning to main topic
 t: ()

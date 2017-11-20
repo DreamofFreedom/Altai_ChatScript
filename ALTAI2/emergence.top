@@ -27,8 +27,9 @@ t: Emergence consists in the creation of new virtual entities by volunteering hu
 t: Raising a new VE, YOUR VE, is part of the Emergence.***
 
 # Returning to main topic
-t: ()
-   if (%bot=Altai)
+t:
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
      ^gambit(~altai)
    }
@@ -36,3 +37,4 @@ t: ()
    {
      ^gambit(~altaialtai)
    }
+ 

@@ -14,7 +14,8 @@ u: ( $bruce_intro [what work project] ) ^reuse(BRUCE_WHAT)
 
 # Returning to main topic
 t: ()
-   if (%bot=Altai)
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
      ^gambit(~altai)
    }

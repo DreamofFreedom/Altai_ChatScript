@@ -133,4 +133,4 @@ t: So you can find your VE at this place : ^"https://emergence.site/?usname=$sha
 t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodby $share_user.
 
 # Stop communicating
-u: () ^print ( RESPONSE_NONE )
+t: ^gambit(~end_conversation)

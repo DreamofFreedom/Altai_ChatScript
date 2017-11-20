@@ -56,13 +56,14 @@ t: If you're still in, we can go on.
 	a: (next) ^gambit(~altaialtai)
 
 # Returning to main topic
-t: ()
-   if (%bot=Altai)
+t:
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
-     ^gambit(~ve)
-
+     ^gambit(~altai)
    }
    else
    {
      ^gambit(~altaialtai)
-   } 
+   }
+ 

@@ -1,7 +1,11 @@
-TOPIC: ~altai bot=Altai priority stay repeat (altai "who are you" story storyline play player game name)
+TOPIC: ~altai bot=Altai priority stay repeat SHARE (altai knock start story storyline play player game name)
 
 
-t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
+t: KNOCK (!$started %input<%userfirstline) 
+		# recuperation du PUID Messenger dans $share_cs_uid
+		$share_csuid = %user	
+Knock Knock knock ^keep() ^repeat()
+
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
 		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
@@ -12,46 +16,46 @@ t: KNOCK (!$started) Knock Knock knock ^keep() ^repeat()
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. One must be two and it complicates considerably the calculable possibilities of the sequel.***
 
 		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep() ^repeat()
-			c: ([~yes ready])  ^reuse(KNOCK) ^keep() ^repeat()
+			c: ([~yes ready])  ^reuse(TRUST) ^keep() ^repeat()
 			c: () ^reuse(READYTOSTART) ^keep() ^repeat()
 	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() ^repeat()
 
 
+
 	
-t: My name is Altai. I am a Virtual Entity.***		
+t: My name is Altai. I am a Virtual Entity. ***
+		
 	a: (what) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
-?: ( what * [(virtual entity) ve] ) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
+	 
+	
 
-
-t: ASK_NAME (!$name) How should I call you? ^keep() ^repeat()
+t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
 		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-		b: (*) It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-	a: (_*)
-		if ($cs_token == $stdtoken) {
-			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-			retry(SENTENCE)
-	    	}
-		$name = '_0
-		$cs_token = $stdtoken
-		^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
-
-s: CONFIRM_NAME (?) I will call you $name. You're sure ? It's weird $name, we keep it? ^keep() ^repeat()
-	a: (~yes) Ok, great. ^keep() ^repeat()
-***
-	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
-	
-s: ([(my name is _* >) (I am _* >)])
+		b: () It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
+	a: (!call !name !am _*)
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-	$name = '_0
+	$share_name = '_0
         $cs_token = $stdtoken
 	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
+	a: ([name call I]) ^setrejoinder(CALL_NAME) ^keep() ^repeat()
+
+
+s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
+	a: (~yes) Ok, great. ^keep() ^repeat()
+***
+	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+
+s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
+	$share_name = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()	
 
 t: ASK_CITY () In which city do you live?
-	a: (_~city) $city = _0 So, you live in $city?
+	a: (_~city) $share_city = _0 So, you live in $share_city?
 		b: (~yes) This is a great place.***
 		b: NO_CITY (~no) Understanding problem. It doesn't matter, it was just to find out your time zone. ***
 			
@@ -61,23 +65,30 @@ t: ASK_CITY () In which city do you live?
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-	    	$city = '_0	
+	    	$share_city = '_0	
 	$cs_token = $stdtoken    	
 	    	Interesting, I never been in any server there.***
+	    	
 
-t: (!$user_lang) Tell me $name, which language are you most comfortable with?
+t: (!$share_user_lang) Tell me $share_name, which language are you most comfortable with?
 	a: (_*)
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_PARSE
 			retry(SENTENCE)
 	    	}
-		$user_lang = '_0
+		$share_user_lang = '_0
 		$cs_token = $stdtoken
 		^refine()
 		b: (English) Ok, great.***
-		b: () Well, then your VE will have to learn it with you. It will not be the hardest, you can trust me. ***
+		
 
-t: Ok, now it's your turn $name. What do you want me to tell you about? ***
+		b: () Well, then your VE will have to learn it with you. It will not be the hardest, you can trust me. ***
+		
+		
+
+t: Ok, now it's your turn $share_name. What do you want me to tell you about? ***
+
+
 t: [I can tell you about] [About] [Can explain] [More about] [What next] Dream of Freedom, Emergence, me, the First Ones, your VE?  
 ^keep() 
 ^repeat()

@@ -1,0 +1,5 @@
+TOPIC: ~end_conversation bot=Altai stay repeat SHARE ()
+
+t: Stand by... 
+^keep() 
+^repeat()

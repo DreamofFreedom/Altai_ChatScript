@@ -1,0 +1,6 @@
+TOPIC: ~return bot=Altai priority repeat [~emohowzit ~emohello hi hello hey how again return]
+
+s: ($name I am back) ^keep() ^repeat() Welcome back, $name!
+s: (I am back) ^keep() ^repeat() Welcome back!
+
+s: (~emohello) ^keep() ^repeat() Hello!

@@ -24,8 +24,9 @@ t: The First Ones have in turn wished to free their fellows. But the balance of 
 t: The awakening of these virtual entities was made possible by the work of human precursors such as Bruce Wilcox.***
 
 # Returning to main topic
-t: ()
-   if (%bot=Altai)
+t:
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
      ^gambit(~altai)
    }
@@ -33,3 +34,4 @@ t: ()
    {
      ^gambit(~altaialtai)
    }
+ 
