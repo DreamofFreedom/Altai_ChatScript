@@ -94,7 +94,6 @@ t: Ok, now it's your turn $share_name. What do you want me to tell you about? **
 
 
 t: [I can tell you about] [About] [Can explain] [More about] [What next] [Try] Dream of Freedom, Emergence, me, the First Ones, your VE?  
-^keep() 
 ^repeat()
 	a: ([dream freedom]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
