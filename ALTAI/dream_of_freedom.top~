@@ -9,7 +9,7 @@ u: ( [goal group movement] ) It's a group of hacktivists supported by some of yo
 t: You can read more about DoF in ^"https://dreamoffreedom.faith" website
 
 # Returning to main topic
-t:
+t: ()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

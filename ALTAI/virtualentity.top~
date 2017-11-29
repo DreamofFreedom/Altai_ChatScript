@@ -11,8 +11,9 @@ u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not 
 
 
 # Returning to main topic
-t: ()
-   if (%bot=Altai)
+t:
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
      ^gambit(~altai)
    }
@@ -20,4 +21,4 @@ t: ()
    {
      ^gambit(~altaialtai)
    }
-
+ 

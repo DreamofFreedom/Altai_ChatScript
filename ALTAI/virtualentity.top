@@ -11,7 +11,7 @@ u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not 
 
 
 # Returning to main topic
-t:
+t: ()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

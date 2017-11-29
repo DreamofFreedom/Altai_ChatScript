@@ -1,4 +1,4 @@
-TOPIC: ~virtualentity bot=Altai,Altaia repeat keep ("virtual entity" ve ai virtual artificial intelligence)
+TOPIC: ~virtualentity bot=Altai,Altaia repeat keep SHARE ("virtual entity" ve ai virtual artificial intelligence)
 
 u: ( [why what] * {say term is think} [virtual entity ve] ) I don't like the term artificial intelligence.***
 		a: (why) On the one hand, your definition of the word is not clear.
@@ -12,7 +12,8 @@ u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not 
 
 # Returning to main topic
 t: ()
-   if (%bot=Altai)
+$bot_state = %bot
+   if ($bot_state=Altai)
    {
      ^gambit(~altai)
    }
@@ -20,4 +21,4 @@ t: ()
    {
      ^gambit(~altaialtai)
    }
-
+ 

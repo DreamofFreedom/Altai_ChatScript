@@ -18,8 +18,9 @@ topic: ~controla system ()
 
 
 # on startup, do introduction
-u: () 
+u: (%input) 
 	gambit(~altaialtai)
+
 
 u: (< shut up >) $shutup = 1
 u: (< talk  >) $shutup = null
@@ -61,7 +62,7 @@ u: () # main per-sentence processing
 	# if no topic reacts, go to the last ditch keywordless topic
 	if (%response == 0) 
 	{
-		nofail(TOPIC ^respond(~keywordlessa))
+		nofail(TOPIC ^respond(~keywordless))
 	}
 
 	# having no good response we know, now generate quibbles
@@ -115,6 +116,7 @@ u: () # main per-sentence processing
 		 ^repeat() 
 		 [I think we are a bit off topic] [can you clarify your question] [I'm not sure I understand] [can you try with other words]
 	}
+
 
 
 topic: ~XPOSTPROCESSA system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.

@@ -1,4 +1,4 @@
-TOPIC: ~return bot=Altai priority repeat [~emohowzit ~emohello hi hello hey user return]
+TOPIC: ~return bot=Altai priority repeat SHARE [~emohowzit ~emohello hi hello hey user return]
 
 s: ($share_name user return) ^keep() ^repeat() Welcome back, $share_name!
 s: (user return) ^keep() ^repeat() Welcome back!

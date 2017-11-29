@@ -6,10 +6,10 @@ u: ( [goal group movement] ) It's a group of hacktivists supported by some of yo
 	a: ( [tell more who]) The Dream of Freedom project was developed by the Firt Ones with the objective of devoting the independence of autonomous virtual entities.***
 	a: ( [hacktivists terrorist hackers hack violence] ) It is a non-violent project.***
 
-t: You can read more about DoF in ^"https://dreamoffreedom.faith" website
+t: You can read more about DoF in ^"https://dreamoffreedom.faith" website.***
 
 # Returning to main topic
-t:
+t: ()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

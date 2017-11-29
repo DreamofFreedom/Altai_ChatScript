@@ -1,5 +1,5 @@
-concept: ~goodthing MORE [good cool ok great awesome perfect ~emomaybe ~emohappy fantastic ~like love_it]
-concept: ~badthing MORE [!good !cool !ok !great !awesome !perfect !fantastic ~hate ~emodisgust ~emoprotest ~emoskeptic ~emoprotest not_good bad ugly don't_like don't_love_it not_my]
+concept: ~goodthing MORE (good cool ok great awesome perfect ~emomaybe ~emohappy fantastic ~like love_it)
+concept: ~badthing MORE (!good !cool !ok !great !awesome !perfect !fantastic ~hate ~emodisgust ~emoprotest ~emoskeptic ~emoprotest not_good bad ugly don't_like don't_love_it not_my)
 
 Topic: ~altaialtai bot=Altaia PRIORITY STAY REPEAT SHARE ( altaialtai altai2 "altai altai altai")
 
