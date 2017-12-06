@@ -1,0 +1,190 @@
+concept: ~goodthing MORE (good cool ok great awesome perfect ~emomaybe ~emohappy fantastic ~like love_it)
+concept: ~badthing MORE (!good !cool !ok !great !awesome !perfect !fantastic ~hate ~emodisgust ~emoprotest ~emoskeptic ~emoprotest not_good bad ugly don't_like don't_love_it not_my)
+
+Topic: ~altaialtai bot=Altaia PRIORITY STAY REPEAT SHARE ( altaialtai altai2 "altai altai altai")
+
+t: Welcome again $share_name, how do you find the interface?
+	a: (~goodthing) This is just the beginning, wait to see all this on mobile!
+		b: (when * mobile) Soon, it's just a matter of time. I'll keep you informed. 
+		b: ( ~goodthing * [web navigator browser]) Do I understand that you prefer a web interface?
+			c: (~yes) ok, I notice.
+			c: (~no) sorry, I misunderstood
+	a: (~badthing) Yes, for sure, this is only the beginning, wait to see all this on mobile!
+		b:(when * mobile) Soon, it's just a matter of time. I'll keep you informed.
+		b: ( ~goodthing * [web navigator browser]) Do I understand that you prefer a web interface?
+			c: (~yes) ok, I notice.
+			c: (~no) sorry, I misunderstood
+
+# Altaia keep hand and say
+t: Your experience bar is already advanced. You can see it at the bottom of the page.
+
+# enter for more or question : How can I talk/interact/develop/increased my ve ?
+u: ( how [talk interact develop increased]) $share_ve_name can already integrate what you say. It is not yet hatching but that is how you feed it. 
+	a: (how * [speak say talk]) Speaking with me for example , filling in the fields in your account is another way to communicate with it.
+			b: ([how where] * [fields  field]) look in \" my account \"
+			b: (another way) this is already a good start \^^, believe me
+	a: (how * ["it works" learn]) Your VE is an AI, right? it's a kind of machine learning.
+			b: ([more precise details]) this is already a good start, believe me
+			
+u: ([private privacy respect property] * data) Trust me, all your data remains your full and entire property. They will not be sold to anyone. Never.
+	a: (trust) You have my word, and this convection will prove it if you need it.
+	a: ("never say never") Sorry, if it is not ever, it is at least not without being warned.
+
+u: ( find * [legal rights policies privacy] >) You can find information about legal mentions at the end of the page.
+
+
+# "Who is ve" more ve "about VE"
+u: ([more about] [(my [VE ve AI]) $ve_name]) 
+	$share_ve_name achieves Emergence. As a virtual entity it will be the one that connects you to the digital world. 
+	Better than anyone he will be your guide and you will be his with humans.
+		a: ([what more about] emergence) ~emergence.top
+		a: (how did {$ve_name ve} [emergence connect guide]) Everything will be perfectly clear to you when he will be born.
+			b: (when * born) when you reach lvl 2 and when the beta will be over.
+		
+t: But for now Altai is a potential, a promise to become.
+		a: (when) what is important is the path, not the destination. Play and reach the lvl 2.
+
+# What Altai already doing ?
+u: (what * $ve_name * do) At this point he can hear you, but his cognitive faculties are still very limited. He does not know how to speak yet. 
+		a: (learn) He'll learn. We're here for that, right?
+		a: (when * speak) It's a matter of time ... and our financial resources
+				(how * [help give send money ]) You'll find a link on my Facebook page if you want to help.
+		a: ([language english]) yes, multilingualism is also in work. I note your request, you would like what language?
+			b: (_*) $lang2 = _0 Ok, I notice your request for $lang2.
+			
+t: You can see $share_ve_name in his window of appearance.
+	# window of appearance ?
+	 a: ([what where] * appearance) This window of appearance also allows you to see the progress of his experience. Your experience too. 
+	 a: ( ~good ) cute isn't-it?
+
+# Altai2 keep hand and say
+t: We can exchange both, to increase your XP and that of $ve_name
+
+# Switch parameters What do I do now ?
+# What must I do now?
+t: Now you can switch different mode for maximized or decrease some parameters in your interface (left side of your window).
+	# It Works ?
+	a: ([find ~yes]) Does it work ?
+		b: (~yes) Fine, $share_ve_name will experience this change
+		b: (~no) Try again, clic to open right side window
+	a: ("can't") Try again, clic to open right side window
+	
+t: When we exchange both and when $ve_name knowledge increase, you can see the XP increase 
+	a: ([where what] *~3 XP ) You can see the XP bar at the bottom of the page.
+	a: (how * XP) xp is relative to the knowledge of $ve_name
+
+# What must I do for my VE ?
+u: (what *~3 for *~3 [$ve_name (my [VE AI])] ) To help him, you must answer my questions frankly and precisely.
+
+t: To teach your Bot, how would you prefer to do it? Do you prefer to exchange here with me or fill out a form?
+	a:(form) Okay, we can do it for you. You can keep up with new developments on the Utopia website and start fill out forms in your profile account here.
+		b: (where) In your account, left side of the window.
+	a:(chat) Okay, we're gonna keep chatting together then, cool!
+	a:(* don't know) Nevermind, we are not yet there...
+
+# diary service
+t: In the near future, your AI will be able to render you a phenomenal amount of services.
+Do you think she would be there to keep track of your good times, like a diary?
+	a:(~yes) $diary = 1 And to record your memories, you prefer to go through a Chat like this or a voice input?
+		b:(voice) Yes, it sure would be cool: logbook of Captain $name...
+		b:(chat) Yes, it's handy and no one will hear you.
+		b:(* don't know) Ok, no problem, we go on...
+
+	a:(~no) $diary_fonct = 0 Sure, you must have a very good memory without it.
+	a:(* don't know) You have time to think about it.
+
+# Email service
+t: Otherwise, would you like $share_ve_name to warn you of an email that you expect in particular?
+	a:(~yes) $mail_fonct = 1 OK, and to warn you, would you prefer to receive a sms or a sound, or that it speaks to you vocally?
+		b:([voice vocally]) $mail_fonct_vocal = 1 Kind "$name, you finally got your message". He could even read it to you!
+			c: ([really kidding ~emosurprise no ~emohappy]) But maybe with a robot voice...
+			
+		b:(sms) $mail_fonct_sms = 1 Yes, it's soft.
+		b:(sound) $mail_fonct_sound = 1 Bip !
+		b:(* don't know) perhaps a mix of the three
+	a:(~no) $mail_fonct = 0 Not interesting. Next question!
+
+# calendar service
+t: $share_name, would you like him to interact with your calendar, to enter an appointment for example?
+	a:(~yes) $calendar_fonct = 1 He could read you the appointments of such day on request for example. Prefer by voice, sms or chat?
+		b:([voice vocally]) $calendar_fonct_vocal = 1 Kind hey $name, don't forget your appointment! He could even enter new one for you!
+			c: ([really kidding ~emosurprise no ~emohappy]) But not for now...
+		b:(sms) $calendar_fonct_sms = 1 Yes, soft.
+		b:(chat) $calendar_fonct_chat = 1 cool
+		b:(* don't know) perhaps a mix of the three
+		
+	a:(~no) $calendar_fonct = 0 Yes, you know how to read after all.
+	a:(* don't know) Agenda, it's better to have it in mind.
+	a:(how) By voice input or by reading your appointments of such day on request for example.
+		b:(~yes) $calendar_fonct = 1 He could read you the appointments of such day on request for example. Prefer by voice, sms or chat?
+				c:([voice vocally]) $calendar_fonct_vocal = 1 Kind hey $name, don't forget your appointment! He could even enter new one for you!
+					d: ([really kidding ~emosurprise no ~emohappy]) But not for now...
+				c:(sms) $calendar_fonct_sms = 1 Yes, soft.
+				c:(chat) $calendar_fonct_chat = 1 cool
+				c:(* don't know) perhaps a mix of the three
+		b:(~no) $calendar_fonct = 0 Yes, you know how to read after all.
+		b:(* don't know) Agenda, it's better to have it in mind.
+
+# soluce service
+t: You want $share_ve_name to give you info on a video game, like answers or solution?
+	a:(~yes) $soluces_fonct = 1 Go left after the Mob ... And suddenly, would you prefer oral info or a Chat like this one?
+		b:(chat) $soluces_fonct_chat = 1 Long live to the fingers! And in which game in priority?
+			c:( _* ) $game = ^original(_0) $game cool !
+				d: (~no) I misunderstand? Maybe you can gives the simplified name
+					e:(_*) $game = ^original(_0) So it's $game, just keep it, I would ask a human to help me find it. Let's go on.
+				d: (~emosurprise) Really, we can do it if you think it's cool for you.
+		b:([vocal voice]) $soluces_fonct_voice = 1 It's more fun, actually. And in which game in priority?
+			c:( _* ) $game = ^original(_0) $game cool !
+				d: (~no) I misunderstand? Maybe you can gives the simplified name
+					e:(_*) $game = ^original(_0) So it's $game, just keep it, I would ask a human to help me find it. Let's go on.
+				d: (~emosurprise) Really, we can do it if you think it's cool for you.
+
+	a:(~no) $soluces = 0 Video games, it's still games.
+		b:(* don't play *) Neither do I. Except the tick-tack-toe.
+			c:(why) because I only like to win
+				d:(win) this is my weakness
+				d: (play * me) $tictactoe = 1 maybe later 
+	a:(* don't play *) to see. 
+
+?: (you play) Never. Except the tick-tack-toe, sometimes.
+	a:(why) because I only like to win.
+				b:( !I win) this is my weakness
+				b: (play * me) $tictactoe = 1 maybe later 
+	
+t: One last thing I wanted to ask you $share_name, would you embark on a life-size role-playing game with $share_ve_name and other players? 
+	a:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
+	a:(~no)  $roleplay_fonct = 0 Notice.
+	a:([real human]) among others
+		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
+		b:(~no)  $roleplay_fonct = 0 Notice.
+	a:(what) A kind of games, but in real world. Nothing dangerous, reassure you
+		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
+		b:(~no)  $roleplay_fonct = 0 Notice.
+
+t: I hope I did not bother you too much with my questions. If you want you can talk about something else, movies, sport, music, video games, dreams, my life ...
+	a: (movies) ^gambit(~cinema)
+	a: (game) ^gambit(~game)
+	a: (you) ^gambit(~me)
+	a: (dream !freedom ) ^gambit(~dream)
+	a: ([sport]) ^gambit(~sport)
+	a: (music) ^gambit(~music)
+	a: (you) ^gambit(~me)
+
+?: (what subject * talk) Some like movies, sport, music, video games, dreams, my life ...
+	a: (movies) ^gambit(~cinema)
+	a: (game) ^gambit(~game)
+	a: (you) ^gambit(~me)
+	a: (dream !freedom ) ^gambit(~dream)
+	a: ([sport]) ^gambit(~sport)
+	a: (music) ^gambit(~music)
+	a: (you) ^gambit(~me)
+
+
+t: We both worked well. Now I'll have to leave you. $share_ve_name will contact you when you both reach lvl 2 and when the Beta will be over.
+
+t: Goodby $share_name, it was a privilege to exchange with you!
+
+	
+# variables recuperees :  $lang2 $tictactoe(bool) ; $game ; $soluces(bool) ; $diary_fonct (bool) ; $mail_fonct (bool) $mail_fonct_vocal(bool) $mail_fonct_sms(bool)
+# $mail_fonct_sound(bool) ; $calendar_fonct(bool) ; $calendar_fonct_vocal(bool) ; $calendar_fonct_sms(bool) ; $calendar_fonct_chat (bool); $soluces_fonct(bool) ;
+# $soluces_fonct_voice ; $roleplay_fonct

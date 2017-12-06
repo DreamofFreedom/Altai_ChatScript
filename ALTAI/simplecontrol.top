@@ -20,7 +20,7 @@ table: defaultbot (^name)
 DATA:
 altai
 
-topic: ~control system ()
+topic: ~control bot=Altai system ()
 
 # on startup, do introduction
 u: ( %input<%userfirstline) 
@@ -121,7 +121,7 @@ u: () # main per-sentence processing
 		 [I think we are a bit off topic] [can you clarify your question] [I'm not sure I understand] [can you try with other words]
 	}
 
-topic: ~controla system ()
+topic: ~controla bot=Altaia system ()
 
 
 # on startup, do introduction

@@ -1,0 +1,26 @@
+TOPIC: ~precision bot=Altai,Altaia share nostay priority (precision topic ok sorry) 
+
+u: (another) Another what?
+u: (sorry) [You're welcome] [no offense] [It's nothing] [Forget It]
+u: (precision) To precise what?
+u: (["you're welcome" "no offense" "it's nothing" "forget It"]) You know $share_name, it's always a pleasure to talk to you.
+u: ([{back} main] topic) ^gambit(BACKMAIN)
+u: (ok) ^gambit(BACKMAIN)
+u: ([so "go on" "go next" "tell me more"]) ^respond(%topic)
+
+t: And now $share_name, what do you want to talk about?
+
+
+
+# Returning to main topic
+t: BACKMAIN ()
+^keep() ^repeat()
+$bot_state = %bot
+   if ($bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

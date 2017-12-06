@@ -1,0 +1,15 @@
+Topic: ~music bot=Altaia STAY (music)
+
+
+
+# Returning to main topic
+t:
+$bot_state = %bot
+   if ($bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }

@@ -3,6 +3,11 @@ concept: ~badthing MORE [!good !cool !ok !great !awesome !perfect !fantastic ~ha
 
 Topic: ~altaialtai bot=Altaia PRIORITY STAY REPEAT SHARE ( altaialtai altai2 "altai altai altai")
 
+u: (what is your name) ^keep() ^repeat()
+My name is Altai. An you are $share_name 
+u: (goodbye) ^keep() ^repeat()
+Goodbye see your soon. 
+
 t: Welcome again $share_name, how do you find the interface?
 	a: (~goodthing) This is just the beginning, wait to see all this on mobile!
 		b: (when * mobile) Soon, it's just a matter of time. I'll keep you informed. 

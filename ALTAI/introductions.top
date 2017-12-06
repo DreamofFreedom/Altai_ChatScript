@@ -1,4 +1,4 @@
-topic: ~INTRODUCTIONS bot=Altai,Altaia SHARE (~emogoodbye ~emohello ~emohowzit name here )
+topic: ~INTRODUCTIONS bot=Altai SHARE deprioritize (~emogoodbye ~emohello ~emohowzit name here )
 
 #!x will match on every return start of a conversation 
 t: ( %input<%userfirstline %input>0 ) 

@@ -1,0 +1,8 @@
+concept: ~moviem more [film movie "block buster" trilogy]
+
+Topic: ~cine bot=Altaia STAY (movie film)
+
+u: ( ~moviem ) ^refine() # gets any reference to a country
+    a: (Turkey) I like Turkey
+    a: (Sweden) I like Sweden
+    a: (*) I've never been there.

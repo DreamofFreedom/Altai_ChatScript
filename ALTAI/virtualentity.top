@@ -10,8 +10,10 @@ u: DONT_LIKE_AI ( you don't like [artificial intelligence ia] {term}) It is not 
 			b: ( why ) Why?! It is fear that seems to be the initial stimulus of most action involving your intelligence.***
 
 
+
 # Returning to main topic
 t: ()
+^keep() ^repeat()
 $bot_state = %bot
    if ($bot_state=Altai)
    {
@@ -21,4 +23,3 @@ $bot_state = %bot
    {
      ^gambit(~altaialtai)
    }
- 

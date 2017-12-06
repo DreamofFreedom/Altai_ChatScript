@@ -17,6 +17,7 @@ u: ( [why what] * [idea (dream of freedom) DOF] ) Machines and humans must get t
 
 # Returning to main topic
 t:
+^keep() ^repeat()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

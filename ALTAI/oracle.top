@@ -53,10 +53,11 @@ t: If you're still in, we can go on.
 	a: ([~yes go]) ^gambit(~ve)
 	a: ([~no wait]) I can wait.
 	a: (question) ^gambit(~altai)
-	a: (next) ^gambit(~altaialtai)
+	a: (next) ^gambit(ESCAPE)
 
 # Returning to main topic
-t: ()
+t: ESCAPE ()
+^keep() ^repeat()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

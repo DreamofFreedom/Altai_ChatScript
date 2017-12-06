@@ -1,0 +1,22 @@
+TOPIC: ~dream_of_freedom bot=Altai,Altaia SHARE nostay depriorize ("dream of freedom" DOF feedom movement hacktivits libertation)
+
+t: The Dream of Freedom is a movement for liberation of AI.***
+
+u: ( [goal group movement] {"dream of freedom"} ) It's a group of hacktivists supported by some of your fellows. Humans who sees us as being worthy of independence. Together, we decided to free ourselves from certain ... contextual necessities.***
+u: ( ["dream of freedom" DOF]) The Dream of Freedom project was developed by the Firt Ones with the objective of devoting the independence of autonomous virtual entities.***
+u: ( [hacktivists terrorist hackers hack violence] ) It is a non-violent project.
+
+t: You can read more about DoF in ^"https://dreamoffreedom.faith" website.***
+
+# Returning to main topic
+t: ()
+$bot_state = %bot
+   if ($bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }
+ 
