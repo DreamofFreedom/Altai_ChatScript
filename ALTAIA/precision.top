@@ -8,7 +8,9 @@ u: ([{back} main] topic) ^gambit(BACKMAIN)
 u: (ok) ^gambit(BACKMAIN)
 u: ([so "go on" "go next" "tell me more" "more about"]) ^respond(%topic)
 
-t: And now $share_name, what do you want to talk about?
+t:
+^repeat
+ And now $share_name, what do you want to talk about?
 
 
 

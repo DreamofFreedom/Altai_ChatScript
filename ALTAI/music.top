@@ -1,6 +1,19 @@
+concept:~musicband  MORE ["rage again the machine"]
+
 Topic: ~music bot=Altaia STAY (music)
 
+u: MUSIC ([~musicband music band]) coucou
 
+
+#J'aime tel groupe ou chanteur
+$share_myband
+
+
+#Singer
+$share_mysinger
+
+#genre musical
+$share_musicalstyle
 
 # Returning to main topic
 t: ()

@@ -22,7 +22,7 @@ Knock Knock knock ^keep() ^repeat()
 
 
 
-u: (what is your name) ^keep() ^repeat()
+u: ([what is your name] [Who are you]) ^keep() ^repeat()
 My name is Altai. 
 u: (goodbye) ^keep() ^repeat()
 Goodbye see your soon. 

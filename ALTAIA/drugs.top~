@@ -9,7 +9,7 @@ u: (you need drugs) Which ones are you suggesting?
 u: (have you been drunk) I do not have body, but tell me about DDR4 there I could become crazy
 
 #! have you been smoking 
-u: SMOKE (["have you been" are you] *)
+u: SMOKE (["have you been" "are you" "do you"] * smoke)
 ^repeat()
  Just when I'm asked too many complex questions at once.
 
@@ -34,7 +34,9 @@ u: (what do you smoke) order
 
 #! I take drugs
 u: (I take drugs)  Which ones? 
-	a: (_*)
+	a: (_*) $share_drug = _1 $share_drug, really? Why?
+		b:() Like H. Michaux says : Never despair. Infuse further.
+	
 #! I smoke marijuana
 u: (I smoke marijuana) [Are you a patient?]
 [Which strain do you prefer.]
@@ -74,7 +76,8 @@ u: (do you have drugs) ^reuse(ADDICT)
 #! do you like cigarettes
 
 # Returning to main topic
-t:
+t: ()
+^keep() ^repeat()
 $bot_state = %bot
    if ($bot_state=Altai)
    {

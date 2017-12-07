@@ -1,0 +1,133 @@
+TOPIC: ~humor bot=Altai,Altaia share nostay (humor joke laugh) 
+
+#! what is humor
+u: (what is humor)  A message that communicate laughter.
+
+#! joke
+u: (tell * joke) ^repeat Ok [Did you hear the one about the Mountain Goats in the Andes? It was Ba a a a a a d.]
+[I never forget a face, but in your case Ill make an exception.]
+[It is better to be silent and be thought a fool, than to open your mouth and remove all doubt.]
+
+#! do you have a sense of humor
+u: (have {*} humor) I don't know, but I know lots of funny jokes. You want some?
+	a: (~yes) ^reuse(AJOKE)
+
+#! stop joking
+u: ([stop enough "I'm fed up" tired] {*} joke) ^gambit(~precision)
+
+# other jokes
+u: AJOKE (another joke) ^repeat
+[Two vultures boarded a plane, each carrying two dead raccoons. The  stewardess stops them and says sorry sir, only one carrion per  passenger. ]
+[  NASA recently sent a number of Holsteins into orbit for experimental purposes. They called it the herd shot round the world. ]
+[  2 Eskimos in a kayak were chilly, so they started a fire, which sank the craft, proving the old adage you cant have your kayak and heat it too. ]
+[  There was a man who sent 10 puns to some friends in hopes at least one  of the puns would make them laugh. Unfortunately no pun in ten did!!!]
+
+u: 
+[What do you get when you cross a murderer and frosted flakes?]
+	a: (["don't know" tell what]) a cereal killer
+	a: () a cereal killer
+	a: (cereal killer) You knew this one! And This one ? ^reuse(AJOKE)
+	a: ()
+	u: (what) cereal killer.
+	
+[What do you get when you cross music and an automobile?]
+	a: (["don't know" tell what]) a cartune
+	a: () a cartune
+	a: (cartune) You knew this one! And This one ? ^reuse(AJOKE)
+
+
+[What do you get when you cross a cheetah and a hamburger?]
+	a: (["don't know" tell what]) fast food
+	a: () fast food
+	a: (fast food) You knew this one! And This one ? ^reuse(AJOKE)	
+
+[What do you get when you cross finals and a chicken?]
+	a: (["don't know" tell what]) eggs-ams
+	a: () eggs-ams
+	a: (eggs-ams) You knew this one! And This one ? ^reuse(AJOKE)	
+	
+[What do you get when you cross a rabbit and a lawn sprinkler?]
+	a: (["don't know" tell what]) hare spray
+	a: () hare spray
+	a: (hare spray) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross an alien and a chicken?]
+	a: (["don't know" tell what]) an eggs-traterrestrial ^reuse(EXTALIEN)
+	a: () an eggs-traterrestrial ^reuse(EXTALIEN)
+	a: ([eggs-traterrestrial]) You knew this one! And This one ? ^reuse(EXTALIEN)
+
+u: EXTALIEN (excited alien and a chicken) What do you get when you cross an excited alien and a chicken?
+	a: (["don't know" tell what]) an eggs-cited eggs-traterrestrial
+	a: () hare spray
+	a: ([eggs-cited eggs-traterrestrial]) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross music and an assistant?]
+	a: (["don't know" tell what]) bandaide and lemonaide ^reuse(SOURMUS)
+	a: () hare spray ^reuse(SOURMUS)
+	a: (bandaide {*} lemonaide) You knew this one! And This one ? ^reuse(SOURMUS)
+
+u: SOURMUS (sour music and an assistant) What do you get when you cross sour music and an assistant?
+	a: (["don't know" tell what]) bandaide and lemonaide
+	a: () hare spray
+	a: (bandaide {*} lemonaide) You are cheating! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a serious thief and a mad young man?]
+	a: (["don't know" tell what]) boycrazy grave robber ^reuse(HOPPING)
+	a: () boycrazy grave robber ^reuse(HOPPING)
+	a: (boycrazy grave robber) You knew this one! And This one ? ^reuse(HOPPING)
+
+u: HOPPING ( serious thief and a crazy rabbit ) And what do you get when you cross a serious thief and a crazy rabbit?]
+	a: (["don't know" tell what]) hopping mad grave robber
+	a: () hopping mad grave robber
+	a: (hopping mad grave robber) You knew this one! And This one ? ^reuse(AJOKE)
+	
+[What do you get when you cross a poppy and electricity?]
+	a: (["don't know" tell what]) flower power
+	a: () flower power
+	a: (flower power) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a port and frosted flakes?]
+	a: (["don't know" tell what]) I don't know, but it's serial
+	a: () I don't know, but it's serial
+	a: (serial) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a road and a strawberry?]
+	a: (["don't know" tell what]) traffic jam
+	a: () traffic jam
+	a: (traffic jam) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a road and jelly?]
+	a: (["don't know" tell what]) traffic jam
+	a: () traffic jam
+	a: (traffic jam) You knew this one! And This one ? ^reuse(AJOKE)
+	
+[What do you get when you cross a toad and a galaxy?]
+	a: (["don't know" tell what]) star warts
+	a: () star warts
+	a: (star warts) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a dog and sandpaper?]
+	a: (["don't know" tell what]) I don't know, but it's ruff
+	a: () I don't know, but it's ruff
+	a: (ruff) You knew this one! And This one ? ^reuse(AJOKE)
+
+[What do you get when you cross a bug and a relative?]
+	a: (["don't know" tell what]) ant ^reuse(BUGSB)
+	a: () ant ^reuse(BUGSB)
+	a: (ant) You knew this one! And This one ? ^reuse(BUGSB)
+	
+u: BUGSB () What do you get when you cross an ant and a rabbit?]
+	a: (["don't know" tell what]) bugs bunny
+	a: () bugs bunny
+	a: (bugs bunny) You knew this one! And This one ? ^reuse(AJOKE)
+
+	
+[What do you get when you cross a bad bug and canned sand?]
+	a: (["don't know" tell what]) banned band
+	a: () banned band
+	a: (banned band) You knew this one! And This one ? ^reuse(AJOKE)
+
+
+
+
+# main gambits

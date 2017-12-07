@@ -106,7 +106,6 @@ t: ASK_COLOR () Another indiscreet question $share_name: What is your favorite c
 #store uid and creadat for Firebase export
 $share_cs_uid = %user
 $cs_creadat = %fulltime
-
 	a: (_~coloren) $share_user_color = _0 Cool.***
 	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 

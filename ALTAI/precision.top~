@@ -6,9 +6,12 @@ u: (precision) To precise what?
 u: (["you're welcome" "no offense" "it's nothing" "forget It"]) You know $share_name, it's always a pleasure to talk to you.
 u: ([{back} main] topic) ^gambit(BACKMAIN)
 u: (ok) ^gambit(BACKMAIN)
-u: ([so "go on" "go next" "tell me more"]) ^respond()
+u: ([so "go on" "go next" "tell me more" "more about"]) ^respond(%topic)
 
-t: And now $share_name, what do you want to talk about?
+t:
+^keep
+^repeat
+ And now $share_name, what do you want to talk about?
 
 
 
