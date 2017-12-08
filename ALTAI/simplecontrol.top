@@ -9,12 +9,6 @@ $cs_control_main = ~control
 $userprompt = ^"%user: >"
 $botprompt = ^"Altai: "
 
-^addtopic(~altaialtai)
-$cs_control_main = ~controla
-#  $cs_control_post = ~XPOSTPROCESS  # uncomment to enable talk
-$userprompt = ^"%user: >"
-$botprompt = ^"Altai: "
-
 table: defaultbot (^name)
 ^createfact(^name defaultbot defaultbot)
 DATA:
@@ -121,6 +115,38 @@ u: () # main per-sentence processing
 		 [I think we are a bit off topic] [can you clarify your question] [I'm not sure I understand] [can you try with other words]
 	}
 
+topic: ~XPOSTPROCESS system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
+
+t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the object) -- no longer has quotes around it
+	loop()
+	{
+		$$tmp = ^last(@9subject) # note last output which is quoted string
+		if (!%server AND %os == windows  AND !$SHUTUP)
+		{
+			$$tmp = ^"talk \"$$tmp\" "
+			popen($$tmp null)
+		}
+	}
+	
+
+# Altaia definition
+
+outputmacro: altaia()  # you get altai by default 
+$stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
+$cs_token = $stdtoken
+
+
+^addtopic(~altaialtai)
+$cs_control_main = ~controla
+#  $cs_control_post = ~XPOSTPROCESSA  # uncomment to enable talk
+$userprompt = ^"%user: >"
+$botprompt = ^"Altai: "
+
+table: defaultbot (^name)
+^createfact(^name defaultbot defaultbot)
+DATA:
+altai
+
 topic: ~controla bot=Altaia system ()
 
 
@@ -225,7 +251,7 @@ u: () # main per-sentence processing
 	}
 	
 	
-topic: ~XPOSTPROCESS system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
+topic: ~XPOSTPROCESSA system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
 
 t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the object) -- no longer has quotes around it
 	loop()
