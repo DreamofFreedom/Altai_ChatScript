@@ -1,11 +1,11 @@
 concept: ~goodthing MORE [good cool ok great awesome perfect ~emomaybe ~emohappy fantastic ~like love_it]
 concept: ~badthing MORE [!good !cool !ok !great !awesome !perfect !fantastic ~hate ~emodisgust ~emoprotest ~emoskeptic ~emoprotest not_good bad ugly don't_like don't_love_it not_my]
 
-Topic: ~altaialtai bot=Altaia PRIORITY STAY REPEAT SHARE ( altaialtai altai2 "altai altai altai")
+Topic: ~altaialtai bot=Altaia PRIORITY SHARE ( altaialtai altaia front chat)
 
 u: (what is your name) ^keep() ^repeat()
 My name is Altai. An you are $share_name 
-u: (goodbye) ^keep() ^repeat()
+u: (~emogoodbye) ^keep() ^repeat()
 Goodbye see your soon. 
 
 t: Welcome again $share_name, how do you find the interface?
@@ -172,7 +172,7 @@ t: I hope I did not bother you too much with my questions. If you want you can t
 	a: (you) ^gambit(~me)
 	a: (dream !freedom ) ^gambit(~dream)
 	a: ([sport]) ^gambit(~sport)
-	a: (music) ^gambit(~music)
+	a: (music) ^gambit(~musictop)
 	a: (you) ^gambit(~me)
 
 ?: (what subject * talk) Some like movies, sport, music, video games, dreams, my life ...
@@ -181,7 +181,7 @@ t: I hope I did not bother you too much with my questions. If you want you can t
 	a: (you) ^gambit(~me)
 	a: (dream !freedom ) ^gambit(~dream)
 	a: ([sport]) ^gambit(~sport)
-	a: (music) ^gambit(~music)
+	a: (music) ^gambit(~musictop)
 	a: (you) ^gambit(~me)
 
 

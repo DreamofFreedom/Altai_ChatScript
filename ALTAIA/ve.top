@@ -3,7 +3,8 @@ concept: ~coloren more [Amaranth Amber Amethyst Apricot Aquamarine Azure Baby bl
 
 TOPIC: ~ve bot=Altai priority STAY ("my [ve ai]" ve )
 
-u: ([back menu topic]) ^gambit(altai.top)
+u: (back * [main menu topic]) ^gambit(~altai)
+u: (ask * question) ^gambit(~altai)
 
 t: We are going to get into the heart of the matter, the mission who drives us both: realize the Emergence! ***
 
@@ -117,7 +118,7 @@ $cs_creadat = %fulltime
 
 t: $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm going to sending to you...***
 
-$_url = https://MyDatabase.firebaseio.com/users.json?auth=MyAuth
+$_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name
@@ -144,7 +145,8 @@ $share_user_id = $_response.name
 
 t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_user_id&color=$share_user_color"
 
-t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodby $share_user.
+t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodbye $share_user.
+	a: (~emogoodbye) ^gambit(~end_conversation)
 
 # Stop communicating
 t: ^gambit(~end_conversation)

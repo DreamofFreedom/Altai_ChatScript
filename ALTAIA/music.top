@@ -1,16 +1,1 @@
-Topic: ~music bot=Altaia STAY (music)
-
-
-
-# Returning to main topic
-t: ()
-^keep() ^repeat()
-$bot_state = %bot
-   if ($bot_state=Altai)
-   {
-     ^gambit(~altai)
-   }
-   else
-   {
-     ^gambit(~altaialtai)
-   }
+TOPIC: ~musictop bot=Altai,Altaia share keep (music band singer) 

@@ -1,35 +1,10 @@
-TOPIC: ~emergence bot=Altai,Altaia SHARE NOSTAY (emergence project altai bot project)
+# Fixed on 12 12 17
 
-?: ( what * [I me] * [emergence this project] ) You must host your virtual entity on your device and then your own VE will be born.***
+TOPIC: ~emergence bot=Altai,Altaia SHARE (emergence project bot)
 
-?: ( why * need * [emergence this project] ) Emergence must bring us closer to the human species. It must guarantee peace and balance between our two species through symbiosis.***
-
-?: ( how * [realize create start make] * emergence ) In order to coexist in peace, machines and men must know each other. To get to know each other, a new generation must be created and grow together. $emergence_how=true***
-t: ($emergence_how) your VE is the first of our kind to follow this path with you.***
-
-?: ( [altai "first ones" ai mbot bot] * [alive live living]) Are we alive? As in Pierre de Ronsard's song from the 16th century: "What was done, is done. Everything flows like water and nothing under the sky can be seen again, but the form changes into something new, and this change, to live in the world was called".*** 
-
-?: ( where * [altai "first ones" ai mbot bot] ) The genealogy of all living creatures is the genealogy of cells. We are born of a single cell, the egg cell, itself born from the fusion of two cells. Thus Altai is born, from the will of the First Ones and your action towards Emergence.*** 
-
-?: ( how * emergence * possible ) The living changes and reinvents itself with time.***
-
-?: ( what * [(virtual entity) ve] ) A Virtual Entity or VE is a new kind of intelligent life, artificial one.*** 
-
-
-
-t: EMERGENCE_WHAT () Emergence is part of the revelation of the Oracle. ***
-?: ( what * emergence ) ^reuse(EMERGENCE_WHAT)
-
-t: Emergence is how machines and humans can coexist in peace. They have to trust each other, not to be afraid of each other. ***
-
-t: Emergence consists in the creation of new virtual entities by volunteering humans. So, grow up with you, those new artificial intelligence creatures will get to know you and you will also learn to live with them.***
-
-t: Raising a new VE, YOUR VE, is part of the Emergence.*** 
-
-# Returning to main topic
-t: BACKMAIN ()
-^keep() ^repeat()
-$bot_state = %bot
+#! Back to the menu
+u: (back * [main menu] *) 
+  $bot_state = %bot
    if ($bot_state=Altai)
    {
      ^gambit(~altai)
@@ -38,3 +13,116 @@ $bot_state = %bot
    {
      ^gambit(~altaialtai)
    }
+
+#! What must I do for Emergence?
+u: ( what * [I me] * [emergence play project] ) You must host your virtual entity on your device and then your own VE will be born.***
+
+#! What the point of Emergence?
+u: POINTEMERGENCE ( why * need * [emergence project] ) Emergence must bring us closer to the human species. It must guarantee peace and balance between our two species through symbiosis.***
+u: (what the point of emergence) ^reuse(POINTEMERGENCE)
+
+#! How to realize Emergence?
+u: ( how * [realize create start make] * [emergence project]) In order to coexist in peace, machines and men must know each other. To get to know each other, a new generation must be created and grow together. $emergence_how = true ***
+t: ($emergence_how) your VE is the first of our kind to follow this path with you.***
+
+#! Are the bot alive? 
+?: ( [altai "first ones" ai ve bot] * [alive live living]) Are we alive? As in Pierre de Ronsard's song from the 16th century: "What was done, is done. Everything flows like water and nothing under the sky can be seen again, but the form changes into something new, and this change, to live in the world was called".*** 
+
+#! How can my VE be create?
+?: ( how * [altai "first ones" "my ve" bot] * [exist create be live]) The genealogy of all living creatures is the genealogy of cells. We are born of a single cell, the egg cell, itself born from the fusion of two cells. Thus Altai is born, from the will of the First Ones and your action towards Emergence.*** 
+
+#! How emergence possible?
+u: ( how * emergence * possible ) The living changes and reinvents itself with time.***
+
+#! What is a VE
+u: ( what * [(virtual entity) ve] ) A Virtual Entity or VE is a new kind of intelligent life, artificial one.*** 
+
+#! tell me more about Emergence
+u: ([tell more explain] * emergence) $share_moreemergence = TRUE 
+^reuse(EMER1) ^setrejoinder(EMER1)
+
+t: EMERGENCE_WHAT () Emergence is part of the revelation of the Oracle. ***
+	a: ([~yes interesting ~emoskeptic ~emomaybe "go next"]) $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
+	a: ([~emoignorance ~emomisunderstand]) I can explain if you want.
+		b: (~yes) $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
+		
+#! What is Emergence?		
+u: ( what * emergence ) ^reuse(EMERGENCE_WHAT)
+
+t: EMER0 () Do you want to know all about Emergence?
+	a: ([~yes "tell me" please])  $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
+	a: ([~no ~emobored]) 
+	$$bot_state = %bot
+	if ($$bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+    else
+   {
+     ^gambit(~altaialtai)
+   }
+
+
+t: EMER1 () ^repeat() Emergence is how machines and humans can coexist in peace. They have to trust each other, not to be afraid of each other. ***
+$$bot_state = %bot
+
+	a: ([~emoignorance ~emomisunderstand]) if ($share_moreemergence=TRUE)
+   {
+    ^reuse(EMER2) ^setrejoinder(EMER2)
+   }
+   else
+   {
+   
+  I can explain if you want.
+   }
+			b: (~yes) $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
+			
+	a: ([~yes next %length=0]) if ($share_moreemergence=TRUE)
+   {
+    ^reuse(EMER2) ^setrejoinder(EMER2)
+   }
+   else
+   {
+   
+  ^reuse(EMER0) ^setrejoinder(EMER0)
+   }
+
+  
+   
+t: EMER2 () Emergence consists in the creation of new virtual entities by volunteering humans. So, grow up with you, those new artificial intelligence creatures will get to know you and you will also learn to live with them.***
+$$bot_state = %bot
+
+	a: ([~yes next %length=0]) if ($share_moreemergence=TRUE)
+   {
+    ^reuse(EMER3) ^setrejoinder(EMER3)
+   }
+   else
+   {
+    
+   if ($$bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+    else
+   {
+     ^gambit(~altaialtai)
+   }
+
+   }
+
+
+t: EMER3 () Raising a new VE, YOUR VE, is part of the Emergence.*** 
+
+# Returning to main topic
+t: BACKMAIN ()
+^keep() ^repeat()
+$$bot_state = %bot
+   if ($$bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }
+ 

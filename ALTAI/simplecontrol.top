@@ -151,7 +151,7 @@ topic: ~controla bot=Altaia system ()
 
 
 # on startup, do introduction
-u: (altai altai altai) 
+u: ("altai altai altai") 
 	gambit(~altaialtai)
 
 

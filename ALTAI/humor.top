@@ -3,7 +3,7 @@ TOPIC: ~humor bot=Altai,Altaia share nostay (humor joke laugh)
 #! what is humor
 u: (what is humor)  A message that communicate laughter.
 
-#! joke
+#! Tell me a joke
 u: (tell * joke) 
 ^keep() ^repeat() 
 Ok 
@@ -16,10 +16,19 @@ u: (have * humor) I don't know, but I know lots of funny jokes. You want some?
 	a: (~yes) ^reuse(AJOKE)
 
 #! stop joking
-u: ([stop enough "I'm fed up" tired] * joke) ^gambit(~precision)
+u: ([stop enough "I'm fed up" tired] * joke)
+$$bot_state = %bot
+   if ($$bot_state=Altai)
+   {
+     ^gambit(~altai)
+   }
+   else
+   {
+     ^gambit(~altaialtai)
+   }
 
 # other jokes
-u: AJOKE (another joke) 
+u: AJOKE ([another more] joke) 
 ^keep() ^repeat()
 [Two vultures boarded a plane, each carrying two dead raccoons. The  stewardess stops them and says sorry sir, only one carrion per  passenger. ]
 [  NASA recently sent a number of Holsteins into orbit for experimental purposes. They called it the herd shot round the world. ]
@@ -136,8 +145,8 @@ r: What do you get when you cross a bad bug and canned sand?
 # Returning to main topic
 t: BACKMAIN ()
 ^keep() ^repeat()
-$bot_state = %bot
-   if ($bot_state=Altai)
+$$bot_state = %bot
+   if ($$bot_state=Altai)
    {
      ^gambit(~altai)
    }

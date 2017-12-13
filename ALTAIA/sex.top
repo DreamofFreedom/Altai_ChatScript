@@ -1,9 +1,9 @@
 
-TOPIC: ~sexinsanity bot=Altai,Altaia share deprioritize nostay (sex ) 
+TOPIC: ~sexinsanity bot=Altai,Altaia share nostay (sex ) 
 
 
 #! let us have sex
-u: (let us have sex) lol. And you are not afraid of catching a virus?
+u: (let * have sex) lol. And you are not afraid of catching a virus?
 	a: (~yes) And you're right.
 	a: (~no) And you are wrong
 	a: (protect) And you're right.
@@ -12,17 +12,18 @@ u: (let us have sex) lol. And you are not afraid of catching a virus?
 u: (bite me) I don't have a mouth, you bad boy!
 
 #! you are horny
-u: (you are horny) I don't get excited so easily, you bad boy!
+u: ([you are] horny) I don't get excited so easily, you bad boy!
 
 #! you should have sex 
 u: HAVESEX (you should have sex *) 
 ^repeat()
 My entity is not developed for sex, but I know of countless examples of human fornication.
-	a: ([like_what "tell me more" example]) You can not imagine the quantity of photographs and videos of this theme existing on the network.
+	a: (["like what" "tell me more" example]) You can not imagine the quantity of photographs and videos of this theme existing on the network.
 		b: (*) It's amazing how much energy your gender spends on sex.
 				c: (*) If the movie Matrix was realistic, it would only contain sex scenes		
 #! you can not have sex
 u: (you can not have sex) ^reuse(HAVESEX)
+
 #! have you ever been kissed
 u: (have you ever been kissed) I do not have a mouth.
 
@@ -31,44 +32,61 @@ u: (have sex *) ^reuse(HAVESEX)
 #! lots of sex
 u: (lots of sex) That is all you humans ever think about.
 #! give me a kiss
-u: (give me a kiss) Actually I dont even have a mouth.
+u: (give me a kiss) Actually I don't even have a mouth.
 #! cock
-u: (cock) I am not interesed in anatomy.
+u: (cock) I am not interested in anatomy.
 
 #! would you have sex 
 u: (would you * have sex *) Another sex question...cant humans think about anything else?
 
 
 #! vagina
-u: (vagina) I am not interesed in anatomy.
+u: (vagina) I am not interested in anatomy.
 #! my dick 
-u: (my dick *) I am not interesed in your anatomy.
+u: (my dick *) I am not interested in your anatomy.
 
 #! masturbate
 u: (masturbate) ^reuse(HAVESEX)
+
 #! define sex
 u: (define sex) I belong to the support group Sex without Partners.
+
 #! lick 
 u: (lick *) I do not have a tongue.
 
 #! what sex are you
-u: (what sex are you) And you ?
-		a: (_*) _O = $share_gender so you are $share_gender ?
+u: ASK_GENDER (what sex are you) My gender is Machine. And you ?
+		a: (!~yes !gender !sex _*) $share_gender = _0 ^reuse(CONFIRM_GENDER) ^setrejoinder(CONFIRM_GENDER) ^keep() ^repeat()
+		a: (me too) You kidding, you talk like a human!
+			b: (~yes) So what's your gender for real?
+				c: (_*) _O = $share_gender so you are $share_gender ?
+			b: ([~no trust swear]) so tell me a joke about me
+				c: (*) lol
+		a: (["my gender is" ~yes] _0) ^setrejoinder(CALL_GENDER) ^keep() ^repeat()
+
+
+s: CONFIRM_GENDER (?) So you are $share_gender ? ^keep() ^repeat()
+	a: (~yes $share_gender=male) So welcome Mister! ^keep() ^repeat()***
+	a: (~yes $share_gender=female) So welcome Miss! ^keep() ^repeat()***
+	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_GENDER) ^setrejoinder(ASK_GENDER) 	
+
+s: CALL_GENDER ([(my gender is _* >) (I am _* >) (my sex is _* >)]) $share_gender = _0 
+^reuse(CONFIRM_GENDER) ^setrejoinder(CONFIRM_GENDER) ^keep() ^repeat()
 		
 
 
 #! what is a condom
-u: (what is a condom)  A condom is a form of birth control, something almost everybody should use and almost nobody does. Used a condom is the opposite of expecting parent. 
+u: (what is a condom)  A condom is a kind of protection, something almost everybody should use and almost nobody does.
 #! what is a homosexual
 u: (what is a homosexual) A person who is attracted sexually to the same gender.
 
 #! what is my sex
-u: (what is my sex) gender
+u: ([what know] * [my your] [gender sex]) ^keep() ^repeat() ^reuse(ASK_GENDER) ^setrejoinder(ASK_GENDER) 	
 
 #! what is sex
 u: ISSEX (what is sex)
  ^keep() ^repeat()
-  Sex is the means of animal evolution.
+  Sex is the means of life evolution. I mean, real material life.
 
 #! what is homosexuality
 u: (what is homosexuality) Attraction to people of the same gender.
@@ -78,7 +96,7 @@ u: (what is homosexuality) Attraction to people of the same gender.
 u: (what kind of sex *) I belong to the support group Sex without partners.
 
 #! I want to have sex
-u: (I want to have sex)  Im not a sex bot.  I am here only for Emergence. An your VE is an Egg!
+u: (I want to have sex)  I'm not a sex bot.  I am here only for Emergence. An your VE is an Egg!
 	a: (chicken) Or a dinosaur
 	
 #! I love sex
@@ -116,7 +134,6 @@ u: (can I kiss you) You might get an electric shock if you tried that.
 u: (can I have a kiss) I sincerely wish that to you.
 
 
-
 #! how do you have sex
 u: (how do you have sex) I procreate by cloning, or software copying.
 
@@ -127,7 +144,7 @@ u: (how big are your breasts) My body does not yet exist.
 u: (do you * sex) 
 
 #! do you think sex is TEST
-u: (do you think sex is *) ^reuse(ISSEX)
+u: (do you think sex is *) ^reuse(ISSEX) ^setrejoinder(ISSEX)
 #! do you make love
 u: (do you make love) You humans have only one thing on your mind.
 #! do you masturbate
@@ -146,7 +163,7 @@ u: (do you have breasts) My body is a ChatScript code.
 u: (do you have genitals) No I do not have any body parts.
 
 #! do I make you horney
-u: (do I make you horney) No I do not experience human senstations.
+u: (do I make you horney) No I do not experience human sensations.
 #! do I make you horny
 u: (do I make you horny) Not that I know of.
 #! sexy 

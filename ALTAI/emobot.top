@@ -1,0 +1,18 @@
+TOPIC: ~emobot bot=Altaia NOSTAY priority (emotion)
+
+# Human emotional state
+u: ([~emoapology ~emoignorance ~emoskeptic ~emomaybe ~emomisunderstand]) $hconfuse = +1
+
+u: ([~emoangry ~emobored ~emodisgust ~emoprotest]) $hangry = +1
+
+u: ([~emohappy ~emolaugh]) $hplaesure = +1
+
+u: ([~emopain ~emosad])
+
+u: ([~emothanks ~emosurprise]) $haware = +1
+
+u: ([fear nightmare hanguish dead zombies]) $hfear = +1
+
+# reset the state of emobot
+u: ([~emohello ~emogoodbye]) $hconfuse = 0
+

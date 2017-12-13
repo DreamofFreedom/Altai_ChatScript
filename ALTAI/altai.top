@@ -24,7 +24,7 @@ Knock Knock knock ^keep() ^repeat()
 
 u: ([what is your name] [who are you]) ^keep() ^repeat()
 My name is Altai. 
-u: (goodbye) ^keep() ^repeat()
+u: (~emogoodbye) ^keep() ^repeat()
 Goodbye see your soon. 
 
 t: My name is Altai. I am a Virtual Entity. ***
