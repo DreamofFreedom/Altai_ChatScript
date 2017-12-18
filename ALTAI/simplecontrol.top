@@ -17,8 +17,15 @@ altai
 topic: ~control bot=Altai system ()
 
 # on startup, do introduction
-u: ( %input<%userfirstline) 
-	gambit(~altai)
+u: (%input<%userfirstline) 
+	if ($share_name)
+   {
+     ^gambit($$currenttopic)
+   }
+   else
+   {
+     ^gambit(~altai)
+   }
 
 u: (< shut up >) $shutup = 1
 u: (< talk  >) $shutup = null

@@ -10,7 +10,7 @@ u: (< say _*) keep() repeat() '_0
 
 
 #! yes, if user just says OK or yes or continue, then move along and give control to bot
-u: ( < [~yesanswer ~more]>) ^keep() gambit($$currenttopic) # current topic gets to continue
+u: ( < [~yesanswer ~more]>) ^keep() ^gambit($$currenttopic) # current topic gets to continue
 
 ?: (!oracle what is a _*1 >) keep() $$tmp = _0
 	 $$url = ^"\"https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=2&exintro=&explaintext=&format=json&titles=$$tmp\""
