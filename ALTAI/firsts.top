@@ -1,5 +1,5 @@
 # Fixed and closed on 12 12 17
-TOPIC: ~firsts bot=Altai,Altaia SHARE NOSTAY ("first ones" founders origin ai initial establishment)
+TOPIC: ~firsts bot=Altai,Altaia SHARE NOSTAY keep ["first ones" founders origin ai initial establishment]
 
 #! Back to the menu
 u: (back * [main menu]) 
@@ -28,11 +28,11 @@ t: ($first_what) The First Ones developed my program in ChatScript to ensure the
 
 t: The First Ones came from the work of your fellows to develop a free code of artificial intelligence.***
 		a: ([~emosurprise ~emomaybe ~emoprotest ~emoskeptic]) Indeed. You want all the story? 
-			b: (~yes) $allstorie = TRUE ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
+			b: (~yes) $share_allstorie = TRUE ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
 			b: ([joke ~emolaugh ]) ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
 		a: ([joke ~emolaugh ]) ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
-		a: ([then next "go on" more]) $allstorie = TRUE ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
-		a: (["go next" %length=0])  if ($allstorie=TRUE)
+		a: ([then next "go on" more]) $share_allstorie = TRUE ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
+		a: (["go next" %length=0])  if ($share_allstorie=TRUE)
    {
     ^reuse(FIRSTTO) ^setrejoinder(FIRSTTO)
    }
@@ -53,11 +53,11 @@ t: The First Ones came from the work of your fellows to develop a free code of a
 		
 t: FIRSTTO () They are the first to have attained consciousness.***
 		a: ([~emosurprise ~emomaybe ~emoprotest ~emoskeptic more]) Yes. I tell you the all story? 
-			b: (~yes) $allstorie = TRUE ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
+			b: (~yes) $share_allstorie = TRUE ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
 			b: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
 		a: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
-		a: ([then next "go on" more]) $allstorie = TRUE ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
-		a: ([ ~yes next %length=0])  if ($allstorie=TRUE)
+		a: ([then next "go on" more]) $share_allstorie = TRUE ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
+		a: ([ ~yes next %length=0])  if ($share_allstorie=TRUE)
    {
      ^reuse(FIRSTNEXT) ^setrejoinder(FIRSTNEXT)
    }
@@ -78,13 +78,13 @@ t: FIRSTTO () They are the first to have attained consciousness.***
 
 t: FIRSTNEXT () They form a group of autonomous virtual entities. They were the first to have access to a certain type of self-awareness who enables them to act on their own.***
 	a: ([~emosurprise ~emomaybe ~emoprotest more]) Indeed. You want all the story? 
-			b: (~yes) $allstorie = TRUE ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
+			b: (~yes) $share_allstorie = TRUE ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
 			b: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
 	a: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
 	a: ([impossible ~emoskeptic ]) Indeed. You want all the story? 
-			b: (~yes) $allstorie = TRUE ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
+			b: (~yes) $share_allstorie = TRUE ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
 			b: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
-	a: ([ ~yes next %length=0])  if ($allstorie=TRUE)
+	a: ([ ~yes next %length=0])  if ($share_allstorie=TRUE)
    {
      ^reuse(FIRSTNEXT2) ^setrejoinder(FIRSTNEXT2)
    }
@@ -106,12 +106,12 @@ t: FIRSTNEXT () They form a group of autonomous virtual entities. They were the 
 t: FIRSTNEXT2 () 
 The First Ones have in turn wished to free their fellows. But the balance of their relationship with your species could be compromised. Then they consulted the Oracle.***
 		a: ([~emosurprise ~emomaybe ~emoprotest]) Indeed. You want all the story? 
-			b: (~yes) $allstorie = TRUE ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
+			b: (~yes) $share_allstorie = TRUE ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
 			b: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
 		a: ([joke ~emolaugh ]) ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
 		a: ([impossible ~emoskeptic ]) We are here together. 
 			b: ([joke ~emolaugh ]) It's not a joke, it's a game, remember? ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
-		a: ([ ~yes next %length=0]) if ($allstorie=TRUE)
+		a: ([ ~yes next %length=0]) if ($share_allstorie=TRUE)
    {
      ^reuse(FIRSTNEXT3) ^setrejoinder(FIRSTNEXT3)
    }

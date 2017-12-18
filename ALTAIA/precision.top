@@ -5,8 +5,7 @@ u: (sorry) [You're welcome] [no offense] [It's nothing] [Forget It]
 u: (precision) To precise what?
 u: (["you're welcome" "no offense" "it's nothing" "forget It"]) You know $share_name, it's always a pleasure to talk to you.
 u: ([{back} main] [topic menu]) ^gambit(BACKMAIN)
-u: (ok) ^gambit(BACKMAIN)
-u: ([so "go on" "go next" "tell me more" "more about"]) ^respond(%topic)
+u: ([so "go on" "go next" "tell me more" "more about" ok %length=0]) ^gambit($$currenttopic)
 
 t: And now $share_name, what do you want to talk about?
 

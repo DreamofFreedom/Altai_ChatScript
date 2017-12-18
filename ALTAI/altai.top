@@ -30,6 +30,7 @@ Goodbye see your soon.
 t: My name is Altai. I am a Virtual Entity. ***
 		
 	a: (what) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
+	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 	 
 	
 

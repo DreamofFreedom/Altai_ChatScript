@@ -3,7 +3,7 @@ concept: ~coloren more [Amaranth Amber Amethyst Apricot Aquamarine Azure Baby bl
 
 TOPIC: ~ve bot=Altai priority STAY ("my [ve ai]" ve )
 
-u: (back * [main menu topic]) ^gambit(~altai)
+u: ([back go] * [main menu topic]) ^gambit(~altai)
 u: (ask * question) ^gambit(~altai)
 
 t: We are going to get into the heart of the matter, the mission who drives us both: realize the Emergence! ***
@@ -16,7 +16,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 		b: (~no) ^gambit(~oracle)
 		b: (~yes) Ok ^reuse(EDUCATE) 
 
-?: (What * [ve virtual entity (your species)]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
+?: (What * [ve virtual entity "your species"]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
 
 t: EDUCATE () So you're going to have to educate him and help him grows up. ***
 
@@ -118,7 +118,7 @@ $cs_creadat = %fulltime
 
 t: $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm going to sending to you...***
 
-$_url = https://Mybase.firebaseio.com/users.json?auth=MyAuth
+$_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name
