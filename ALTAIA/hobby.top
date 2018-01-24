@@ -6,7 +6,7 @@ u: ( ~hobbytop ) ^refine() # gets any reference to a country
     a: (Sweden) I like Sweden
     a: (*) I've never been there.
 
- t: Mhm, I think this topic isn't already scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
+ t: Mhm, I think hobby topic isn't already scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
 
  t: ABOUTELSE2 () We can talk about music, video games, my life and your family, for now.
 	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)

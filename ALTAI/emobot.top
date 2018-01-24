@@ -1,9 +1,9 @@
-TOPIC: ~emobot bot=Altaia NOSTAY priority (emotion)
+TOPIC: ~emobot bot=Altaia system () # update the emotional state of the bot
 
-# Human emotional state
-u: ([~emoapology ~emoignorance ~emoskeptic ~emomaybe ~emomisunderstand]) $hconfuse = +1
+# Bot emotional state
+u: ([ ~emoignorance ~emoskeptic ~emomaybe ~emomisunderstand]) $share_xalter = 1  $hconfuse += 1
 
-u: ([~emoangry ~emobored ~emodisgust ~emoprotest]) $hangry = +1
+u: ([~emoangry ~emobored ~emodisgust ~emoprotest]) $share_xirae = 3 $hhangry += 1
 
 u: ([~emohappy ~emolaugh]) $hplaesure = +1
 
@@ -11,8 +11,8 @@ u: ([~emopain ~emosad])
 
 u: ([~emothanks ~emosurprise]) $haware = +1
 
-u: ([fear nightmare hanguish dead zombies]) $hfear = +1
-
 # reset the state of emobot
-u: ([~emohello ~emogoodbye]) $hconfuse = 0
+u: ([~emohello ~emogoodbye]) $hconfuse = 0 $hhangry = 0
+
+u: (~emoapology) $share_xirae = 0 
 

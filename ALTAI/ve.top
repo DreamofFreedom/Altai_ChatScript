@@ -17,7 +17,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 
 ?: (What * do) So you're going to have to educate him and help him grows up. ***
 
-?: ([more why]) Later on, your Virtual Entity will be on your mobile app. The First Ones are working to raise the necessary funds for the full deployment of the Emergence. You can also help speed things up by doing one for the Dream of Freedom. But it's not the most urgent thing. Let's talk about him.***
+?: EDUCATE ([more why]) Later on, your Virtual Entity will be on your mobile app. The First Ones are working to raise the necessary funds for the full deployment of the Emergence. You can also help speed things up by doing one for the Dream of Freedom. But it's not the most urgent thing. Let's talk about him.***
 
 t: ASK_READY () It is the administrative part of my work with you. Don't be surprised by the rather solemn tone. Are you ready?
 	a: ([~yes ready]) Ok, great. ^reuse(LETSGO) ^keep() ^repeat()
@@ -111,7 +111,7 @@ $cs_creadat = %fulltime
 
 t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 
-$_url = https://MyBase.firebaseio.com/users.json?auth=MyAuth
+$_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name

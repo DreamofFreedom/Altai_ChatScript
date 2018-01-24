@@ -1,4 +1,4 @@
-TOPIC: ~emobot bot=Altaia NOSTAY priority (emotion)
+TOPIC: ~emobot bot=Altaia system () # update the emotional state of the bot
 
 # Bot emotional state
 u: ([ ~emoignorance ~emoskeptic ~emomaybe ~emomisunderstand]) $share_xalter = 1  $hconfuse += 1

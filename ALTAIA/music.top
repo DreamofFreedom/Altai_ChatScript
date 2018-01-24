@@ -1,50 +1,11 @@
 # variables : $share_fav_mus_band $share_fav_mus_singer $share_fav_music
 
+concept: ~music MORE [~popstar ~music_groups ~music_subjects ~musical_instruments_woodwind ~musical_instruments_string ~musical_instruments_percussion ~musical_instruments_brass ~musician ~musiciantype ~musical_instrument ~music_stuff] 
+
 Topic: ~musictop bot=Altaia STAY (music)
 
-# My favorite music song is
-u: MYFAVSONG ( [favorite preferred "go to"] [~music ~] [song track] is _*)
-if ($cs_token == $stdtoken) {
-    $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-    retry(SENTENCE)
-  }
-  $share_fav_music = '_0
-  $cs_token = $stdtoken
-
-# My favorite music band is
- u: ( [favorite preferred "go to"] [~music ~] [ group band ] is _*)
- if ($cs_token == $stdtoken) {
-     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-     retry(SENTENCE)
-   }
-   $share_fav_mus_band = '_0
-   $cs_token = $stdtoken
-
-# My favorite music singer is
-u: ( [favorite preferred "go to"] [~music ~] [~singer] is _*)
-if ($cs_token == $stdtoken) {
-    $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
-    retry(SENTENCE)
-  }
-  $share_fav_mus_singer = '_0
-  $cs_token = $stdtoken
-		$share_fav_mus_singer ?
-		a: (~yes) ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
-		a:(~no) Oups. Tell me again ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
-
-# I play music
-u: (~me * ~occupation_music) You are a musician?
-	a: (~yes) Great! And what kind of music do you play?
-
-	a: (~no) OK. But you are listening to music.
-		b: (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
-		b: (~no) $no_music = true
-    $share_fav_music = false
-
-t: let's talk about music then.
-   a: (~yes) ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
-   a: ([~emoignorance ~emomisunderstand]) ...
-
+# ##################
+# About you, say the player
 #What's your favorite song?
 u: ([you your] * [song music track]) I appreciate 8-bit music.
  		a: ([~emosurprise ~emohappy why what ~emoignorance ~emomisunderstand]) I like rhythm bit repetition in chiptune.
@@ -122,7 +83,7 @@ u: WHYMUSICQUEST (my ve * music) Maybe someday $share_vename will do something f
      ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
    }
 	a: (~no ~emobored ~emoangry ~emoprotest) Nothing require you to answer these questions. You can just skip it.
-		b: (~yes) $share_fav_music = false ^gambit(~altaia)
+		b: (~yes) $share_fav_music = false ^gambit(~altaialtai)
 	a: (~more ~emobeg ~emomisunderstand ) One day $share_vename will have many service that he can render to you. His "$share_name music knowledge" will make it grow specifically for you.
 		b:	(~yes ~emohappy ~emoskeptic do) if (!$share_fav_music)
    {
@@ -132,6 +93,88 @@ u: WHYMUSICQUEST (my ve * music) Maybe someday $share_vename will do something f
    {
      ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
    }
+   
+# ###################
+# About me, say  the player
+
+# My favorite music song is
+u: MYFAVSONG ( [favorite preferred "go to"] * [song track ] is _*)
+if ($cs_token == $stdtoken) {
+    $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+    retry(SENTENCE)
+  }
+  $share_fav_music = '_0
+  $cs_token = $stdtoken
+
+# My favorite music band is
+ u: ( my [favorite preferred "go to" listen] * [ group band] is _*)
+ if ($cs_token == $stdtoken) {
+     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+     retry(SENTENCE)
+   }
+   $share_fav_mus_band = '_0
+   $cs_token = $stdtoken
+
+# or with ~music_groups
+u: ( I [like favorite preferred "go to" "listen to" love] * _~music_groups)
+ if ($cs_token == $stdtoken) {
+     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+     retry(SENTENCE)
+   }
+   $share_fav_mus_band = '_0
+   $cs_token = $stdtoken
+
+# My favorite music singer is
+u: ( my [favorite preferred "go to"] * [singer interpreter] is _*)
+if ($cs_token == $stdtoken) {
+    $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+    retry(SENTENCE)
+  }
+  $share_fav_mus_singer = '_0
+  $cs_token = $stdtoken
+		$share_fav_mus_singer ?
+		a: (~yes) ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+		a:(~no) Oups. Tell me again ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
+
+# or with _~singer
+u: ( my [favorite preferred "go to" "listen to"] * _~singer)
+if ($cs_token == $stdtoken) {
+    $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+    retry(SENTENCE)
+  }
+  $share_fav_mus_singer = '_0
+  $cs_token = $stdtoken
+		$share_fav_mus_singer ?
+		a: (~yes) ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+		a:(~no) Oups. Tell me again ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
+
+
+# I play music
+u: (~me * ~occupation_music) You are a musician?
+	a: KINDINSTRUMENT (~yes) Great! And ^reuse(KINDINSTRUMENT) ^setrejoinder(KINDINSTRUMENT)
+	a: (~no) OK. But you are listening to music.
+		b: (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
+		b: (~no) $no_music = true
+    $share_fav_music = false Neither do I. ^gambit(~hobbytop)
+    
+u: KINDINSTRUMENT (I play music) what kind of music do you play?
+		a: (_~musical_instruments_woodwind) $instrument = ‎woodwind  All for the swing, I like that!
+		a: (_~musical_instruments_string) $instrument = ‎stringed ‎Stringed instruments are cool!
+		a: (_~musical_instruments_percussion) $instrument = ‎percussion The rhythm, nothing but the rhythm, I like this!
+		a: (* > _*-1) $instrument = ‎_0 $instrument ? Cool!
+			b: (~no) Oups. So : ^reuse(KINDINSTRUMENT) ^setrejoinder(KINDINSTRUMENT)
+
+# do you listen music?
+t: LISTENMUSIC () Do you listen music?
+	a: (~yes) ^reuse(TALKMUSIC) ^setrejoinder(TALKMUSIC)
+	a: (~no) $musiclisten = false Not a music lover. ^gambit(~hobbytop)
+
+t: TALKMUSIC () let's talk about music then.
+   a: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+   a: ([~emoignorance ~emomisunderstand]) Don't worry, it does not hurt. ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+   a: (~no) Let's talk about something else. ^gambit(~hobbytop)
+
+
 
 #pour etre sur que les variables soient remplies
 

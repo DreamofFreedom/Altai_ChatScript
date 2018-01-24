@@ -7,14 +7,13 @@ u: ( ~moviem ) ^refine() # gets any reference to a country
     a: (Sweden) I like Sweden
     a: (*) I've never been there.
     
- t: Mhm, I think this topic isn't already scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
+ t: Mhm, I think this movie topic isn't already scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
  
  t: ABOUTELSE2 () We can talk about music, video games, my life and your family, for now.
-	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
 	a: (you) ^gambit(~me)
 	a: (dream !freedom ) ^gambit(~dreamtop)
-	a: ([~sport ~occupation_sports]) ^gambit(~sporttop)
+	a: ([~sport ~occupation_sports]) ^gambit(~sportop)
 	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
 	a: (~hobby)	^gambit(~hobbytop)
 	a: (family) ^gambit(~familytop)

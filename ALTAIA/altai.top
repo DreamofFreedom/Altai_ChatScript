@@ -2,11 +2,10 @@ TOPIC: ~altai bot=Altai priority stay repeat SHARE (altai knock start story stor
 
 
 t: KNOCK (!$started %input<%userfirstline) 
-		
-		
+	
 Knock Knock knock ^keep() ^repeat()
 
-	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
+	a: ASK_FOLLOW ([~yes what who who's]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
 		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
 				d: (~yes) ^reuse(ALTNAME) ^setrejoinder(ALTNAME)
@@ -22,12 +21,12 @@ Knock Knock knock ^keep() ^repeat()
 
 
 
-u: ([what is your name] [who are you]) ^keep() ^repeat()
+u: ([what is your name] [who are you]) $altai_name = TRUE ^keep() ^repeat()
 My name is Altai. 
 u: (~emogoodbye) ^keep() ^repeat()
 Goodbye see your soon. 
 
-t: My name is Altai. I am a Virtual Entity. ***
+t: ALTNAME (!$altai_name) My name is Altai. I am a Virtual Entity. ***
 		
 	a: (what) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
 	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
@@ -50,8 +49,8 @@ t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 
 
 s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
-	a: (~yes) Ok, great. ^keep() ^repeat()
-***
+	a: (~yes) Ok, great. ^keep() ^repeat() ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
+
 	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 
 s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
@@ -65,7 +64,7 @@ s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
 
 t: ASK_CITY () In which city do you live?
 	a: (_~city) $share_city = _0 So, you live in $share_city?
-		b: (~yes) This is a great place.***
+		b: (~yes) This is a great place. ^reuse(LANG) ^setrejoinder(LANG) 
 		b: NO_CITY (~no) Understanding problem. It doesn't matter, it was just to find out your time zone. ***
 			
 
@@ -76,10 +75,10 @@ t: ASK_CITY () In which city do you live?
 	    	}
 	    	$share_city = '_0	
 	$cs_token = $stdtoken    	
-	    	Interesting, I never been in any server there.***
+	    	Interesting, I never been in any server there. ^reuse(LANG) ^setrejoinder(LANG) 
 	    	
 
-t: (!$share_user_lang) Tell me $share_name, which language are you most comfortable with?
+t: LANG (!$share_user_lang) Tell me $share_name, which language are you most comfortable with?
 	a: (_*)
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_PARSE
@@ -88,14 +87,14 @@ if ($cs_token == $stdtoken) {
 		$share_user_lang = '_0
 		$cs_token = $stdtoken
 		^refine()
-		b: (English) Ok, great.***
+		b: (English) Ok, simple. 
 		
 
-		b: () Well, then your VE will have to learn it with you. It will not be the hardest, you can trust me. ***
+		b: () Well, then your VE will have to learn it with you. ^reuse(YOURTURN) ^setrejoinder(YOURTURN) 
 		
 		
 
-t: Ok, now it's your turn $share_name. What do you want me to tell you about? ***
+t: YOURTURN () Ok, now it's your turn $share_name. What do you want me to tell you about? ***
 	a: ([dream freedom]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
 	a: (you) ^gambit(~me)

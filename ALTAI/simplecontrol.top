@@ -75,7 +75,7 @@ u: () # main per-sentence processing
 	# now we need to find fake responses 
 	if (%response == 0 AND %rand > 50)
 	{
-		nofail(TOPIC respond(~QUIBBLE_ALL))
+		nofail(TOPIC respond(~precision))
 	}
 
 	# if we have rejoinders for what we said OR we asked a question, stop here
@@ -210,7 +210,7 @@ u: () # main per-sentence processing
 	# now we need to find fake responses 
 	if (%response == 0 AND %rand > 50)
 	{
-		nofail(TOPIC respond(~QUIBBLE_ALL))
+		nofail(TOPIC respond(~precision))
 	}
 
 	# if we have rejoinders for what we said OR we asked a question, stop here
