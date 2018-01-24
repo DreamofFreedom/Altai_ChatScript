@@ -7,6 +7,35 @@ u: (["you're welcome" "no offense" "it's nothing" "forget It"]) You know $share_
 u: ([{back} main] [topic menu]) ^gambit(BACKMAIN)
 u: ([so "go on" "go next" "tell me more" "more about" ok %length=0]) ^gambit($$currenttopic)
 
+u: LANGUAGE (["I want" "can I"] * language) Depend, for now only English is implement. 
+if ($share_lang=French)
+   {
+     Tu m'as dis que tu preferais le Francais. C'est juste une question de temps...
+   }
+    else
+   {
+     You tell me that $share_lang is your favorite one, we need time to implement it. 
+   }
+   
+  a: (I [help "do something" develop]) Of course! Feel free to join dev community in utopia-french.tech website. $share_dev=true 
+  a: (when) Since developpers make it append. Feel free to join human community in utopia-french.tech website.
+
+
+u: DEVELOP (["I want" "can I"] * [develop script participate]) You want to get involved more actively into Emergence ?
+	a: ([$share_vename "my ve" "my ai"]) Even for develop $share_vename, Feel free to join dev community in utopia-french.tech website. $share_dev=true
+	a: (~yes ~emomaybe) Cool! Feel free to join dev community in utopia-french.tech website. $share_dev=true
+	a: (~no ~emoskeptic) Even if your skills are not in computer area $share_name,
+	if ($share_profession)
+   {
+     $share_profession is your part, but feel free to join community in utopia-french.tech website.
+   }
+    else
+   {
+     feel free to join dev community in utopia-french.tech website.
+   }
+
+
+
 t: And now $share_name, what do you want to talk about?
 
 

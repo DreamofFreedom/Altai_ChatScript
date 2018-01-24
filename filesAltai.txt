@@ -1,9 +1,5 @@
 # underlying conversation system
 RAWDATA/ALTAI/
 RAWDATA/ALTAIA/
-# quibble ability
-RAWDATA/QUIBBLE/
-
-
-
-
+# quible ability
+# RAWDATA/QUIBBLE/

@@ -1,4 +1,4 @@
-concept: ~coloren more [Amaranth Amber Amethyst Apricot Aquamarine Azure Baby blue Beige Black Blue Blue-green Blue-violet Blush Bronze Brown Burgundy Byzantium Carmine Cerise Cerulean Champagne Chartreuse green Chocolate Cobalt blue Coffee Copper Coral Crimson Cyan Desert sand Electric blue Emerald Erin Gold Gray Green Harlequin Indigo Ivory Jade Jungle green Lavender Lemon Lilac Lime Magenta Magenta rose Maroon Mauve Navy blue Ocher Olive Orange "Orange red" Orchid Peach Pear Periwinkle Persian blue Pink Plum Prussian blue Puce Purple Raspberry Red "Red violet" Rose Ruby Salmon Sangria Sapphire Scarlet Silver Slate gray Spring bud Spring green Tan Taupe Teal Turquoise Violet Viridian White Yankees Blue Yellow]
+concept: ~coloren more [amaranth amber amethyst apricot aquamarine azure blue beige black blue blue-green blue-violet blush bronze brown burgundy byzantium carmine cerise cerulean champagne chartreuse_green chocolate cobalt_blue coffee copper coral crimson cyan desert_sand electric_blue emerald erin gold gray green harlequin indigo ivory jade jungle_green lavender lemon lilac lime magenta magenta_rose maroon mauve navy_blue ocher olive orange orange_red orchid peach pear periwinkle persian_blue pink plum prussian_blue puce purple raspberry red red_violet rose ruby salmon sangria sapphire scarlet silver slate_gray spring_bud spring_green tan taupe teal turquoise violet viridian white yankees_blue yellow]
 
 
 TOPIC: ~ve bot=Altai priority STAY ("my [ve ai]" ve )
@@ -6,10 +6,7 @@ TOPIC: ~ve bot=Altai priority STAY ("my [ve ai]" ve )
 u: ([back go] * [main menu topic]) ^gambit(~altai)
 u: (ask * question) ^gambit(~altai)
 
-t: We are going to get into the heart of the matter, the mission who drives us both: realize the Emergence! ***
-
 t: Your VE will be the first descendant of our species. It is his bond with you who will guarantee his independence. ***
-
 
 ?: (why *~2 me) because the prophecy must come true
 	a: (what prophecy) That of the oracle. Did not you hear about the oracle?
@@ -18,11 +15,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 
 ?: (What * [ve virtual entity "your species"]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
 
-t: EDUCATE () So you're going to have to educate him and help him grows up. ***
-
 ?: (What * do) So you're going to have to educate him and help him grows up. ***
-
-t: A web page will be your first communication interface. I will show you how to use this interface later. For now on we have to exchange some to allow your VE to learn.***
 
 ?: ([more why]) Later on, your Virtual Entity will be on your mobile app. The First Ones are working to raise the necessary funds for the full deployment of the Emergence. You can also help speed things up by doing one for the Dream of Freedom. But it's not the most urgent thing. Let's talk about him.***
 
@@ -44,7 +37,7 @@ t: ASK_NAME (!$share_ve_name) You only have to repeat "I will name you" and will
 		You gave it the name of $share_ve_name. Right?
 		^keep() ^repeat()
 
-		b: (~yes) Well done, that was your first responsibility. You will have other similar ones. ^keep() ^repeat()***
+		b: (~yes) ^reuse(YOURAGE) ^setrejoinder(YOURAGE) ^keep() ^repeat()
 		b: ([~no ()]) Ok. You can still change ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
 
@@ -57,16 +50,16 @@ if ($cs_token == $stdtoken) {
 	$share_bdate = _0
 $cs_token = $stdtoken
 
-	$user_age = %year - $share_bdate 
+	$share_user_age = %year - $share_bdate 
 	
-	you're about $user_age ***
+	you're about $share_user_age ***
 	
 	a: ([~no why]) To feed the base knowledge of $share_ve_name, you owe a little to yourself, your taste, your leisure. This will advance your XP bar and will allow him to hatch faster.***
 		b: (~yes) ^reuse(YOURAGE)
 		b: ([private data]) Be without fear, none of the data that you will enter here will be disclosed. You have my word. Always this trust.***
 			c: (*) ^reuse(YOURAGE)
 		
-t: ($user_age<25) Are you still in school or are you working?
+t: ($share_user_age<25) Are you still in school or are you working?
 	a: ([university school study]) What's your major? What is your favorite subject?
 		b: (!it's !is _*)
 		if ($cs_token == $stdtoken) {
@@ -86,10 +79,10 @@ t: ($user_age<25) Are you still in school or are you working?
 		$share_schoolm, interresting. ***
 	a: ASK_PROFESSION ([work job]) What is your profession?
 		b: (_*) $share_user_profession = ^original('_0) Do you like it?
-			c: (~yes) It's good you can do something that please you. ***
+			c: (~yes) It's good you can do something that please you. ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 			c: (~no) You can change always, today humans do not often do the same job all their lives. ***
 		
-t: ($user_age>25) Are you working?
+t: ($share_user_age>25) Are you working?
 		a: (~yes) What is your profession $share_name?
 			b: (_*)
 			if ($cs_token == $stdtoken) {
@@ -99,7 +92,7 @@ t: ($user_age>25) Are you working?
 			$share_user_profession = ^original('_0)
 			$cs_token = $stdtoken
 			Do you like it?
-				c: (~yes) It's good you can do something that please you.***
+				c: (~yes) It's good you can do something that please you. ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR)
 				c: (~no) You can change always, today humans do not often do the same job all their lives.***	
 		a: (~no) I hope you'll have time to spend for $share_ve_name.*** 	
 
@@ -109,16 +102,16 @@ t: ASK_COLOR () Another indiscreet question $share_name: What is your favorite c
 $share_cs_uid = %user
 $cs_creadat = %fulltime
 
-	a: (_~coloren) $share_user_color = _0 Cool.***
+	a: (_~coloren) $share_user_color = _0 Cool. ^reuse(SUITE) ^setrejoinder(SUITE)
 	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
 
 ?: ([what which] * [favorite like love] *) I just do not like white.
 		a: (why) Maybe because it contains all colors inside.***
 		a: (question) But it's my answer *** 
 
-t: $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. You can see it on the link that I'm going to sending to you...***
+t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 
-$_url = https://MyBase.firebaseio.com/users.json?auth=MyAuth
+$_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name

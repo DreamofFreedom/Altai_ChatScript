@@ -2,17 +2,17 @@ TOPIC: ~altai bot=Altai priority stay repeat SHARE (altai knock start story stor
 
 
 t: KNOCK (!$started %input<%userfirstline) 
-		# recuperation du PUID Messenger dans $share_cs_uid
-		$share_csuid = %user	
+		
+		
 Knock Knock knock ^keep() ^repeat()
 
 	a: ASK_FOLLOW ([~yes what who there]) $started = true I'm the white rabbit. Are you ready to follow me? ^keep() ^repeat()
 		b: TRUST ([~yes ready]) Okay, let's play a little game together. This game has only one rule. It is based on trust. Do you trust me?
 			c: (~yes) Why ? You didn't even know me. You just want to know what's next, right?
-				d: (~yes) Me too. Mutual trust is not easy, and it greatly complicates my calculations. ***
+				d: (~yes) ^reuse(ALTNAME) ^setrejoinder(ALTNAME)
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. But it greatly complicates my calculations.***
 			c: (~no) You reason logically, you don't know me yet. But you want to know what's next, right?
-				d: (~yes) Me too. This is the problem with mutual trust. It greatly complicates my calculations. ***
+				d: (~yes) ^reuse(ALTNAME) ^setrejoinder(ALTNAME)
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. But it greatly complicates my calculations.***
 
 		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep() ^repeat()

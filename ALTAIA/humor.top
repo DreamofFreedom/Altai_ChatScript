@@ -16,7 +16,7 @@ u: (have * humor) I don't know, but I know lots of funny jokes. You want some?
 	a: (~yes) ^reuse(AJOKE)
 
 #! stop joking
-u: ([stop enough "I'm fed up" tired] * joke)
+u: ([stop enough "I'm fed up" tired ] * joke)
 $$bot_state = %bot
    if ($$bot_state=Altai)
    {
@@ -27,7 +27,8 @@ $$bot_state = %bot
      ^gambit(~altaialtai)
    }
 
-# other jokes
+# other joke
+u: (another one ~) ^reuse(AJOKE)	
 u: AJOKE ([another more] joke) 
 ^keep() ^repeat()
 [Two vultures boarded a plane, each carrying two dead raccoons. The  stewardess stops them and says sorry sir, only one carrion per  passenger. ]

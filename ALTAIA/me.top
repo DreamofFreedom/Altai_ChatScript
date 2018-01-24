@@ -8,6 +8,10 @@ t: I am a Virtual Entity.***
 		a: ([joke ~emolaugh ]) ^reuse(ALTAI1) ^setrejoinder(ALTAI1)
 		a: ([then next "go on" more]) ^reuse(ALTAI1) ^setrejoinder(ALTAI1)
 		a: (["go next" %length=0])  ^reuse(ALTAI1) ^setrejoinder(ALTAI1)
+		
+#! do you really exist?
+u: (you exist) I do really exist in the digital universe.
+	a: (where) Right here, in the space between your screen and some server.
 
 #! Tell me more about you Altai
 u: (more about you) ^reuse(ALTAI1) ^setrejoinder(ALTAI1)

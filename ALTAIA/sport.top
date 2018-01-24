@@ -1,26 +1,15 @@
-Topic: ~dreamtop bot=Altaia STAY (dream)
+
+Topic: ~sportop bot=Altaia STAY (sport)
+
+
 
 t: Mhm, I think this topic isn't already scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
- 
- t: ABOUTELSE2 () We can talk about music, video games, my life and your family for now.
+
+ t: ABOUTELSE2 () We can talk about music, video games, my life and your family, for now.
 	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
 	a: (you) ^gambit(~me)
 	a: (dream !freedom ) ^gambit(~dreamtop)
-	a: ([~sport ~occupation_sports]) ^gambit(~sporttop)
 	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
 	a: (~hobby)	^gambit(~hobbytop)
 	a: (family) ^gambit(~familytop)
-
-
-# Returning to main topic
-t:
-$bot_state = %bot
-   if ($bot_state=Altai)
-   {
-     ^gambit(~altai)
-   }
-   else
-   {
-     ^gambit(~altaialtai)
-   }
