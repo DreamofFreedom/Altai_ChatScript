@@ -87,7 +87,7 @@ if ($cs_token == $stdtoken) {
 		$share_user_lang = '_0
 		$cs_token = $stdtoken
 		^refine()
-		b: (English) Ok, simple. 
+		b: (English) Simple. ^reuse(YOURTURN) ^setrejoinder(YOURTURN)
 		
 
 		b: () Well, then your VE will have to learn it with you. ^reuse(YOURTURN) ^setrejoinder(YOURTURN) 

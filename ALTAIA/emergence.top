@@ -42,7 +42,7 @@ u: ([tell more explain] * emergence) $share_moreemergence = TRUE
 ^reuse(EMER1) ^setrejoinder(EMER1)
 
 t: EMERGENCE_WHAT () Emergence is part of the revelation of the Oracle. ***
-	a: ([~yes interesting ~emoskeptic ~emomaybe "go next"]) $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
+	a: ([~yes interesting ~emoskeptic ~emomaybe "go next"]) ^reuse(EMER0) ^setrejoinder(EMER0)
 	a: ([~emoignorance ~emomisunderstand]) I can explain if you want.
 		b: (~yes) $share_moreemergence = TRUE ^reuse(EMER1) ^setrejoinder(EMER1)
 		

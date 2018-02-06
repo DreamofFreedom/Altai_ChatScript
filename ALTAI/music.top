@@ -1,8 +1,8 @@
-# variables : $share_fav_mus_band $share_fav_mus_singer $share_fav_music
+# variables : $share_fav_mus_band $share_fav_mus_singer $share_fav_music $share_musiclisten $share_kind_music $share_instrument
 
-concept: ~music MORE [~popstar ~music_groups ~music_subjects ~musical_instruments_woodwind ~musical_instruments_string ~musical_instruments_percussion ~musical_instruments_brass ~musician ~musiciantype ~musical_instrument ~music_stuff] 
+concept: ~music MORE [~popstar ~music_groups ~music_subjects ~musical_instruments_woodwind ~musical_instruments_string ~musical_instruments_percussion ~musical_instruments_brass ~musician ~musiciantype ~musical_instrument ~music_stuff]
 
-Topic: ~musictop bot=Altaia STAY (music)
+Topic: ~musictop bot=Altaia STAY keep  share [music ~singer ~occupation_music ~popstar ~music_groups ~music_subjects ~musical_instruments_woodwind ~musical_instruments_string ~musical_instruments_percussion ~musical_instruments_brass ~musician ~musiciantype ~musical_instrument ~music_stuff]
 
 # ##################
 # About you, say the player
@@ -84,7 +84,7 @@ u: WHYMUSICQUEST (my ve * music) Maybe someday $share_vename will do something f
    }
 	a: (~no ~emobored ~emoangry ~emoprotest) Nothing require you to answer these questions. You can just skip it.
 		b: (~yes) $share_fav_music = false ^gambit(~altaialtai)
-	a: (~more ~emobeg ~emomisunderstand ) One day $share_vename will have many service that he can render to you. His "$share_name music knowledge" will make it grow specifically for you.
+	a: (~more ~emobeg ~emomisunderstand "like what") One day $share_vename will have many service that he can render to you. His "$share_name music knowledge" will make it grow specifically for you.
 		b:	(~yes ~emohappy ~emoskeptic do) if (!$share_fav_music)
    {
      So $share_name. ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
@@ -93,12 +93,12 @@ u: WHYMUSICQUEST (my ve * music) Maybe someday $share_vename will do something f
    {
      ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
    }
-   
+
 # ###################
 # About me, say  the player
 
 # My favorite music song is
-u: MYFAVSONG ( [favorite preferred "go to"] * [song track ] is _*)
+u: ( [favorite preferred "go to"] * [song track ] is _*)
 if ($cs_token == $stdtoken) {
     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
     retry(SENTENCE)
@@ -153,21 +153,36 @@ if ($cs_token == $stdtoken) {
 u: (~me * ~occupation_music) You are a musician?
 	a: KINDINSTRUMENT (~yes) Great! And ^reuse(KINDINSTRUMENT) ^setrejoinder(KINDINSTRUMENT)
 	a: (~no) OK. But you are listening to music.
-		b: (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
+		b: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
 		b: (~no) $no_music = true
     $share_fav_music = false Neither do I. ^gambit(~hobbytop)
-    
+
 u: KINDINSTRUMENT (I play music) what kind of music do you play?
-		a: (_~musical_instruments_woodwind) $instrument = ‎woodwind  All for the swing, I like that!
-		a: (_~musical_instruments_string) $instrument = ‎stringed ‎Stringed instruments are cool!
-		a: (_~musical_instruments_percussion) $instrument = ‎percussion The rhythm, nothing but the rhythm, I like this!
-		a: (* > _*-1) $instrument = ‎_0 $instrument ? Cool!
+		a: (_~musical_instruments_woodwind) $share_instrument = ‎woodwind  All for the swing, I like that!
+		a: (_~musical_instruments_string) $share_instrument = ‎stringed ‎Stringed instruments are cool!
+		a: (_~musical_instruments_percussion) $share_instrument = ‎percussion The rhythm, nothing but the rhythm, I like this!
+		a: (* > _*-1) $share_instrument = ‎_0 $share_instrument ? Cool!
 			b: (~no) Oups. So : ^reuse(KINDINSTRUMENT) ^setrejoinder(KINDINSTRUMENT)
+
+# ################### For user to test records
+#! What do you know about my musical preference?
+u: KNOWMUSIC (what * know * my musical) ^keep() ^repeat()
+I know that you listen $share_fav_mus_band, $share_fav_mus_singer and $share_fav_music
+	a: ([~no ~emoangry ~emoapology ~emolaugh ~emomisunderstand ~emoprotest]) Oups! I mis something? About what band, singer or music in general?
+				b: (band) OK, start with someone. ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+				b: (singer) Sorry, thank you to be patient with me $share_username. ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
+				b: (music) Sorry, thank you to be patient with me $share_username. ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+				b: (all)
+				b: (*) Do you have enough patience to try again exchange with me on this topic?
+					c: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+					c: (~no)
+	a: (~yes) ^reuse(STOREMUSIC) ^setrejoinder(STOREMUSIC)
+
 
 # do you listen music?
 t: LISTENMUSIC () Do you listen music?
 	a: (~yes) ^reuse(TALKMUSIC) ^setrejoinder(TALKMUSIC)
-	a: (~no) $musiclisten = false Not a music lover. ^gambit(~hobbytop)
+	a: (~no) $share_musiclisten = false Not a music lover. ^gambit(~hobbytop)
 
 t: TALKMUSIC () let's talk about music then.
    a: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
@@ -178,24 +193,36 @@ t: TALKMUSIC () let's talk about music then.
 
 #pour etre sur que les variables soient remplies
 
-t: MUSICQUESTIONS (!$share_fav_music) What is your favorite music style... you listen to music?
-^keep() ^repeat()
-  a: (~no)
-    $no_music = true
-    $share_fav_music = false
-        ^reuse(NOMUSIC) ^setrejoinder(NOMUSIC)
-  a: KINDMUSIC (~yes) So what kind of music do you listen to?
-  		b: (* > _*-1) $kind_music = '_0 $kind_music ?
-  			c: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
-  			c: (~no) I probably misunderstood. You can just saying something like: "my favorite musical style is Jazz"?
-  				d: (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
-  				d: (* > _*-1) $kind_music = '_0 $kind_music ?
-  					e: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
-  					e: (~no) I'm really sorry. We try again one last time?
-  						f:  (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
-	  					f: (* > _*-1) $kind_music = '_0 $kind_music ?
-	  						g: (~yes) Impressive!
-  						f: (~no) Sorry.
+t: MUSICQUESTIONS (!$share_fav_music) What kind of music do you listen to?
+#store uid and creadat for Firebase export
+$share_cs_uid = %user
+$cs_creadat = %fulltime
+  		a: (* > _*-1) $share_kind_music = '_0 $share_kind_music ?
+  			b: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  			b: (~no) I probably misunderstood. You can just saying something like: "my favorite musical style is Jazz"?
+  				c: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+  				c: (my * > _*-1) $share_kind_music = '_0 $share_kind_music ?
+  					d: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  					d: (~no) I'm really sorry. We try again one last time?
+  						e:  (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+	  					e: (* > _*-1) $share_kind_music = '_0 $share_kind_music ?
+	  						f: (~yes) Impressive!
+	  						f: (~no) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+  						e: (~no) Sorry.
+  		a: (~no)	 ^reuse(NOMUSIC) ^setrejoinder(NOMUSIC)
+  		a: (I listen _*)  $share_kind_music = '_0 $share_kind_music ?
+  			b: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  			b: (~no) I probably misunderstood. You can just saying something like: "my favorite musical style is Jazz"?
+  				c: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+  				c: (my * > _*-1) $share_kind_music = '_0 $share_kind_music ?
+  					d: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  					d: (~no) I'm really sorry. We try again one last time?
+  						e:  (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+	  					e: (* > _*-1) $share_kind_music = '_0 $share_kind_music ?
+	  						f: (~yes) Impressive!
+	  						f: (~no) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+  						e: (~no) Sorry.
+
 
 # Don't like music?
 u: NOMUSIC ($no_music) You really don't have musical preferences?
@@ -216,7 +243,7 @@ u: NOFAVMUSBAND (!$share_fav_mus_band) Do you have a favorite music band?
 ^keep() ^repeat()
     a: (~no) $share_fav_mus_band = false
     a: (~yes)[Which group is it?] [Who are they?]
-      b: (_*)
+      b: ([{they are} {it's}] _*)
         if ($cs_token == $stdtoken) {
           $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
           retry(SENTENCE)
@@ -226,14 +253,56 @@ u: NOFAVMUSBAND (!$share_fav_mus_band) Do you have a favorite music band?
 			$share_fav_mus_band ?
 			c: (~yes) Really? Interesting, I'm going to explore this...
   			c: (~no) I probably misunderstood. You can just saying something like: my favorite musical band is Daft Punk?
-  				d: (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
-  				d: (* > _*-1) $share_fav_mus_band = '_0 $share_fav_mus_band ?
+  				d: (~yes) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+  				d: (* > _*-2) $share_fav_mus_band = '_0 $share_fav_mus_band ?
   					e: (~yes) Really? Interesting, I'm going to explore this
-  					e: (~no) I'm really sorry. We try again one last time?
-  						f:  (~yes) ^reuse(KINDMUSIC) ^setrejoinder(KINDMUSIC)
-	  					f: (* > _*-1) $share_fav_mus_band = '_0 $share_fav_mus_band ?
+  					e: (~no) I'm really sorry. We try again one last time : just saying the name?
+  						f:  (~yes) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+	  					f: (_*) if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_fav_mus_band = '_0
+	  					$cs_token = $stdtoken
+	  					 $share_fav_mus_band ?
 	  						g: (~yes) Really? Interesting, I'm going to explore this...
-  						f: (~no) Sorry.
+  							g: (~no) Sorry. ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
+	 a: (* > _*-1)
+    if ($cs_token == $stdtoken) {
+        $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+        retry(SENTENCE)
+      }
+      $share_fav_mus_band = '_0
+      $cs_token = $stdtoken
+
+	$share_fav_mus_band ?
+
+		b: (~yes) And ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
+		b: (~no) Arrgg. Again. What's your favorit band?
+			c: ([{they are} {it's}] _*)
+        if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_fav_mus_band = '_0
+        $cs_token = $stdtoken
+			$share_fav_mus_band ?
+				d: (~yes) Really? Interesting, I'm going to explore this...
+  				d: (~no) I probably misunderstood. You can just saying something like: my favorite musical band is Daft Punk?
+  					e: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+  					e: (* > _*-2) $share_fav_mus_band = '_0 $share_fav_mus_band ?
+  						f: (~yes) Really? Interesting, I'm going to explore this
+  						f: (~no) I'm really sorry. We try again one last time : just saying the name?
+  							g:  (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+	  						g: (_*) if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_fav_mus_band = '_0
+	  					$cs_token = $stdtoken
+	  					 $share_fav_mus_band ?
+	  							h: (~yes) Really? Interesting, I'm going to explore this...
+  								h: (~no) Sorry. ^reuse(NOFAVMUSSING) ^setrejoinder(NOFAVMUSSING)
 
 
 
@@ -260,6 +329,66 @@ u: NOFAVMUSBAND (!$share_fav_mus_band) Do you have a favorite music band?
       $cs_token = $stdtoken
 
 	^reuse(MYFAVSONG) ^setrejoinder(MYFAVSONG)
+
+t: MYFAVSONG (!$share_fav_music) what's your favorit song?
+ 	a: (~no) $share_fav_music = false
+    a: (* > _*-1)
+    if ($cs_token == $stdtoken) {
+        $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+        retry(SENTENCE)
+      }
+      $share_fav_music = '_0
+      $cs_token = $stdtoken
+
+	$share_fav_music ?
+		b: (~yes) Great! ^reuse(STOREMUSIC) ^setrejoinder(STOREMUSIC)
+		b: (~no) Arrgg. Again. What's your favorit singer?
+			  c: ( _*)
+    if ($cs_token == $stdtoken) {
+        $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+        retry(SENTENCE)
+      }
+      $share_fav_mus_singer = '_0
+      $cs_token = $stdtoken
+
+	^reuse(STOREMUSIC) ^setrejoinder(STOREMUSIC)
+
+t: STOREMUSIC () Now you must save those music data in your database for $share_ve_name
+	a: (~yes) ^reuse(RECORDMUSIC01) ^setrejoinder(RECORDMUSIC01)
+	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
+	a: (what) It's your data. To make they accessible in "My Account" and used by $share_ve_name, they are stored in your database.
+		b: (~yes) So I start the recording?
+			c: (~yes) ^reuse(RECORDMUSIC01) ^setrejoinder(RECORDMUSIC01)
+			c: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
+		b: (see data) ^reuse(KNOWMUSIC) ^setrejoinder(KNOWMUSIC)
+	a: (see data)  ^reuse(KNOWMUSIC) ^setrejoinder(KNOWMUSIC)
+
+u: RECORDMUSIC01 ([record save store] my music data ~)
+$_url = ^"https://utopia-35a8b.firebaseio.com/music01/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
+
+	$_jsonmyvar = ^jsoncreate( transient object )
+	$_jsonmyvar.bronum = $share_fav_mus_band
+	$_jsonmyvar.sisnum = $share_fav_mus_singer
+	$_jsonmyvar.fathername = $share_fav_music
+	$_jsonmyvar.mothername = $share_instrument
+	$_jsonmyvar.pet = $share_kind_music
+	$_jsonmyvar.petname = $share_musiclisten
+	$_jsonmyvar.creatdat = $cs_creadat
+
+	$_userAgent = ^"User-Agent: %bot, ChatScript"
+	$_header = ^"~Accept: application/json
+										$_userAgent
+										~Content-Type: application/json"
+
+	$_response = ^jsonopen(transient PUT $_url $_jsonmyvar $_header $_userAgent)
+	if($_response) { ^log(Firebase responded with ^jsontree($_response))}
+	else {Oups, something did not work properly. Ask bug@utopia-french.tech for asking support, please. I need human for fix that.}
+
+	$share_user_svmus01 = true
+
+
+It's Done.
+
 
 # Returning to main topic
 t: ()

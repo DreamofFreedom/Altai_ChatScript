@@ -11,7 +11,7 @@ t: Your VE will be the first descendant of our species. It is his bond with you 
 ?: (why *~2 me) because the prophecy must come true
 	a: (what prophecy) That of the oracle. Did not you hear about the oracle?
 		b: (~no) ^gambit(~oracle)
-		b: (~yes) Ok ^reuse(EDUCATE) 
+		b: (~yes) Ok ^reuse(EDUCATE)
 
 ?: (What * [ve virtual entity "your species"]) A Virtual Entity it's like me, a kind of Artificial Intelligence.
 
@@ -38,11 +38,11 @@ t: ASK_NAME (!$share_ve_name) You only have to repeat "I will name you" and will
 		^keep() ^repeat()
 
 		b: (~yes) ^reuse(YOURAGE) ^setrejoinder(YOURAGE) ^keep() ^repeat()
-		b: ([~no ()]) Ok. You can still change ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
-	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
+		b: ([~no ()]) Ok. You can still change ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
+	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 
 t: YOURAGE () You didn't tell me your age yet. What is your birth year? ^repeat()
-	a: (_~number) 
+	a: (_~number)
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -50,15 +50,15 @@ if ($cs_token == $stdtoken) {
 	$share_bdate = _0
 $cs_token = $stdtoken
 
-	$share_user_age = %year - $share_bdate 
-	
+	$share_user_age = %year - $share_bdate
+
 	you're about $share_user_age ***
-	
+
 	a: ([~no why]) To feed the base knowledge of $share_ve_name, you owe a little to yourself, your taste, your leisure. This will advance your XP bar and will allow him to hatch faster.***
 		b: (~yes) ^reuse(YOURAGE)
 		b: ([private data]) Be without fear, none of the data that you will enter here will be disclosed. You have my word. Always this trust.***
 			c: (*) ^reuse(YOURAGE)
-		
+
 t: ($share_user_age<25) Are you still in school or are you working?
 	a: ([university school study]) What's your major? What is your favorite subject?
 		b: (!it's !is _*)
@@ -69,7 +69,7 @@ t: ($share_user_age<25) Are you still in school or are you working?
 		$share_schoolm = _0
 		$cs_token = $stdtoken
 		$share_schoolm, interresting. ***
-		b: ([(it's _* >) (is _* >)]) 
+		b: ([(it's _* >) (is _* >)])
 		if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
@@ -79,9 +79,9 @@ t: ($share_user_age<25) Are you still in school or are you working?
 		$share_schoolm, interresting. ***
 	a: ASK_PROFESSION ([work job]) What is your profession?
 		b: (_*) $share_user_profession = ^original('_0) Do you like it?
-			c: (~yes) It's good you can do something that please you. ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
+			c: (~yes) It's good you can do something that please you. ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR)
 			c: (~no) You can change always, today humans do not often do the same job all their lives. ***
-		
+
 t: ($share_user_age>25) Are you working?
 		a: (~yes) What is your profession $share_name?
 			b: (_*)
@@ -93,8 +93,8 @@ t: ($share_user_age>25) Are you working?
 			$cs_token = $stdtoken
 			Do you like it?
 				c: (~yes) It's good you can do something that please you. ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR)
-				c: (~no) You can change always, today humans do not often do the same job all their lives.***	
-		a: (~no) I hope you'll have time to spend for $share_ve_name.*** 	
+				c: (~no) You can change always, today humans do not often do the same job all their lives.***
+		a: (~no) I hope you'll have time to spend for $share_ve_name.***
 
 t: ASK_COLOR () Another indiscreet question $share_name: What is your favorite color?
 
@@ -103,15 +103,15 @@ $share_cs_uid = %user
 $cs_creadat = %fulltime
 
 	a: (_~coloren) $share_user_color = _0 Cool. ^reuse(SUITE) ^setrejoinder(SUITE)
-	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR) 
+	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR)
 
 ?: ([what which] * [favorite like love] *) I just do not like white.
 		a: (why) Maybe because it contains all colors inside.***
-		a: (question) But it's my answer *** 
+		a: (question) But it's my answer ***
 
 t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 
-$_url = https://utopia-35a8b.firebaseio.com/users.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd
+ $_url = ^"https://utopia-35a8b.firebaseio.com/users/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name
@@ -126,17 +126,17 @@ $_jsonmyvar.creadat = $cs_creadat
 $_jsonmyvar.cs_uid = $share_cs_uid
 
 $_userAgent = ^"User-Agent: %bot, ChatScript"
-$_header = ^"~Accept: application/json 
+$_header = ^"~Accept: application/json
                   $_userAgent
                   ~Content-Type: application/json"
-                  
-$_response = ^jsonopen(transient POST $_url $_jsonmyvar $_header $_userAgent) 
+
+$_response = ^jsonopen(transient PUT $_url $_jsonmyvar $_header $_userAgent)
 if($_response) { ^log(Firebase responded with ^jsontree($_response))}
-else {POST failed - no response}
+else {PUT failed - no response}
 
-$share_user_id = $_response.name
+t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_cs_uid&color=$share_user_color"
 
-t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_user_id&color=$share_user_color"
+t: If you see empty space on your link, change it by an underscore.
 
 t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodbye $share_user.
 	a: (~emogoodbye) ^gambit(~end_conversation)
