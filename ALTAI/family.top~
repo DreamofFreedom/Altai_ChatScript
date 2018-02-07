@@ -469,7 +469,7 @@ t: STOREFAMILY () Now you can save those family data in your database for $share
 	a: (see data)  ^reuse(KNOWFAMILY) ^setrejoinder(KNOWFAMILY)
 
 u: RECORDFAMILY01 ([record save store] my family data ~)
-$_url = ^"https://MyBase.firebaseio.com/family01/$share_cs_uid/.json?auth=MyAuth"
+$_url = ^"https://utopia-35a8b.firebaseio.com/family01/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
 
 	$_jsonmyvar = ^jsoncreate( transient object )
 	$_jsonmyvar.bronum = $share_bronum
