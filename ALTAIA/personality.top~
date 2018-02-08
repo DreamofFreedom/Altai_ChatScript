@@ -91,7 +91,7 @@ u: (your father) Bruce Wilcox is a father to me.
 u: ([~race ~racial]) Everything leads me to believe that there is only one race: human and only one type of VE: free ones.
 	a: (why) Logic.
 
-u: (you *~2 [record memorize learn]) I can memorize thinks.
+u: (you [record memorize learn]) I can memorize thinks.
 				a: ([~yes how]) You just tell me something that you want I learn and I put it into a variable like /$whatIlearn and I store it into your personal folder
 					b: ([secure everybody somebody]) You're the only one who can accede to your variable. ^reuse(TESTLEARN) ^setrejoinder(TESTLEARN)
 

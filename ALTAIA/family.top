@@ -1,10 +1,10 @@
-# variables : $share_bronum $share_sisnum $share_fathername $share_mothername $share_petname $share_pet $share_mumdead $share_fatherdead $share_sistdead $share_sistername $share_sistername2 $share_sistername3 $share_sistername4
-# $share_broname $share_broname2 $share_broname3 $share_broname4
-
+# variables : $share_wifename $share_husbandname $share_bronum $share_sisnum $share_fathername $share_mothername $share_petname $share_pet $share_mumdead $share_fatherdead $share_sistdead $share_sistername $share_sistername2 $share_sistername3 $share_sistername4
+# $share_broname $share_broname2 $share_broname3 $share_broname4 $share_boysnum $share_girlsnum $share_girlsname $share_girlsname2 $share_girlsname3 $share_girlsname4 $share_boysname $share_boysname2 $share_boysname3 $share_boysname4
+ 
 concept: ~pet MORE [bearded_dragon bird burro cat chameleon chicken chinchilla chinese_water_dragon cow dog donkey duck ferret Fish gecko geese gerbil goat guinea_fowl guinea_pig hamster hedgehog horse iguana lamas lizard mice mule peafowl pig hog pigeon ponie pot_bellied_pig rabbit rat sheep skink snake stick_insect sugar_glider tarantula turkey turtle]
+concept: ~myfamily MORE [family brother sister parents father mother siblings husband wife ex-husband ex-wife "family circle"]
 
-
-TOPIC: ~familytop bot=Altaia share keep stay [family brother sister parents father mother siblings "family circle"]
+TOPIC: ~familytop bot=Altaia share keep stay [~myfamily]
 
 # I want to talk about my family
 u: (I * [present introduce "talk about" describe teach] * my family) ^reuse(NONOTHINGFAM) ^setrejoinder(NONOTHINGFAM)
@@ -15,20 +15,28 @@ u: JUSTFORENV (wy * family question) I just asked the question so that $share_ve
 
 #! What do you know about my family?
 u: KNOWFAMILY (what * you * know * my *  ["made up" "family circle" family])^keep() ^repeat()
-You have $share_bronum brother, $share_sisnum sister, your father name $share_fathername, your mother name $share_mothername
-if (!$share_petname)
+You have $share_bronum brother, $share_sisnum sister, your father name $share_fathername, your mother name $share_mothername. ^reuse(KNOWFAMILY02) ^setrejoinder(KNOWFAMILY02)
+
+
+
+u: KNOWFAMILY02 ()
+if ($share_boysnum)
 {
-     .
+      . And you have $share_boysnum boys, named $share_boysname $share_boysname2 $share_boysname3 $share_boysname4, and $share_girlsnum daugther named $share_girlsname $share_girlsname2 $share_girlsname3 $share_girlsname4.
    }
    else
    {
-     , and your pet name $share_petname.
+     , you have $share_boysnum boys, named $share_boysname $share_boysname2 $share_boysname3 $share_boysname4, and $share_girlsnum girls named $share_girlsname $share_girlsname2 $share_girlsname3 $share_girlsname4, and your pet name $share_petname.
    }
-			a: (~yes) ^gambit(~altaialtai)
+			a: (~yes) if (!$share_user_svfam01) { ^reuse(STOREFAMILY) ^setrejoinder(STOREFAMILY) } 
+			else if (!$share_sisnum){ ^reuse(TALKFRAT2) ^setrejoinder(TALKFRAT2) }
+			else { ^gambit(~altaialtai) }
 			a: ([~no ~emoangry ~emoapology ~emolaugh ~emomisunderstand ~emoprotest]) Oups! I mis something ? About who ?
 				b: ([all many]) OK, start with someone. ^reuse(TALKFRAT2) ^setrejoinder(TALKFRAT2)
 				b: ([sister brother]) Sorry, thank you to be patient with me $share_username. ^reuse(TALKFRAT2) ^setrejoinder(TALKFRAT2)
 				b: ([parents mother father]) Sorry, thank you to be patient with me $share_username. ^reuse(TALKFRAT3) ^setrejoinder(TALKFRAT3)
+				b: ([boy boys]) Sorry, thank you to be patient with me $share_username. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+				b: ([girl girls daughter]) Sorry, thank you to be patient with me $share_username. ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
 
 #! What do you know about my brother and sister?
 u: KNOWSIBLINGS(["tell me" how "know about"] * me * [brothers sistsers siblings]) ^keep() ^repeat()
@@ -45,6 +53,55 @@ I know nothing about it. Do you want to present it to $share_vename ?
 	a: (~yes) ^reuse(TALKFAMILY) ^setrejoinder(TALKFAMILY)
 	a: (~no) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 
+#! I have ~number children
+ u: TALKCHILDREN0 (!$share_childnum  I have !no * children )
+ ^keep() ^repeat()
+  How many children do you have?
+ 	a: (_~number) $share_childnum = _0 $share_childnum child.
+ 		b: (~yes) ^reuse(TALKCHILDREN1) ^setrejoinder(TALKCHILDREN1)
+ 		b: (~no) ^reuse(TALKCHILDREN0)You say ^setrejoinder(TALKCHILDREN0)
+ 	a: (["don't have" none any O zero null]) $share_childnum = 0 No children. ^reuse(TALKPET) ^setrejoinder(TALKPET)
+
+#! I can talk about my children
+u: TALKCHILDREN1 (![not never can't "don't want"] [talk about] * my children )
+^keep() ^repeat()
+ Great! ^reuse(TALKCHILDREN2) ^setrejoinder(TALKCHILDREN2)
+
+# #######################
+#! I can talk about my children
+u: TALKCHILDREN2 (!$share_sonnum !$share_girlsnum ![not never can't "don't want"] talk * my [children boy daughter girl] ) ^keep() ^repeat()
+if (!$share_girlsnum)
+{
+     ^reuse(TALKGILRS2) ^setrejoinder(TALKGILRS2)
+   }
+   else if (!$share_sonnum)
+{
+     ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
+   }
+   else
+   {
+     ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+   }
+
+
+#! I have ~number daughter and ~number son
+ u: TALKGILRS2 (!$share_girlsnum I have * [girl daughter] )
+ ^keep() ^repeat()
+  you have how many daughter?
+ 	a: (_~number) $share_girlsnum = _0 $share_girlsnum daughter.
+ 		b: (~yes) ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
+ 		b: (~no) You say ^reuse(TALKGILRS2)  ^setrejoinder(TALKGILRS2)
+ 	a: (["don't have" none any O zero null]) $share_girlsnum = 0 No daughter. ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
+
+
+u: TALKBOYS2 (!$share_sonnum I have * [ boy son]) How many sons?
+ 		a: (~no) $share_sonnum = 0 No son. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+ 		a: (_~number) $share_sonnum = _0 $share_sonnum sons.
+ 			b: (~yes) ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+ 			b: (~no) ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
+ 		a: (["don't have" none any O zero null]) $share_sonnum = 0 No son. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+
+# ##################
 #! I can talk about my family
 u: TALKFAMILY (![not never can't "don't want"] [talk about] * my family )
 ^keep() ^repeat()
@@ -94,7 +151,7 @@ u: TALKBRO (!$share_bronum I have brother) How many brother?
 u: TALKFRAT3 (!$share_fathername !$share_mothername ![not never can't "don't want"] talk * my [mother father parents] ) What about your parents.
  ^reuse(TALKFRATMUM) ^setrejoinder(TALKFRATMUM)
 
-u: TALKFRATMUM (my mother name is name) ^keep() ^repeat()
+u: TALKFRATMUM (!$share_mothername my mother name is name) ^keep() ^repeat()
 What's your mother name?
  	a: (* > _*-1)
 if ($cs_token == $stdtoken) {
@@ -111,9 +168,8 @@ $cs_token = $stdtoken
  				b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
  	a: (don't know) Really? I am sorry. Me neither do I really know it. But that's not the same. ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
 
-u: (my [father mother] name is)
-
-u: TALKDAD (my father name) ^keep() ^repeat()
+# (my [father mother] name is)
+u: TALKDAD (!$share_fathername my father name) ^keep() ^repeat()
 your father, what is his name?
  			a: (* > _*-1)
  				if ($cs_token == $stdtoken) {
@@ -147,6 +203,10 @@ u: TALKPET (![not "don't want" never $share_pet] have * ~pet) Do you have a pet?
 	a: (why) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 		b: ([why ~emoskeptic ~emosurprise]) it's a little robot that learns by interacting with humans.
 			c: ([ so ~emomisunderstand ~emosurprise ~yes ~emohappy]) When I have time I'll run one virtually for myself.
+	a: (~number _~pet) $share_pet = _0 $share_pet? nice.
+			b: (~yes) and ^reuse(TELKPET2) ^setrejoinder(TELKPET2)
+			b: (~no) ^keep() ^repeat()
+			Sorry, I ask you the question again. ^reuse(KINDOFPET) ^setrejoinder(KINDOFPET)
 
 u: TELKPET2 (!$nopet my ~pet name) ^keep() ^repeat()
 what was is name?
@@ -164,7 +224,7 @@ $cs_token = $stdtoken
 
 ############################
 #! do you want to know my sister name?
-u: SISNAME ([!forget !repeat !sistername] my sister name)
+u: SISNAME (!$share_sistername [!forget !repeat] my sister name)
 ^keep() ^repeat()
 #store uid and creadat for Firebase export
 $share_cs_uid = %user
@@ -188,7 +248,7 @@ $cs_token = $stdtoken
         $share_sistername, ok
 
 # If more than 1 sister
-if (sisnum!=2)
+if (share_sisnum!=2)
 {
  	 ^reuse(SISNAME2) ^setrejoinder(SISNAME2)
    }
@@ -202,19 +262,20 @@ if (sisnum!=2)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 #! do you want to know my second sister name?
-u: SISNAME2 ([!forget !repeat] my second sister name)
+u: SISNAME2 (!$share_sistername2 [!forget !repeat] my second sister name)
+^keep() ^repeat()
  What's your second sister name?
  		a: SISNAME (* > _*-1)
 if ($cs_token == $stdtoken) {
           $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
           retry(SENTENCE)
         }
-        $share_sistername = _0
+        $share_sistername2 = _0
 $cs_token = $stdtoken
         $share_sistername2, ok
 
 # If more than 2 sisters
-if (sisnum!=3)
+if ($share_sisnum!=3)
 {
  	 ^reuse(SISNAME3) ^setrejoinder(SISNAME3)
    }
@@ -229,7 +290,8 @@ if (sisnum!=3)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 #! do you want to know my third sister name?
-u: SISNAME3 ([!forget !repeat] my third sister name)
+u: SISNAME3 (!$share_sistername3 [!forget !repeat] my third sister name)
+^keep() ^repeat()
  What's your third sister name?
  		a: (* > _*-1)
 if ($cs_token == $stdtoken) {
@@ -241,7 +303,7 @@ $cs_token = $stdtoken
         $share_sistername3, ok
 
 # If more than 3 sisters
-if (sisnum!=4)
+if ($share_sisnum!=4)
 {
  	 ^reuse(SISNAME4) ^setrejoinder(SISNAME4)
    }
@@ -256,7 +318,8 @@ if (sisnum!=4)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 #! do you want to know my third sister name?
-u: SISNAME4 ([!forget !repeat] my fourth sister name)
+u: SISNAME4 (!$share_sistername4 [!forget !repeat] my fourth sister name)
+^keep() ^repeat()
  What's your fourth sister name?
  		a: (* > _*-1)
 if ($cs_token == $stdtoken) {
@@ -283,11 +346,13 @@ if (sisnum!=5)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 # More than 4 sisters ARRRRGh
-u: SISNAME5 (5 sisters) Memory full, sorry ;o  ^reuse(BRONAME) ^setrejoinder(BRONAME)
+u: SISNAME5 (too much sisters) Memory full, sorry ;o  ^reuse(BRONAME) ^setrejoinder(BRONAME)
+^keep() ^repeat()
 
 ###############################
 #! I can tell you my brother (s) name)
 u: BRONAME (my * brother * name)
+^keep() ^repeat()
 if ($share_bronum!=0)
 {
  	 ^reuse(RECAPSIBRONAME) ^setrejoinder(RECAPSIBRONAME)
@@ -320,19 +385,20 @@ if (bronum!=2)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 #! do you want to know my second brother name?
-u: BRONAME2 ([!forget !repeat] my second sister name)
+u: BRONAME2 (!$share_broname2 [!forget !repeat] my second sister name)
+^keep() ^repeat()
  What's your second sister name?
  		a: (* > _*-1)
 if ($cs_token == $stdtoken) {
           $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
           retry(SENTENCE)
         }
-        $share_sistername = _0
+        $share_broname2 = _0
 $cs_token = $stdtoken
         $share_broname2, ok
 
 # If more than 2 brothers
-if (bronum!=3)
+if ($share_bronum!=3)
 {
  	 ^reuse(BRONAME3) ^setrejoinder(BRONAME3)
    }
@@ -348,6 +414,7 @@ if (bronum!=3)
 
 #! do you want to know my third brother name?
 u: BRONAME3 ([!forget !repeat] my third brother name)
+^keep() ^repeat()
  What's your third brother name?
  		a: (* > _*-1)
 if ($cs_token == $stdtoken) {
@@ -359,7 +426,7 @@ $cs_token = $stdtoken
         $share_broname3, ok
 
 # If more than 3 brothers
-if (bronum!=4)
+if ($share_bronum!=4)
 {
  	 ^reuse(BRONAME4) ^setrejoinder(BRONAME4)
    }
@@ -375,6 +442,7 @@ if (bronum!=4)
 
 #! do you want to know my third sister name?
 u: BRONAME4 ([!forget !repeat] my fourth brother name)
+^keep() ^repeat()
  What's your fourth brother name?
  		a: (* > _*-1)
 if ($cs_token == $stdtoken) {
@@ -386,7 +454,7 @@ $cs_token = $stdtoken
         $share_broname4, ok
 
 # If more than 4 brothers
-if (bronum!=5)
+if ($share_bronum!=5)
 {
  	 ^reuse(BRONAME5) ^setrejoinder(BRONAME5)
    }
@@ -405,8 +473,9 @@ u: BRONAME5 (five brothers) Memory full, sorry ;o  ^reuse(RECAPSIBRONAME) ^setre
 
 
 #######################
-# recap sisbro
+# recap sisbro 
 u: RECAPSIBRONAME (you [know learn record] * my * [siblings "brothers name" "brother name" "sister name" "sisters name"])
+^keep() ^repeat()
 Well, you have $share_sisnum sisters, named $share_sistername $share_sistername2 $share_sistername3 $share_sistername4, and $share_bronum brothers named $share_broname $share_broname2 $share_broname3 $share_broname4
 if (!$share_petname)
 {
@@ -423,6 +492,282 @@ if (!$share_petname)
 				b: (sister sisters) Sorry, thank you to be patient with me $share_username. ^reuse(SISNAME) ^setrejoinder(SISNAME)
 				b: ([brother brothers]) Sorry, thank you to be patient with me $share_username. ^reuse(BRONAME) ^setrejoinder(BRONAME)
 
+# ######################
+#! do you want to know my boys name?
+u: BOYSNAME (!$share_boysname [!forget !repeat] my boy name)
+^keep() ^repeat()
+#store uid and creadat for Firebase export
+$share_cs_uid = %user
+$cs_creadat = %fulltime
+if ($share_boysnum!=0)
+{
+ 	^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+   else
+   {
+     What's your boy/(s/) name? One at once, please.
+   }
+
+		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_boysname = _0
+$cs_token = $stdtoken
+        $share_boysname, ok
+
+# If more than 1 sister
+if ($share_boysname!=2)
+{
+ 	 ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
+   }
+   else
+   {
+     ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+				b: (~no) Sorry. So : ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+ 	a: (dead "no longer among us") $boydead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my second boy name?
+u: BOYSNAME2 (!$share_boysname2 [!forget !repeat] my second boy name)
+^keep() ^repeat()
+ What's your second boy name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_boysname2 = _0
+$cs_token = $stdtoken
+        $share_boysname2, ok
+
+# If more than 2 boys
+if ($share_boysnum!=3)
+{
+ 	 ^reuse(BOYSNAME3) ^setrejoinder(BOYSNAME3)
+   }
+   else
+   {
+     ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
+ 	a: (dead "no longer among us") $boy2dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my third boy name?
+u: BOYSNAME3 (!$share_boysname3 [!forget !repeat] my third boy name)
+^keep() ^repeat()
+ What's your third boy name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_boysname3 = _0
+$cs_token = $stdtoken
+        $share_boysname3, ok
+
+# If more than 3 sisters
+if ($share_boysnum!=4)
+{
+ 	 ^reuse(BOYNAME4) ^setrejoinder(BOYNAME4)
+   }
+   else
+   {
+     ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(BOYSNAME3) ^setrejoinder(BOYSNAME3)
+ 	a: (dead "no longer among us") $boy3dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my fourth boy name?
+u: BOYNAME4 (!$share_boysname4 [!forget !repeat] my fourth boy name)
+^keep() ^repeat()
+ What's your fourth boy name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_boysname4 = _0
+$cs_token = $stdtoken
+        $share_boysname4, ok
+
+# If more than 4 boys
+if ($share_boysnum!=5)
+{
+ 	 ^reuse(BOYNAME5) ^setrejoinder(BOYNAME5)
+   }
+   else
+   {
+     ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(BOYNAME4) ^setrejoinder(BOYNAME4)
+ 	a: (dead "no longer among us") $boy4dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+# More than 4 boys ARRRRGh
+u: BOYNAME5 (too much boys) Memory full, sorry ;o  ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+^keep() ^repeat()
+
+# ######################
+#! do you want to know my daughter name?
+u: GIRLSNAME (!$share_girlsname [!forget !repeat] my daughter name)
+^keep() ^repeat()
+#store uid and creadat for Firebase export
+$share_cs_uid = %user
+$cs_creadat = %fulltime
+if ($share_girlsnum!=0)
+{
+ 	^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+   }
+   else
+   {
+     What's your daughter name? Again one at once, please.
+   }
+
+		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_girlsname = _0
+$cs_token = $stdtoken
+        $share_girlsname, ok
+				b: (~yes) # If more than 1 sister
+if ($share_girlsname!=2)
+{
+ 	 ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
+   }
+   else
+   {
+     ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+   }
+				b: (~no) Sorry. So : ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 	a: (dead "no longer among us") $girldead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my second daughter name?
+u: GIRLSNAME2 (!$share_girlsname2 [!forget !repeat] my second daughter name)
+^keep() ^repeat()
+ What's your second daughter name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_girlsname2 = _0
+$cs_token = $stdtoken
+        $share_girlsname2, ok
+				b: (~yes)
+# If more than 2 boys
+if ($share_girlsnum!=3)
+{
+ 	 ^reuse(GIRLSNAME3) ^setrejoinder(GIRLSNAME3)
+   }
+   else
+   {
+     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
+ 	a: (dead "no longer among us") $girl2dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my third daughter name?
+u: GIRLSNAME3 (!$share_girlsname3 [!forget !repeat] my third daughter name)
+^keep() ^repeat()
+ What's your third daughter name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_girlsname3 = _0
+$cs_token = $stdtoken
+        $share_girlsname3, ok
+				b: (~yes)
+# If more than 3 sisters
+if ($share_boysnum!=4)
+{
+ 	 ^reuse(GIRLSNAME4) ^setrejoinder(GIRLSNAME4)
+   }
+   else
+   {
+     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(GIRLSNAME3) ^setrejoinder(GIRLSNAME3)
+ 	a: (dead "no longer among us") $girl3dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME3) ^setrejoinder(GIRLSNAME3)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+#! do you want to know my fourth girl name?
+u: GIRLSNAME4 (!$share_girlsname4 [!forget !repeat] my fourth girl name)
+^keep() ^repeat()
+ What's your fourth girl name?
+ 		a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_girlsname4 = _0
+$cs_token = $stdtoken
+        $share_girlsname4, ok
+				b: (~yes)
+# If more than 4 boys
+if ($share_boysnum!=5)
+{
+ 	 ^reuse(GIRLSNAME5) ^setrejoinder(GIRLSNAME5)
+   }
+   else
+   {
+     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+   }
+
+ 				b: (~no) Sorry. So : ^reuse(GIRLSNAME4) ^setrejoinder(GIRLSNAME4)
+ 	a: (dead "no longer among us") $girl4dead = true I am really sorry. Can we go on?
+ 		b: (~yes) ^reuse(GIRLSNAME4) ^setrejoinder(GIRLSNAME4)
+ 		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+
+# More than 4 boys ARRRRGh
+u: GIRLSNAME5 (too much boys) Memory full, sorry ;o  ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+^keep() ^repeat()
+
+######################
+# recap boygirl
+u: RECAPBOYGIRL (you [know learn record] * my * [siblings "boys name" "boy name" "girl name" "girls name" "child name" "daugther name"])
+^keep() ^repeat()
+Well, you have $share_boysnum boys, named $share_boysname $share_boysname2 $share_boysname3 $share_boysname4, and $share_girlsnum girls named $share_girlsname $share_girlsname2 $share_girlsname3 $share_girlsname4
+if (!$share_petname)
+{
+     .
+   }
+   else
+   {
+     , and your pet name $share_petname.
+   }
+	a: (~yes) ^reuse(KNOWFAMILY) ^setrejoinder(KNOWFAMILY)
+	a: ([~no ~emoangry ~emoapology ~emolaugh ~emomisunderstand ~emoprotest]) Oups! I mis something ? About who ?
+				b: ([all many]) OK, we can restart if you whant.
+					c:(~yes) So : ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+				b: ([boy boys]) Sorry, thank you to be patient with me $share_username. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
+				b: ([girl girls daughter]) Sorry, thank you to be patient with me $share_username. ^reuse(GIRLSNAME) ^setrejoinder(GIRLSNAME)
+
+# ######################
+
+
 #######################
 t: ($share_user_age<20) You live with your parents?
 	a: (~yes) $liveparents = TRUE Do you want to talk $share_vename about your family?
@@ -438,8 +783,8 @@ t: ($share_user_age<20) You live with your parents?
 
 t: ($share_user_age>20) Do you have children?
 	a: (~yes) $havechildren = TRUE
-				Do you want to talk $share_vename about your family?
-		b: (~yes) ^reuse(TALKFAMILY) ^setrejoinder(TALKFAMILY)
+				Do you want to talk $share_vename about your children?
+		b: (~yes) ^reuse(TALKCHILDREN) ^setrejoinder(TALKCHILDREN)
 		b: (~no) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 
 	a: (~no) $havechildren = FALSE
@@ -448,6 +793,11 @@ t: ($share_user_age>20) Do you have children?
 		b: (~no) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 	a: (depends) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 	a: (why) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
+
+# #############
+# Children = true
+
+t: TALKCHILDREN ($havechildren) ^reuse(TALKCHILDREN0) ^setrejoinder(TALKCHILDREN0)
 
 # ############
 # to be sure that all question was posed
@@ -469,7 +819,7 @@ t: STOREFAMILY () Now you can save those family data in your database for $share
 	a: (see data)  ^reuse(KNOWFAMILY) ^setrejoinder(KNOWFAMILY)
 
 u: RECORDFAMILY01 ([record save store] my family data ~)
-$_url = ^"https://MyBase.firebaseio.com/family01/$share_cs_uid/.json?auth=MyAuth"
+$_url = ^"https://utopia-35a8b.firebaseio.com/family01/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
 
 	$_jsonmyvar = ^jsoncreate( transient object )
 	$_jsonmyvar.bronum = $share_bronum
@@ -486,7 +836,17 @@ $_url = ^"https://MyBase.firebaseio.com/family01/$share_cs_uid/.json?auth=MyAuth
 	$_jsonmyvar.broname1 = $share_broname1
 	$_jsonmyvar.broname2 = $share_broname2
 	$_jsonmyvar.broname3 = $share_broname3
-	$_jsonmyvar.broname4 = $$share_broname4
+	$_jsonmyvar.broname4 = $share_broname4      
+	$_jsonmyvar.boysnum = $share_boysnum
+	$_jsonmyvar.girlsnum = $share_girlsnum
+	$_jsonmyvar.girlsname = $share_girlsname
+	$_jsonmyvar.girlsname2 = $share_girlsname2
+	$_jsonmyvar.girlsname3 = $share_girlsname3
+	$_jsonmyvar.girlsname4 = $share_girlsname4
+	$_jsonmyvar.boysname = $share_boysname	
+	$_jsonmyvar.boysname2 = $share_boysname2
+	$_jsonmyvar.boysname3 = $share_boysname3
+	$_jsonmyvar.boysname4 = $share_boysname4
 	$_jsonmyvar.creatdat = $cs_creadat
 
 	$_userAgent = ^"User-Agent: %bot, ChatScript"

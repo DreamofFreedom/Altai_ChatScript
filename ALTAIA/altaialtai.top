@@ -3,7 +3,7 @@ concept: ~badthing MORE [!good !cool !ok !great !awesome !perfect !fantastic ~ha
 
 
 
-Topic: ~altaialtai bot=Altaia SHARE ( altaialtai altaia front chat legal)
+Topic: ~altaialtai bot=Altaia SHARE [altaialtai altaia front chat legal]
 
 u: (what is your name) ^keep() ^repeat()
 My name is Altai. An you are $share_name
@@ -182,7 +182,7 @@ t: STOREALTAIA () Now you can save those data in your database for $share_ve_nam
 #store uid and creadat for Firebase export
 $share_cs_uid = %user
 $cs_creadat = %fulltime
-	a: (~yes) ^reuse(RECORDALTAIA01) ^setrejoinder(RECORDALTAIA01)
+	a: ([~yes ok go]) ^reuse(RECORDALTAIA01) ^setrejoinder(RECORDALTAIA01)
 	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
 	a: (what) It's your data. To make they accessible in "My Account" and used by $share_ve_name, they are stored in your database.
 		b: (~yes) So I start the recording?
@@ -232,7 +232,7 @@ $_url = ^"https://utopia-35a8b.firebaseio.com/altaia01/$share_cs_uid/.json?auth=
 Done.
 
 
-t: ABOUTELSE () If you want you can talk about something else, movies, music, video games, dreams, my life, your family... ^keep()
+t: ABOUTELSE () If you want you can talk about something else, movies, music, video games, dreams, my life, your family... ^keep() ^repeat()
 	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
 	a: (you) ^gambit(~me)
@@ -243,7 +243,7 @@ t: ABOUTELSE () If you want you can talk about something else, movies, music, vi
 	a: (family) ^gambit(~familytop)
 
 
-?: (subject * talk) Some like movies, sport, music, video games, dreams, my life, your family...
+?: (subject * talk) ^keep() ^repeat() Some like movies, sport, music, video games, dreams, my life, your family...
 	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
 	a: (you) ^gambit(~me)

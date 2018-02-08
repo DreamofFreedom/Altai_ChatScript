@@ -1,10 +1,10 @@
-# variables : $share_wifename $share_husbandname $share_bronum $share_sisnum $share_fathername $share_mothername $share_petname $share_pet $share_mumdead $share_fatherdead $share_sistdead $share_sistername $share_sistername2 $share_sistername3 $share_sistername4
+# variables : $share_bronum $share_sisnum $share_fathername $share_mothername $share_petname $share_pet $share_mumdead $share_fatherdead $share_sistdead $share_sistername $share_sistername2 $share_sistername3 $share_sistername4
 # $share_broname $share_broname2 $share_broname3 $share_broname4 $share_boysnum $share_girlsnum $share_girlsname $share_girlsname2 $share_girlsname3 $share_girlsname4 $share_boysname $share_boysname2 $share_boysname3 $share_boysname4
  
 concept: ~pet MORE [bearded_dragon bird burro cat chameleon chicken chinchilla chinese_water_dragon cow dog donkey duck ferret Fish gecko geese gerbil goat guinea_fowl guinea_pig hamster hedgehog horse iguana lamas lizard mice mule peafowl pig hog pigeon ponie pot_bellied_pig rabbit rat sheep skink snake stick_insect sugar_glider tarantula turkey turtle]
-concept: ~myfamily MORE [family brother sister parents father mother siblings husband wife ex-husband ex-wife "family circle"]
 
-TOPIC: ~familytop bot=Altaia share keep stay [~myfamily]
+
+TOPIC: ~familytop bot=Altaia share keep stay [family brother sister parents father mother siblings "family circle"]
 
 # I want to talk about my family
 u: (I * [present introduce "talk about" describe teach] * my family) ^reuse(NONOTHINGFAM) ^setrejoinder(NONOTHINGFAM)
@@ -16,8 +16,6 @@ u: JUSTFORENV (wy * family question) I just asked the question so that $share_ve
 #! What do you know about my family?
 u: KNOWFAMILY (what * you * know * my *  ["made up" "family circle" family])^keep() ^repeat()
 You have $share_bronum brother, $share_sisnum sister, your father name $share_fathername, your mother name $share_mothername. ^reuse(KNOWFAMILY02) ^setrejoinder(KNOWFAMILY02)
-
-
 
 u: KNOWFAMILY02 ()
 if ($share_boysnum)
@@ -53,55 +51,6 @@ I know nothing about it. Do you want to present it to $share_vename ?
 	a: (~yes) ^reuse(TALKFAMILY) ^setrejoinder(TALKFAMILY)
 	a: (~no) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 
-#! I have ~number children
- u: TALKCHILDREN0 (!$share_childnum  I have !no * children )
- ^keep() ^repeat()
-  How many children do you have?
- 	a: (_~number) $share_childnum = _0 $share_childnum child.
- 		b: (~yes) ^reuse(TALKCHILDREN1) ^setrejoinder(TALKCHILDREN1)
- 		b: (~no) ^reuse(TALKCHILDREN0)You say ^setrejoinder(TALKCHILDREN0)
- 	a: (["don't have" none any O zero null]) $share_childnum = 0 No children. ^reuse(TALKPET) ^setrejoinder(TALKPET)
-
-#! I can talk about my children
-u: TALKCHILDREN1 (![not never can't "don't want"] [talk about] * my children )
-^keep() ^repeat()
- Great! ^reuse(TALKCHILDREN2) ^setrejoinder(TALKCHILDREN2)
-
-# #######################
-#! I can talk about my children
-u: TALKCHILDREN2 (!$share_sonnum !$share_girlsnum ![not never can't "don't want"] talk * my [children boy daughter girl] ) ^keep() ^repeat()
-if (!$share_girlsnum)
-{
-     ^reuse(TALKGILRS2) ^setrejoinder(TALKGILRS2)
-   }
-   else if (!$share_sonnum)
-{
-     ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
-   }
-   else
-   {
-     ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
-   }
-
-
-#! I have ~number daughter and ~number son
- u: TALKGILRS2 (!$share_girlsnum I have * [girl daughter] )
- ^keep() ^repeat()
-  you have how many daughter?
- 	a: (_~number) $share_girlsnum = _0 $share_girlsnum daughter.
- 		b: (~yes) ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
- 		b: (~no) You say ^reuse(TALKGILRS2)  ^setrejoinder(TALKGILRS2)
- 	a: (["don't have" none any O zero null]) $share_girlsnum = 0 No daughter. ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
-
-
-u: TALKBOYS2 (!$share_sonnum I have * [ boy son]) How many sons?
- 		a: (~no) $share_sonnum = 0 No son. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
- 		a: (_~number) $share_sonnum = _0 $share_sonnum sons.
- 			b: (~yes) ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
- 			b: (~no) ^reuse(TALKBOYS2) ^setrejoinder(TALKBOYS2)
- 		a: (["don't have" none any O zero null]) $share_sonnum = 0 No son. ^reuse(BOYSNAME) ^setrejoinder(BOYSNAME)
-
-# ##################
 #! I can talk about my family
 u: TALKFAMILY (![not never can't "don't want"] [talk about] * my family )
 ^keep() ^repeat()
@@ -473,7 +422,7 @@ u: BRONAME5 (five brothers) Memory full, sorry ;o  ^reuse(RECAPSIBRONAME) ^setre
 
 
 #######################
-# recap sisbro 
+# recap sisbro
 u: RECAPSIBRONAME (you [know learn record] * my * [siblings "brothers name" "brother name" "sister name" "sisters name"])
 ^keep() ^repeat()
 Well, you have $share_sisnum sisters, named $share_sistername $share_sistername2 $share_sistername3 $share_sistername4, and $share_bronum brothers named $share_broname $share_broname2 $share_broname3 $share_broname4
@@ -628,7 +577,7 @@ $share_cs_uid = %user
 $cs_creadat = %fulltime
 if ($share_girlsnum!=0)
 {
- 	^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+ 	^reuse(RECAPBOYGIR) ^setrejoinder(RECAPBOYGIR)
    }
    else
    {
@@ -677,7 +626,7 @@ if ($share_girlsnum!=3)
    }
    else
    {
-     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+     ^reuse(RECAPBOYGIR) ^setrejoinder(RECAPBOYGIR)
    }
 
  				b: (~no) Sorry. So : ^reuse(BOYSNAME2) ^setrejoinder(BOYSNAME2)
@@ -705,7 +654,7 @@ if ($share_boysnum!=4)
    }
    else
    {
-     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+     ^reuse(RECAPBOYGIR) ^setrejoinder(RECAPBOYGIR)
    }
 
  				b: (~no) Sorry. So : ^reuse(GIRLSNAME3) ^setrejoinder(GIRLSNAME3)
@@ -733,7 +682,7 @@ if ($share_boysnum!=5)
    }
    else
    {
-     ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+     ^reuse(RECAPBOYGIR) ^setrejoinder(RECAPBOYGIR)
    }
 
  				b: (~no) Sorry. So : ^reuse(GIRLSNAME4) ^setrejoinder(GIRLSNAME4)
@@ -742,7 +691,7 @@ if ($share_boysnum!=5)
  		b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
 
 # More than 4 boys ARRRRGh
-u: GIRLSNAME5 (too much boys) Memory full, sorry ;o  ^reuse(RECAPBOYGIRL) ^setrejoinder(RECAPBOYGIRL)
+u: GIRLSNAME5 (too much boys) Memory full, sorry ;o  ^reuse(RECAPBOYGIR) ^setrejoinder(RECAPBOYGIR)
 ^keep() ^repeat()
 
 ######################
@@ -783,8 +732,8 @@ t: ($share_user_age<20) You live with your parents?
 
 t: ($share_user_age>20) Do you have children?
 	a: (~yes) $havechildren = TRUE
-				Do you want to talk $share_vename about your children?
-		b: (~yes) ^reuse(TALKCHILDREN) ^setrejoinder(TALKCHILDREN)
+				Do you want to talk $share_vename about your family?
+		b: (~yes) ^reuse(TALKFAMILY) ^setrejoinder(TALKFAMILY)
 		b: (~no) ^reuse(JUSTFORENV) ^setrejoinder(JUSTFORENV)
 
 	a: (~no) $havechildren = FALSE
@@ -797,7 +746,8 @@ t: ($share_user_age>20) Do you have children?
 # #############
 # Children = true
 
-t: TALKCHILDREN ($havechildren) ^reuse(TALKCHILDREN0) ^setrejoinder(TALKCHILDREN0)
+t: ($havechildren = TRUE) How many boys have you?
+	
 
 # ############
 # to be sure that all question was posed

@@ -1,0 +1,20 @@
+TOPIC: ~precisionaltaia bot=Altaia share nostay priority keep repeat () 
+
+# my saved data
+u: MYSAVEDDATA (my * data) You want to know what data already stored or how to store data?
+	a: (how) Vous pouvez stocker vos données dans votre identifiant de profil sur la base de données cloud. Pour cela, demandez-moi de faire ceci: je veux sauvegarder mes données
+	a: (what)
+	a: ([~no else]) I think I misunderstood, may you reword that?
+	a: (~yes) So, I ask again. ^reuse(MYSAVEDDATA) ^setrejoinder(MYSAVEDDATA)
+	a: (where) Your data are stored in ChatScript server, in you tread of discuss with me, and, when you decide to do it, in Firebase Utopia cloud database, under your unique ID.
+
+u: (I *~1 want *~1 save *~1 data) What data specificly ? Functionality preference, video game, family, music data?
+	a: ([functionality preference]) 
+	a: ([video game])
+	a: ([family]) ^gambit(~familytop)
+	a: ([music data])
+	a: (data) You want to teach something new to your VE?
+		b: (~yes) You just have to say : I want you to learn something
+		b: ([~no else]) I think I misunderstood, may you reword that?
+	a: ([~no else]) I think I misunderstood, may you reword that?
+	

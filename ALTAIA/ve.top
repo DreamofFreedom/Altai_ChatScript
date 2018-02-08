@@ -111,7 +111,7 @@ $cs_creadat = %fulltime
 
 t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 
- $_url = ^"https://MyBase.firebaseio.com/users/$share_cs_uid/.json?auth=MyAuth"
+ $_url = ^"https://utopia-35a8b.firebaseio.com/users/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name

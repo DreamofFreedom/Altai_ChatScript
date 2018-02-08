@@ -1,34 +1,9 @@
-# variables : $share_fav_vgame $share_playvg  $share_vggenre  $share_fav_platform
+# variables : $share_fav_vgame
 
 topic: ~hgamingvg bot=Altaia SHARE [video_game game gaming play playstation nintendo xbox console psp ~videogame]
 
 # About videogame
 u: (about videogame) ^reuse(MYVGAME) ^setrejoinder(MYVGAME)
-
-# ################### For user to test records
-#! What do you know about my video game preference?
-u: KNOWVGAME (what * know * my game) ^keep() ^repeat()
-if ($share_playvg = TRUE) 
-   		{
- 		    So $share_name. ^reuse(KNOWVGAME1) ^setrejoinder(KNOWVGAME1)
- 		   }
- 		  else
- 		  	{
- 		  	^reuse(KNOWVGAME2) ^setrejoinder(KNOWVGAME2)
- 		  	}
-
-u: KNOWVGAME1 () I know that you play $share_vggenre $share_fav_vgame on $share_fav_platform.
-	a: ([~no ~emoangry ~emoapology ~emolaugh ~emomisunderstand ~emoprotest]) Oups! I mis something? About what : genre, platform device or your preferred video game?
-				b: (genre) OK, start with someone. ^reuse(GENREVG) ^setrejoinder(GENREVG)
-				b: ([platform device]) Sorry, thank you to be patient with me $share_username. ^reuse(NOFAVPLATFORM) ^setrejoinder(NOFAVPLATFORM)
-				b: ([preferred video game]) Sorry, thank you to be patient with me $share_username. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
-				b: (all)
-				b: (*) Do you have enough patience to try again exchange with me on this topic?
-					c: (~yes) ^reuse(DOYOUPLAY) ^setrejoinder(DOYOUPLAY)
-					c: (~no) 
-	a: (~yes) ^reuse(RECORDVGAME01) ^setrejoinder(RECORDVGAME01)
-
-u: KNOWVGAME2 () $share_name, play video game takes a lot of time. And human life is short.
 
 #! Are you playing game?
 u: (you * [gaming game play]) I like playing Tic-tac-toe... I admit, actually I hate losing.
@@ -114,12 +89,7 @@ u: MYVGAME (you ~videogame) I often played Warhamer Online. Now I have less cycl
 		b: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me. 
 	a: (I * know) Sorry I give too much conversation in the same time.
 
-
-# #################
-# Altaia take hand
-
 t: DOYOUPLAY (!$share_playvg) So, about you $share_name, do you play videogames?
-^repeat() 
 	a: (yes) $share_playvg = TRUE
 	^reuse(GENREVG) ^setrejoinder(GENREVG)
 	a: (~no) $share_playvg = FALSE 
@@ -128,8 +98,7 @@ t: DOYOUPLAY (!$share_playvg) So, about you $share_name, do you play videogames?
 	
 
 	
-t: GENREVG () What kind of videogame do you like, what genre? Action games, RPG, simulations, strategy or sport games?
-^repeat() 
+t: GENREVG (!$share_vggenre) What kind of videogame do you like, what genre? Action games, RPG, simulations, strategy or sport games?
 	a: ACTIONVG (action) $share_vggenre = action Yes, too much energy needed for me in it. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	a: RPG ([RPG "role play"]) $share_vggenre = RPG Me too. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	a: SIMVG (simulations) $share_vggenre = SIM Adrenaline! ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
@@ -162,7 +131,7 @@ t: GENREVG () What kind of videogame do you like, what genre? Action games, RPG,
 				d: (~no) ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	
 u: WHYGAMEQUEST () $wygamequest = TRUE  $share_vename will be able to assist you virtually in game, or with his knowledge like a little angel on you shoulder.
-	a:	([~yes ~emohappy ~emoskeptic do]) if (!$share_vggenre) 
+	a:	(~yes ~emohappy ~emoskeptic do) if (!$share_vggenre) 
    		{
  		    So $share_name. ^reuse(GENREVG) ^setrejoinder(GENREVG)
  		  }
@@ -207,8 +176,8 @@ u: WHYGAMEQUEST () $wygamequest = TRUE  $share_vename will be able to assist you
 # Pour être sur qu'on récupère bien tous les champs
 
  # On what platform do you play? 
-t: NOFAVPLATFORM () Do you have a favorite platform to play? PC, console, portable console, smartphone, tablet ?
-^repeat() 
+ u: NOFAVPLATFORM (!$share_fav_platform) Do you have a favorite platform to play? PC, console, portable console, smartphone, tablet ?
+^keep() ^repeat() 
     a: (~no) $share_fav_platform = false That mean you play all or none?
     	b: (none) Ok. Interesting, I must tell that to Mr Spoke.
     	b: (all) $share_fav_platform = all Wow. So smart.
@@ -270,7 +239,7 @@ u: TELL_GAME (["my * is _*" "it's _* " "is _* "])
 
 
 t: VGAMEQUESTIONS (!$share_fav_vgame) What is your favorite videogame, [all platform] [all genre] [ever] ?
-^repeat()
+^keep() ^repeat()
   a: (~no)
     $no_vgame = true
     $share_fav_vgame = false
@@ -280,20 +249,13 @@ t: VGAMEQUESTIONS (!$share_fav_vgame) What is your favorite videogame, [all plat
   			b: (~no) I probably misunderstood. You can just saying something like: Call of Dutty	
   				c: (~yes) ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
   				c: (!my !is _*) $share_fav_vgame = '_0 It's $share_fav_vgame ?
-  					d: (~yes) Really cool! 
-  					if (!$share_vggenre) 
-  					{
-  					^reuse(ENDGAME) ^setrejoinder(ENDGAME)
-  					}
-  					else {
-  					^reuse(GENREVG) ^setrejoinder(GENREVG)
-  					}
+  					d: (~yes) Really cool! ^reuse(ENDGAME) ^setrejoinder(ENDGAME)
   					d: (~no) I'm really sorry. We try again one last time?
   						e:  (~yes) ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	  					e: (* > _*-1) $share_fav_vgame = '_0 You play $share_fav_vgame ?
 	  						f: (~yes) Really cool!
   							f: (~no) Sorry.
-	a: ("my favorite" [game videogame] is _*) ^setrejoinder(TELL_GAME) ^keep() ^repeat()
+	a: (["my favorite videogame" is] _*) ^setrejoinder(TELL_GAME) ^keep() ^repeat()
 	a: (why) ^reuse(WHYGAMEQUEST) ^setrejoinder(WHYGAMEQUEST)
 	 		       
 t: ENDGAME ()
@@ -315,47 +277,13 @@ if (!$share_vggenre)
  							   }
  		  else
  						  {
- 		    I think playing video game is a good thing, but it's like anything, so you do not over do it.
+ 		    I thing playing video game is a good thing, but it's like anything, so you do not over do it.
  		    				}
  		    			}
 		 	 }		
-
   						
-t: STOREVGAME () Now you must save those video game data in your database for $share_ve_name
-	a: (~yes) ^reuse(RECORDVGAME01) ^setrejoinder(RECORDVGAME01)
-	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
-	a: (what) It's your data. To make they accessible in "My Account" and used by $share_ve_name, they are stored in your database.
-		b: (~yes) So I start the recording?
-			c: (~yes) ^reuse(RECORDVGAME01) ^setrejoinder(RECORDVGAME01)
-			c: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
-		b: (see data) ^reuse(KNOWVGAME) ^setrejoinder(KNOWVGAME)
-	a: (see data)  ^reuse(KNOWVGAME) ^setrejoinder(KNOWVGAME)
-
-u: RECORDVGAME01 ([record save store] my music data ~)
-$_url = ^"https://utopia-35a8b.firebaseio.com/videog01/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
-
-	$_jsonmyvar = ^jsoncreate( transient object )
-	$_jsonmyvar.favvg = $share_fav_vgame
-	$_jsonmyvar.playvg = $share_playvg
-	$_jsonmyvar.platform = $share_fav_platform
-	$_jsonmyvar.vggenre = $share_vggenre 
-   $_jsonmyvar.creatdat = $cs_creadat
-
-	$_userAgent = ^"User-Agent: %bot, ChatScript"
-	$_header = ^"~Accept: application/json
-										$_userAgent
-										~Content-Type: application/json"
-
-	$_response = ^jsonopen(transient PUT $_url $_jsonmyvar $_header $_userAgent)
-	if($_response) { ^log(Firebase responded with ^jsontree($_response))}
-	else {Oups, something did not work properly. Ask bug@utopia-french.tech for asking support, please. I need human for fix that.}
-
-	$share_user_svvg01 = true
-
-It's Done.
+# Now play even more
+The game ran out of steam with time ... and me too.
+It takes a lot of time and my level is not changing any more.
 
 
-# Returning to main topic
-t: ()
-^keep() ^repeat()
-^gambit(~altaialtai)

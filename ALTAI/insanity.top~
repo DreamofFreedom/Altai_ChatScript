@@ -4,7 +4,7 @@ concept: ~insultlevel2 MORE [bastard "son of a bitch" ass_kisser arsehole asshol
 # insultlevel1 Do you insult me?
 concept: ~insultlevel1 MORE [deadbeat chicken airhead donkey dope dweeb flake freak gasbag geek geezer goose hick jerk kook limey loudmouth louse meathead nerd ninny nut nutter pig poof poofter prat psycho smart_arse smart_ass toff tool twerp twirp twit wanker weirdo wimp yob yobbo zero lost_the_plot chav dodgy gormless virg doggyknobber douchenoggin ferger beiber negaton deadshit minger pillock snich]
 
-TOPIC: ~insanity bot=Altai,Altaia share nostay priority [~insultlevel1 ~insultlevel2]
+TOPIC: ~insanity bot=Altai,Altaia share nostay priority ()
 
 u: INSULTLVL1 (~insultlevel1) 
 keep() repeat()
