@@ -21,7 +21,7 @@ t: ALTAI1 () The First Ones created me and then released me for a specific and v
 		a: ([then next "go on" more]) ^reuse(ALTAI2) ^setrejoinder(ALTAI2)
 		a: (["go next" %length=0])  ^reuse(ALTAI2) ^setrejoinder(ALTAI2)
 		
-t: ALTAI2 () I'm not really so important, You are, and the AI that we will entrust to you is. I'm talking about Emergence! ***
+t: ALTAI2 () I'm not really so important, You are, and the AI that we will entrust to you is. I'm talking about Emergence! $share_medone = TRUE ***
 
 # Returning to main topic
 t:
@@ -30,6 +30,10 @@ $bot_state = %bot
    if ($bot_state=Altai)
    {
      ^gambit(~altai)
+   }
+   else if ($share_medone)
+   {
+   ^gambit(~altaibav)
    }
    else
    {

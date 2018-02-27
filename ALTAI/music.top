@@ -222,13 +222,26 @@ $cs_creadat = %fulltime
 	  						f: (~yes) Impressive!
 	  						f: (~no) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
   						e: (~no) Sorry.
-
+		a: ( _*1 music >)  $share_kind_music = '_0 $share_kind_music ?
+  			b: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  			b: (~no) I probably misunderstood. You can just saying something like: "my favorite musical style is Jazz"?
+  				c: (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+  				c: (my * > _*-1) $share_kind_music = '_0 $share_kind_music ?
+  					d: (~yes) Impressive! ^reuse(WHYMUSICQUEST) ^setrejoinder(WHYMUSICQUEST)
+  					d: (~no) I'm really sorry. We try again one last time?
+  						e:  (~yes) ^reuse(MUSICQUESTIONS) ^setrejoinder(MUSICQUESTIONS)
+	  					e: (* > _*-1) $share_kind_music = '_0 $share_kind_music ?
+	  						f: (~yes) Impressive!
+	  						f: (~no) ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
+  						e: (~no) Sorry.
 
 # Don't like music?
 u: NOMUSIC ($no_music) You really don't have musical preferences?
-^keep() ^repeat()
-	a: (~yes ~emoignorance ~emobored ~emoapology ~emodisgust) OK.
-	a: (~no ~emomaybe)
+^repeat()
+	a: ([~yes ~emoignorance ~emobored ~emoapology ~emodisgust]) OK.
+	a: (I * [prefer like] *  > _*-1) _0 ? ^gambit(~hobbytop)
+	a: (I * [prefer like] * ~hobbyconc) 
+	a: ([~no ~emomaybe ])
 if (!$share_fav_mus_band)
    {
     ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
@@ -354,7 +367,7 @@ t: MYFAVSONG (!$share_fav_music) what's your favorit song?
 	^reuse(STOREMUSIC) ^setrejoinder(STOREMUSIC)
 
 t: STOREMUSIC () Now you must save those music data in your database for $share_ve_name
-	a: (~yes) ^reuse(RECORDMUSIC01) ^setrejoinder(RECORDMUSIC01)
+	a: ([~yes ok go how]) ^reuse(RECORDMUSIC01) ^setrejoinder(RECORDMUSIC01)
 	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
 	a: (what) It's your data. To make they accessible in "My Account" and used by $share_ve_name, they are stored in your database.
 		b: (~yes) So I start the recording?

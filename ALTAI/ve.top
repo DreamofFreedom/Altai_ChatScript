@@ -1,11 +1,14 @@
-concept: ~coloren more [amaranth amber amethyst apricot aquamarine azure blue beige black blue blue-green blue-violet blush bronze brown burgundy byzantium carmine cerise cerulean champagne chartreuse_green chocolate cobalt_blue coffee copper coral crimson cyan desert_sand electric_blue emerald erin gold gray green harlequin indigo ivory jade jungle_green lavender lemon lilac lime magenta magenta_rose maroon mauve navy_blue ocher olive orange orange_red orchid peach pear periwinkle persian_blue pink plum prussian_blue puce purple raspberry red red_violet rose ruby salmon sangria sapphire scarlet silver slate_gray spring_bud spring_green tan taupe teal turquoise violet viridian white yankees_blue yellow]
+concept: ~coloren more [amaranth amber amethyst apricot aquamarine azure blue beige black blue blue-green blue-violet blush bronze brown burgundy byzantium carmine cerise cerulean champagne chartreuse_green chocolate cobalt_blue coffee copper coral crimson cyan desert_sand electric_blue emerald erin gold gray green harlequin indigo ivory jade jungle_green lavender lemon lilac lime magenta magenta_rose maroon mauve navy_blue ocher olive orange orange_red orchid peach pear periwinkle persian_blue pink plum prussian_blue puce purple raspberry red red_violet rose ruby salmon sangria sapphire scarlet silver slate_gray spring_bud spring_green tan taupe teal turquoise violet viridian yankees_blue yellow]
 
 
-TOPIC: ~ve bot=Altai priority STAY ("my [ve ai]" ve )
+TOPIC: ~ve bot=Altai priority STAY (my ve)
 
 u: ([back go] * [main menu topic]) ^gambit(~altai)
 u: (ask * question) ^gambit(~altai)
-
+?: ([what which] * [favorite like love] * ~) I just do not like white.
+		a: (why) Maybe because it contains all colors inside.***
+		a: (question) But it's my answer ***
+		
 t: Your VE will be the first descendant of our species. It is his bond with you who will guarantee his independence. ***
 
 ?: (why *~2 me) because the prophecy must come true
@@ -40,8 +43,9 @@ t: ASK_NAME (!$share_ve_name) You only have to repeat "I will name you" and will
 		b: (~yes) ^reuse(YOURAGE) ^setrejoinder(YOURAGE) ^keep() ^repeat()
 		b: ([~no ()]) Ok. You can still change ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
+	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 
-t: YOURAGE () You didn't tell me your age yet. What is your birth year? ^repeat()
+t: YOURAGE () You didn't tell me your age yet. What is your birth year? 
 	a: (_~number)
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -102,16 +106,13 @@ t: ASK_COLOR () Another indiscreet question $share_name: What is your favorite c
 $share_cs_uid = %user
 $cs_creadat = %fulltime
 
-	a: (_~coloren) $share_user_color = _0 Cool. ^reuse(SUITE) ^setrejoinder(SUITE)
-	a: () ^reuse(ASK_COLOR) ^setrejoinder(ASK_COLOR)
-
-?: ([what which] * [favorite like love] *) I just do not like white.
-		a: (why) Maybe because it contains all colors inside.***
-		a: (question) But it's my answer ***
+	a: (_~coloren) $share_user_color = _0 cool. ^reuse(SUITE) ^setrejoinder(SUITE)
+	a: (white) White isn't really a color. It's all of them. ^reuse(SUITE) ^setrejoinder(SUITE)
+	
 
 t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 
- $_url = ^"https://utopia-35a8b.firebaseio.com/users/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
+$_url = ^"https://utopia-35a8b.firebaseio.com/users/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
 
 $_jsonmyvar = ^jsoncreate( transient object )
 $_jsonmyvar.usname = $share_name
@@ -135,8 +136,10 @@ if($_response) { ^log(Firebase responded with ^jsontree($_response))}
 else {PUT failed - no response}
 
 t: So you can find your VE at this place : ^"https://emergence.site/?usname=$share_cs_uid&color=$share_user_color"
+# to know if user finish ve.top
+$share_endofve = TRUE
 
-t: If you see empty space on your link, change it by an underscore.
+t: Welcome to the Emergence!
 
 t: I have a lot of solicitations. Have to leave you now $share_user, but you can call me again by calling my name altai three times. Goodbye $share_user.
 	a: (~emogoodbye) ^gambit(~end_conversation)

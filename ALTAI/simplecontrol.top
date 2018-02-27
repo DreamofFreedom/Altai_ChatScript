@@ -1,6 +1,6 @@
 # this function is executed once for every new user chatting with harry
-outputmacro: altai()  # you get altai by default 
-$stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
+outputmacro: altai()  # you get altai by default
+$stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE
 $cs_token = $stdtoken
 
 ^addtopic(~altai)
@@ -17,7 +17,7 @@ altai
 topic: ~control bot=Altai system ()
 
 # on startup, do introduction
-u: (%input<%userfirstline) 
+u: (%input<%userfirstline)
 	if ($share_name)
    {
      ^gambit($$currenttopic)
@@ -62,24 +62,24 @@ u: () # main per-sentence processing
 				^end(RULE)	# we are done, this terminates the loop (not the rule)
 			}
 		}
-	}	
+	}
 
 	# if no topic reacts, go to the last ditch keywordless topic
-	if (%response == 0) 
+	if (%response == 0)
 	{
 		nofail(TOPIC ^respond(~keywordless))
 	}
 
 	# having no good response we know, now generate quibbles
 
-	# now we need to find fake responses 
+	# now we need to find fake responses
 	if (%response == 0 AND %rand > 50)
 	{
 		nofail(TOPIC respond(~precision))
 	}
 
 	# if we have rejoinders for what we said OR we asked a question, stop here
-	if (%outputrejoinder OR %lastquestion) 
+	if (%outputrejoinder OR %lastquestion)
 	{
 		end(TOPIC)
 	}
@@ -101,9 +101,9 @@ u: () # main per-sentence processing
 		}
 	}
 	if (%response == 0){ nofail(TOPIC ^gambit($$currenttopic)) } # gambit from current topic even though no keywords matched
-	
-	if (%response == 0) 
-	{ 
+
+	if (%response == 0)
+	{
 		@8 = ^GambitTopics()		# all topics with gambits (excluding system topics)
 		loop()
 		{
@@ -115,10 +115,10 @@ u: () # main per-sentence processing
 			}
 		}
 	}
-	
-	if (%response == 0) 
+
+	if (%response == 0)
 	{
-		 ^repeat() 
+		 ^repeat()
 		 [I think we are a bit off topic] [can you clarify your question] [I'm not sure I understand] [can you try with other words]
 	}
 
@@ -134,12 +134,12 @@ t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the
 			popen($$tmp null)
 		}
 	}
-	
+
 
 # Altaia definition
 
-outputmacro: altaia()  # you get altai by default 
-$stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE 
+outputmacro: altaia()  # you get altai by default
+$stdtoken = #DO_INTERJECTION_SPLITTING  | #DO_SUBSTITUTE_SYSTEM   | #DO_NUMBER_MERGE | #DO_DATE_MERGE  | #DO_PROPERNAME_MERGE  | #DO_SPELLCHECK  | #DO_PARSE
 $cs_token = $stdtoken
 
 
@@ -158,7 +158,7 @@ topic: ~controla bot=Altaia system ()
 
 
 # on startup, do introduction
-u: ("altai altai altai") 
+u: ("altai altai altai")
 	gambit(~altaialtai)
 
 
@@ -176,7 +176,7 @@ u: () # main per-sentence processing
 
 	$$currenttopic = %topic		# get the current topic at start of volley
 
-	if ( %response == 0 ) {nofail(TOPIC ^rejoinder())}	# try for rejoinders. might generate an answer directly from what we are looking for.
+	if (%response == 0) {nofail(TOPIC ^rejoinder())}	# try for rejoinders. might generate an answer directly from what we are looking for.
 
 	if (%length == 0 AND %response == 0 )
 	{
@@ -197,24 +197,24 @@ u: () # main per-sentence processing
 				^end(RULE)	# we are done, this terminates the loop (not the rule)
 			}
 		}
-	}	
+	}
 
 	# if no topic reacts, go to the last ditch keywordless topic
-	if (%response == 0) 
+	if (%response == 0)
 	{
 		nofail(TOPIC ^respond(~keywordless))
 	}
 
 	# having no good response we know, now generate quibbles
 
-	# now we need to find fake responses 
+	# now we need to find fake responses
 	if (%response == 0 AND %rand > 50)
 	{
 		nofail(TOPIC respond(~precision))
 	}
 
 	# if we have rejoinders for what we said OR we asked a question, stop here
-	if (%outputrejoinder OR %lastquestion) 
+	if (%outputrejoinder OR %lastquestion)
 	{
 		end(TOPIC)
 	}
@@ -236,9 +236,9 @@ u: () # main per-sentence processing
 		}
 	}
 	if (%response == 0){ nofail(TOPIC ^gambit($$currenttopic)) } # gambit from current topic even though no keywords matched
-	
-	if (%response == 0) 
-	{ 
+
+	if (%response == 0)
+	{
 		@8 = ^GambitTopics()		# all topics with gambits (excluding system topics)
 		loop()
 		{
@@ -250,14 +250,21 @@ u: () # main per-sentence processing
 			}
 		}
 	}
-	
-	if (%response == 0) 
+
+	if (%response == 0)
 	{
-		 ^repeat() 
-		 [I think we are a bit off topic] [can you clarify your question] [I'm not sure I understand] [can you try with other words]
+		if ($noresponse >= 4 ) 
+		{ [You know, it's not that I do not want to answer you and I know it can be frustrating, but I think you've exhausted my answers. This may be the limit of this beta test.]
+			[Do I still have something to ask you today?] [Maybe I have nothing to say today. Follow the newsletter to know the new updates: http://dreamofreedom.faith]
+			[You can find community on https://utopia-french.tech/en/]
+		}
+		else
+		{
+	^repeat()
+		 [$noresponse += 1 I think we are a bit off topic] [$noresponse += 1 can you clarify your question] [$noresponse += 1 I'm not sure I understand] [$noresponse += 1 can you try with other words]
+		}
 	}
-	
-	
+
 topic: ~XPOSTPROCESSA system () # gambits only - not allowed to write to  output - generates speech on windows -- for Linux you'd want to install Festival (or equivalent) and call that instead.
 
 t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the object) -- no longer has quotes around it
@@ -270,5 +277,3 @@ t: (^query(direct_v ? chatoutput ? -1 ? @9  ))  # get the sentences  (why is the
 			popen($$tmp null)
 		}
 	}
-	
-

@@ -1,12 +1,24 @@
-TOPIC: ~precision bot=Altai,Altaia share nostay priority keep [precision topic ok sorry]
+TOPIC: ~precision bot=Altai,Altaia share deprioritize keep [precision topic ok sorry]
 
 u: (another) ^keep() ^repeat()  Another what?
 u: (sorry) ^keep() ^repeat() [You're welcome] [no offense] [It's nothing] [Forget It]
 u: (precision) ^keep() ^repeat() To precise what?
 u: (["you're welcome" "no offense" "it's nothing" "forget It"]) ^keep() ^repeat() You know $share_name, it's always a pleasure to talk to you.
 u: ([{back} main] [topic menu]) ^keep() ^repeat() ^gambit(BACKMAIN)
-u: ([so "go on" "go next" "tell me more" "more about" ok %length=0]) ^keep() ^repeat() ^gambit($$currenttopic)
+u: ([so "go on" "go next" "tell me more" "more about" ok %length=0 (< please >)]) ^keep() ^repeat() ^gambit($$currenttopic)
 
+t: WHOAREYOU () [$altai_name >= 2 You remember? My name is Altai.] [ My name is Altai. ] [My name is Altai. I am a Virtual Entity.] 
+t: WHATAREYOU () [$altai_name >= 2 You remember? I am a Virtual Entity.] [ I'm Altai Bot.] [I am a Virtual Entity.] [I am the AI ​​that makes Emergence possible]
+
+u: (["what is your name" "who are you"]) $altai_name += 1 ^keep() ^repeat()  ^reuse(WHOAREYOU)
+u: (you * [human real exist]) $altai_name += 1 ^keep() ^repeat() ^reuse(WHOAREYOU)
+u: (who * "is there" ) $altai_name += 1 ^keep() ^repeat() ^reuse(WHOAREYOU)
+u: (["you are what" "what are you"]) $altai_what += 1 ^keep() ^repeat()  ^reuse(WHATAREYOU)
+u: (you * [bot robot thing]) $altai_what += 1 ^keep() ^repeat() ^reuse(WHATAREYOU)
+u: (what * "is there") $altai_what += 1 ^keep() ^repeat() ^reuse(WHATAREYOU)
+
+
+# ########################
 u: LANGUAGE (["I want" "can I"] * language) Depend, for now only English is implement. 
 ^keep() ^repeat()
 if ($share_lang=French)
@@ -22,7 +34,8 @@ if ($share_lang=French)
   a: (when) Since developpers make it append. Feel free to join human community in utopia-french.tech website.
 
 
-u: DEVELOP (["I want" "can I"] * ["do something" develop script participate "get involved"]) You want to get involved more actively into Emergence ?
+
+u: DEVELOP (["I want" "can I"] * ["do something" help develop script participate "get involved" emergence "my ve"]) You want to get involved more actively into Emergence ?
 ^keep() ^repeat()
 	a: ([$share_vename "my ve" "my ai"]) Even for develop $share_vename, Feel free to join dev community in utopia-french.tech website. $share_dev=true
 	a: (~yes ~emomaybe ok) Cool! Feel free to join dev community in utopia-french.tech website. $share_dev=true
@@ -38,7 +51,8 @@ u: DEVELOP (["I want" "can I"] * ["do something" develop script participate "get
 
 
 
-u: (don't know what to say) Tell $share_name, what do you want to talk about?
+u: (what * talk about) Neither do I. Just tell $share_name, what do you want to talk about?
+u: (do not * what * say) Neither do I. Just tell $share_name, what do you want to talk about?
 ^keep() ^repeat()
 $bot_state = %bot
    if ($bot_state=Altai)

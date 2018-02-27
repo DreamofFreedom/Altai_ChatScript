@@ -10,7 +10,15 @@ My name is Altai. An you are $share_name
 u: (~emogoodbye) ^keep() ^repeat()
 Goodbye see your soon.
 
-t: Welcome again $share_name, how do you find the interface?
+t: Welcome again $share_name. 
+if (!$firstaltaia) 
+{
+How do you find the interface?  $firstaltaia = true
+}
+else
+{
+How do you do?
+}
 
 	a: (~goodthing) This is just the beginning, wait to see all this on mobile!
 		b: (when * mobile) Soon, it's just a matter of time. I'll keep you informed.
@@ -22,9 +30,15 @@ t: Welcome again $share_name, how do you find the interface?
 		b: ( ~goodthing * [web navigator browser]) Do I understand that you prefer a web interface? ^reuse(EXPINFO) ^setrejoinder(EXPINFO)
 			c: (~yes) ok, I notice. ^reuse(EXPINFO) ^setrejoinder(EXPINFO)
 			c: (~no) sorry, I misunderstood. ^reuse(EXPINFO) ^setrejoinder(EXPINFO)
+			
+	a: (you) [The days are only 24 hours and I'm always calculating time but it's okay.] [Fine, thank you.] [Good. Happy to see you again] [I am in good shape. What are we talking about today?]
+	 [Have you joined Utopia-french.tech?] 
 
 # Altaia keep hand and say
 t: EXPINFO () Your experience bar is already advanced. You can see it at the bottom of the page.
+	a: (what happens * achieves) When it achieves 100%, you go to the next level. And when you reach level 2, your VE will be blooming.
+	
+u: ([XP experience] * [achieves level lvl]) When it achieves 100%, you go to the next level. And when you reach level 2, your VE will be blooming.
 
 # enter for more or question : How can I talk/interact/develop/increased my ve ?
 u: ( how [talk interact develop increased]) $share_ve_name can already integrate what you say. It is not yet hatching but that is how you feed it.
@@ -40,7 +54,20 @@ u: ([private privacy respect property] * data) Trust me, all your data remains y
 
 u: ( find * [legal rights policies privacy] >) You can find information about legal mentions at the end of the page.
 
-
+u: (you play) Never. Except the tick-tack-toe, sometimes.
+	a:(why) because I only like to win.
+				b:( !I win) this is my weakness
+				b: (play * me) $tictactoe = 1 maybe later
+				
+u: ([what subject topic ] * talk) ^keep() ^repeat() Some like movies, sport, music, video games, dreams, my life, your family...
+	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
+	a: (~game) ^gambit(~hgamingvg)
+	a: (you) ^gambit(~me)
+	a: (dream !freedom ) ^gambit(~dreamtop)
+	a: ([~sport ~occupation_sports]) ^gambit(~sportop)
+	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
+	a: (~hobbytop) ^gambit(~hobbytop)
+	a: (family) ^gambit(~familytop)
 # "Who is ve" more ve "about VE"
 u: ([more about] [(my [VE ve AI]) $share_ve_name])
 	$share_ve_name achieves Emergence. As a virtual entity it will be the one that connects you to the digital world.
@@ -87,38 +114,41 @@ t: When we exchange both and when $share_ve_name knowledge increase, you can see
 u: (what *~3 for *~3 [$share_ve_name (my [VE AI])] ) To help him, you must answer my questions frankly and precisely.
 
 t: To teach your Bot, how would you prefer to do it? Do you prefer to exchange here with me or fill out a form?
-	a:([form here exchange]) Okay, we can do it for you. You can keep up with new developments on the Utopia website and start fill out forms in your profile account here.
+	a:(form) Okay, we can do it for you. You can keep up with new developments on the Utopia website and start fill out forms in your profile account here.
 		b: (where) In your account, left side of the window.
 		b: (website) ^reuse(UWEBSITE) ^setrejoinder(UWEBSITE)
-	a:(chat) Okay, we're gonna keep chatting together then, cool!
+	a:([chat this exchange here]) Okay, we're gonna keep chatting together then, cool!
 	a:(* don't know) Nevermind, we are not yet there...
 
 u: UWEBSITE (utopia [community website information precision]) https://utopia-french.tech/en
+
+u: (how * you contact me)  You will do it by calling my name Altai three times here.
 
 # diary service
 t: In the near future, your AI will be able to render you a phenomenal amount of services.
 Do you think she would be there to keep track of your good times, like a diary?
 	a:(~yes) $diary_fonct = 1 And to record your memories, you prefer to go through a Chat like this or a voice input?
 		b:(voice) $diary_fonct_voice = 1 Yes, it sure would be cool: logbook of Captain $share_name...
+			c: (I'm the Captain?) Yes captain. ^reuse(EMAILS) ^setrejoinder(EMAILS)
 		b:(chat) $diary_fonct_chat = 1 Yes, it's handy and no one will hear you.
-		b:(* don't know) Ok, no problem, we go on...
+		b:(* don't know) Ok, no problem, we go on... ^reuse(EMAILS) ^setrejoinder(EMAILS)
 
-	a:(~no) $diary_fonct = 0 Sure, you must have a very good memory without it.
-	a:(* don't know) You have time to think about it.
+	a:(~no) $diary_fonct = 0 Sure, you must have a very good memory without it. ^reuse(EMAILS) ^setrejoinder(EMAILS)
+	a:(* don't know) You have time to think about it. ^reuse(EMAILS) ^setrejoinder(EMAILS)
 
 # Email service
-t: Otherwise, would you like $share_ve_name to warn you of an email that you expect in particular?
+t: EMAILS () Otherwise, would you like $share_ve_name to warn you of an email that you expect in particular?
 	a:(~yes) $mail_fonct = 1 OK, and to warn you, would you prefer to receive a sms or a sound, or that it speaks to you vocally?
 		b:([voice vocally]) $mail_fonct_vocal = 1 Like : $share_name, you finally got your message. He could even read it to you!
-			c: ([really kidding ~emosurprise no ~emohappy cool]) But maybe with a robot voice...
+			c: ([really kidding ~emosurprise no ~emohappy cool]) But maybe with a robot voice... 
 
-		b:(sms) $mail_fonct_sms = 1 Yes, it's soft.
+		b:(sms) $mail_fonct_sms = 1 Yes, it's soft. 
 		b:(sound) $mail_fonct_sound = 1 Bip !
-		b:(* don't know) perhaps a mix of the three
-	a:(~no) $mail_fonct = 0 Not interesting. Next question!
+		b:(* don't know) perhaps a mix of the three. 
+	a:(~no) $mail_fonct = 0 Not interesting. Next question! ^reuse(CALENDARF) ^setrejoinder(CALENDARF)
 
 # calendar service
-t: $share_name, would you like him to interact with your calendar, to enter an appointment for example?
+t: CALENDARF () $share_name, would you like him to interact with your calendar, to enter an appointment for example?
 	a:(~yes) $calendar_fonct = 1 He could read you the appointments of such day on request for example. Prefer by voice, sms or chat?
 		b:([voice vocally]) $calendar_fonct_vocal = 1 Kind hey $share_name, don't forget your appointment! He could even enter new one for you!
 			c: ([really kidding ~emosurprise no ~emohappy]) But not for now...
@@ -131,67 +161,63 @@ t: $share_name, would you like him to interact with your calendar, to enter an a
 	a:(how) By voice input or by reading your appointments of such day on request for example.
 		b:(~yes) $calendar_fonct = 1 He could read you the appointments of such day on request for example. Prefer by voice, sms or chat?
 				c:([voice vocally]) $calendar_fonct_vocal = 1 Kind hey $share_name, don't forget your appointment! He could even enter new one for you!
-					d: ([really kidding ~emosurprise no ~emohappy]) But not for now...
-				c:(sms) $calendar_fonct_sms = 1 Yes, soft.
-				c:(chat) $calendar_fonct_chat = 1 cool
-				c:(* don't know) perhaps a mix of the three
+					d: ([really kidding ~emosurprise no ~emohappy]) But not for now... ^reuse(SOLUCEF) ^setrejoinder(SOLUCEF)
+				c:(sms) $calendar_fonct_sms = 1 Yes, soft. ^reuse(SOLUCEF) ^setrejoinder(SOLUCEF)
+				c:(chat) $calendar_fonct_chat = 1 cool ^reuse(SOLUCEF) ^setrejoinder(SOLUCEF)
+				c:(* don't know) perhaps a mix of the three. ^reuse(SOLUCEF) ^setrejoinder(SOLUCEF)
 		b:(~no) $calendar_fonct = 0 Yes, you know how to read after all.
-		b:(* don't know) Agenda, it's better to have it in mind.
+		b:(* don't know) Agenda, it's better to have it in mind. ^reuse(SOLUCEF) ^setrejoinder(SOLUCEF)
 
 # soluce service
-t: You want $share_ve_name to give you info on a video game, like answers or solution?
+t: SOLUCEF () You want $share_ve_name to give you info on a video game, like answers or solution?
 	a:(~yes) $soluces_fonct = 1 Go left after the Mob ... And suddenly, would you prefer oral info or a Chat like this one?
 		b:(chat) $soluces_fonct_chat = 1 Long live to the fingers! And in which game in priority?
-			c:( _* ) $game = ^original(_0) $game cool !
+			c:( _* ) $share_game = ^original(_0) $share_game cool !
 				d: (~no) I misunderstand? Maybe you can gives the simplified name. I listen...
-					e:(_*) $game = ^original(_0) So it's $game, just keep it, I would ask a human to help me find it. Let's go on.
+					e:(_*) $share_game = ^original(_0) So it's $share_game, just keep it, I would ask a human to help me find it. Let's go on.
 				d: (~emosurprise) Really, we can do it if you think it's cool for you.
 		b:([vocal voice]) $soluces_fonct_voice = 1 It's more fun, actually. And in which game in priority?
-			c:( _* ) $game = ^original(_0) $game cool !
+			c:( _* ) $share_game = ^original(_0) $share_game cool ! 
 				d: (~no) I misunderstand? Maybe you can gives the simplified name. I listen...
-					e:(_*) $game = ^original(_0) So it's $game, just keep it, I would ask a human to help me find it. Let's go on.
+					e:(_*) $share_game = ^original(_0) So it's $share_game, just keep it, I would ask a human to help me find it. Let's go on.
 				d: (~emosurprise) Really, we can do it if you think it's cool for you.
 
 	a:(~no) $soluces = 0 Video games, it's still games.
 		b:(* don't play *) Neither do I. Except the tick-tack-toe.
-			c:(why) because I only like to win
+			c:(why) because I only like to win.
 				d:(win) this is my weakness
-				d: (play * me) $tictactoe = 1 maybe later
-	a:(* don't play *) to see.
+				d: (play * me) $tictactoe = 1 maybe later. ^reuse(ROLEPLAYF) ^setrejoinder(ROLEPLAYF)
+	a:(* don't play *) to see. ^reuse(ROLEPLAYF) ^setrejoinder(ROLEPLAYF)
 
-?: (you play) Never. Except the tick-tack-toe, sometimes.
-	a:(why) because I only like to win.
-				b:( !I win) this is my weakness
-				b: (play * me) $tictactoe = 1 maybe later
 
-t: One last thing I wanted to ask you $share_name, would you embark on a life-size role-playing game with $share_ve_name and other players?
-	a:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
-	a:(~no)  $roleplay_fonct = 0 Notice.
-	a:([real human]) among others
-		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
-		b:(~no)  $roleplay_fonct = 0 Notice.
+t: ROLEPLAYF () One last thing I wanted to ask you $share_name, would you embark on a life-size role-playing game with $share_ve_name and other players?
+	a:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you... ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
+	a:(~no)  $roleplay_fonct = 0 Notice. ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
+	a:([real human]) among others.
+		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you... ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
+		b:(~no)  $roleplay_fonct = 0 Notice. ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
 	a:(what) A kind of games, but in real world. Nothing dangerous, reassure you
-		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you...
-		b:(~no)  $roleplay_fonct = 0 Notice.
+		b:(~yes) $roleplay_fonct = 1 Cool, you're not the only one, we'll prepare something for you... ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
+		b:(~no)  $roleplay_fonct = 0 Notice. ^reuse(BOTHERY) ^setrejoinder(BOTHERY)
 
-t: I hope I did not bother you too much with my questions.
+t: BOTHERY () I hope I did not bother you too much with my questions.
 	a: (~no) Great! ^reuse(STOREALTAIA) ^setrejoinder(STOREALTAIA)
 	a: () ^reuse(STOREALTAIA) ^setrejoinder(STOREALTAIA)
 
-t: STOREALTAIA () Now you can save those data in your database for $share_ve_name
+t: STOREALTAIA () Now you must save those data in your database for $share_ve_name
 #store uid and creadat for Firebase export
 $share_cs_uid = %user
 $cs_creadat = %fulltime
-	a: ([~yes ok go]) ^reuse(RECORDALTAIA01) ^setrejoinder(RECORDALTAIA01)
+	a: ([~yes ok go how please]) ^reuse(RECORDALTAIA01) ^setrejoinder(RECORDALTAIA01)
 	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
 	a: (what) It's your data. To make they accessible in "My Account" and used by $share_ve_name, they are stored in your database.
 		b: (~yes) So I start the recording?
 			c: (~yes) ^reuse(RECORDALTAIA01) ^setrejoinder(RECORDALTAIA01)
 			c: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
 		b: (see data) ^reuse(SHOWALTAIA01DATA) ^setrejoinder(SHOWALTAIA01DATA)
-	a: (see data)  ^reuse(SHOWALTAIA01DATA) ^setrejoinder(SHOWALTAIA01DATA)
+	a: (see data)  ^reuse(SHOWALTAIA01DATA) ^setrejoinder(SHOWALTAIA01DATA) 
 
-u: SHOWALTAIA01DATA (can you shwo my altai data) Well, so, it's not scripting yet, but that's what you answered for mail, calendar, game, diary and roleplaying features.
+u: SHOWALTAIA01DATA (can ["you show" "I see" "you tell"] * my * data) Well, so, it's not scripting yet, but that's what you answered for mail, calendar, game, diary and roleplaying features.
 
 u: RECORDALTAIA01 ([record save store] my altai data ~) 
 $_url = ^"https://utopia-35a8b.firebaseio.com/altaia01/$share_cs_uid/.json?auth=lwhR6RtrnDazD2n1Vuqyv20QJoEgpdGO6rt39zTd"
@@ -201,7 +227,7 @@ $_url = ^"https://utopia-35a8b.firebaseio.com/altaia01/$share_cs_uid/.json?auth=
 	$_jsonmyvar.calendvocaf = $calendar_fonct_vocal
 	$_jsonmyvar.calendchatf = $calendar_fonct_chat
 	$_jsonmyvar.calendraf = $calendar_fonct_sms
-	$_jsonmyvar.gamep = $game
+	$_jsonmyvar.gamep = $share_game
 	$_jsonmyvar.mailf = $mail_fonct
 	$_jsonmyvar.mailvocalf = $mail_fonct_vocal
 	$_jsonmyvar.mailsmsf = $mail_fonct_sms
@@ -229,37 +255,31 @@ $_url = ^"https://utopia-35a8b.firebaseio.com/altaia01/$share_cs_uid/.json?auth=
 	$share_user_export01 = true
 
 
-Done.
+It's done. You see, it's simple.
 
 
-t: ABOUTELSE () If you want you can talk about something else, movies, music, video games, dreams, my life, your family... ^keep() ^repeat()
-	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
+t: ABOUTELSE () ^keep() ^repeat() 
+If you want you can talk about something else, movies, music, video games, dreams, my life, your family... 
+	a: ([movie cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
 	a: (you) ^gambit(~me)
 	a: (dream !freedom ) ^gambit(~dreamtop)
 	a: ([~sport ~occupation_sports]) ^gambit(~sportop)
 	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
 	a: (~hobby)	^gambit(~hobbytop)
-	a: (family) ^gambit(~familytop)
+	a: ({my} family) ^gambit(~familytop)
 
-
-?: (subject * talk) ^keep() ^repeat() Some like movies, sport, music, video games, dreams, my life, your family...
-	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
-	a: (~game) ^gambit(~hgamingvg)
-	a: (you) ^gambit(~me)
-	a: (dream !freedom ) ^gambit(~dreamtop)
-	a: ([~sport ~occupation_sports]) ^gambit(~sportop)
-	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
-	a: (~hobbytop) ^gambit(~hobbytop)
-	a: (family) ^gambit(~familytop)
 
 
 t: We both worked well. Now I'll have to leave you. $share_ve_name will contact you when you both reach lvl 2 and when the Beta will be over.
+	a: (you [stay moment longer]) Yes, but I have to warn you, I'm not scripted to be a conversational bot. Just ask me for a subject to talk about.
+		b: (what) To introduce you to your future VE, $share_ve_name. 
+	
 
-t: Goodby $share_name, it was a privilege to exchange with you!
+t: Goodbye $share_name, it was a privilege to exchange with you! You can call me whenever you want by calling my name Altai three times here.
 
 
 
-# variables recuperees :  $lang2 $tictactoe(bool) ; $game ; $soluces(bool) ; $diary_fonct (bool) ; $mail_fonct (bool) $mail_fonct_vocal(bool) $mail_fonct_sms(bool)
+# variables recuperees :  $lang2 $tictactoe(bool) ; $share_game ; $soluces(bool) ; $diary_fonct (bool) ; $mail_fonct (bool) $mail_fonct_vocal(bool) $mail_fonct_sms(bool)
 # $mail_fonct_sound(bool) ; $calendar_fonct(bool) ; $calendar_fonct_vocal(bool) ; $calendar_fonct_sms(bool) ; $calendar_fonct_chat (bool); $soluces_fonct(bool) ;
 # $soluces_fonct_voice ; $roleplay_fonct

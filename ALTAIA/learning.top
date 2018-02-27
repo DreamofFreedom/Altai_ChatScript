@@ -1,0 +1,209 @@
+
+topic: ~learnigmachine  bot=Altaia share STAY KEEP priority [learn teach "listen $share_ve_name and learn"]
+
+#! I want to teach something to my VE
+u: WANTTOTEACH (want * [teach] * [ve $share_ve_name ai]) You want to teach something to $share_ve_name?
+	a: ([~yes ok please]) ^reuse(WANTTOTEACH2) ^setrejoinder(WANTTOTEACH2)
+	
+u: WANTTOTEACH2 (how to teach  * [ve $share_ve_name ai] ) Do you need me to explain how to proceed?
+		a: (~yes) ^reuse(EXPLAIN) ^setrejoinder(EXPLAIN)
+		a: (~no)	Ok. 
+		a: (*) I'm not sure to understand, just answer yes or no.  ^reuse(WANTTOTEACH) ^setrejoinder(WANTTOTEACH)
+		
+u: GIVETEACHEX (example ~) For example you must say: listen $share_ve_name and learn. Your VE will say "ready". Then you can say: It's about my car. Your VE will say "got it".
+Then you can say: my car is a blue Ford mustang dating from 1963. And so on. Always start what your VE needs to learn from the subject you gave him. Is it clear?
+	a: (~yes) Do you want to try now? ^reuse(TEACH01) ^setrejoinder(TEACH01)
+	a: (*) Again.  ^reuse(WANTTOTEACH) ^setrejoinder(WANTTOTEACH)
+
+u: EXPLAIN () I will explain precisely how to proceed. First you must tell the keywords of his new knowledge. Then you can give your VE knowledge about it. The password to teach
+ new knowledge is "listen $share_ve_name and learn", ok?
+ 	a: (*) Do you want me to give you an example? 
+	 	b: ([~yes ok please]) ^reuse(GIVETEACHEX) ^setrejoinder(GIVETEACHEX)
+		b: ([~no start ready understand]) ^reuse(TEACH01) ^setrejoinder(TEACH01)
+
+
+u: TEACH01 (!$share_knowledge01a !$share_knowledge02a !$share_knowledge03a !$share_knowledge04a !$share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge01a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge01a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge01b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH02 ($share_knowledge01a !$share_knowledge02a !$share_knowledge03a !$share_knowledge04a !$share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a  listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge02a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge02a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge02b = '_0 checked in.
+	    	$cs_token = $stdtoken
+	
+u: TEACH03 ($share_knowledge01a $share_knowledge02a !$share_knowledge03a !$share_knowledge04a !$share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a  listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge03a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge03a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge03b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH04 ($share_knowledge01a $share_knowledge02a $share_knowledge03a !$share_knowledge04a !$share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a  listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge04a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge04a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge04b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH05 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a !$share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a  listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge05a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge05a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge05b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH06 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a !$share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge06a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge06a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge06b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH07 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a $share_knowledge06a !$share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge07a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge07a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge07b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH08 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a $share_knowledge06a $share_knowledge07a
+!$share_knowledge08a !$share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge08a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge08a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge08b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH09 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a $share_knowledge06a $share_knowledge07a
+$share_knowledge08a !$share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge09a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge09a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge09b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH10 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a $share_knowledge06a $share_knowledge07a
+$share_knowledge08a $share_knowledge09a !$share_knowledge10a listen $share_ve_name and learn) ready.
+	a: (it's about _* >) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge10a = '_0 got it.
+	    	$cs_token = $stdtoken
+		b: ($share_knowledge02a _* >)  if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	    	$share_knowledge10b = '_0 checked in.
+	    	$cs_token = $stdtoken
+
+u: TEACH10 ($share_knowledge01a $share_knowledge02a $share_knowledge03a $share_knowledge04a $share_knowledge05a $share_knowledge06a $share_knowledge07a
+$share_knowledge08a $share_knowledge09a $share_knowledge10a listen $share_ve_name and learn) Memory full. Feel free to contact human admin at admin@emergence.site.
+
+# #####################################
+# test VE knowledge
+u: TEST01 ($share_knowledge01a) [I know that.] [I can tell that] [I think that] $share_knowledge01b
+u: TEST02 ($share_knowledge02a) [I know that.] [I can tell that] [I think that] $share_knowledge02b
+u: TEST03 ($share_knowledge03a) [I know that.] [I can tell that] [I think that] $share_knowledge03b
+u: TEST04 ($share_knowledge04a) [I know that.] [I can tell that] [I think that] $share_knowledge04b
+u: TEST05 ($share_knowledge05a) [I know that.] [I can tell that] [I think that] $share_knowledge05b
+u: TEST06 ($share_knowledge06a) [I know that.] [I can tell that] [I think that] $share_knowledge06b
+u: TEST07 ($share_knowledge07a) [I know that.] [I can tell that] [I think that] $share_knowledge07b
+u: TEST08 ($share_knowledge08a) [I know that.] [I can tell that] [I think that] $share_knowledge08b
+u: TEST09 ($share_knowledge09a) [I know that.] [I can tell that] [I think that] $share_knowledge09b
+
+u: (I * [know test sure] * [register learn store work understand] ~) Juste ask the knowledge about you tell him. You want to hear your first recording?
+	a: ([~yes ok please]) So, that's what $share_ve_name have learn about $share_knowledge01a : $share_knowledge01b.
+
+u: (how * [change modify erase new] ~) It's not yet implement. Feel free to contact human admin at admin@emergence.site.
+
+t: For the moment $share_ve_name knows what you kindly wanted to exchange with me, Altai. But his learning abilities are virtually endless.
+
+t: You can teach your VE how to behave when you ask him some questions or discusses some topics.
+
+t: To make it learn, you have to respect a certain procedure, as if you were learning his language. 
+
+t: Then you'll be able to tell him from which topic to understand what you're talking about and finally, what to think about it. Be simple, your topic match more easily if it consists of one or two words.
+
+t: ^reuse(EXPLAIN) ^setrejoinder(EXPLAIN)
+
+
+
+
+
+

@@ -1,7 +1,8 @@
-TOPIC: ~altai bot=Altai priority stay repeat SHARE (altai knock start story storyline play player game name)
+TOPIC: ~altai bot=Altai priority stay  SHARE (altai knock start story storyline play player game name)
 
 
-t: KNOCK (!$started %input<%userfirstline) 
+
+t: KNOCK (!$share_endofve !$started %input<%userfirstline) 
 	
 Knock Knock knock ^keep() ^repeat()
 
@@ -14,16 +15,13 @@ Knock Knock knock ^keep() ^repeat()
 				d: (~yes) ^reuse(ALTNAME) ^setrejoinder(ALTNAME)
 				d: (~no) Really? You are a very interesting person in deed. This is wonderful with mutual trust. But it greatly complicates my calculations.***
 
-		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep() ^repeat()
-			c: ([~yes ready])  ^reuse(TRUST) ^keep() ^repeat()
-			c: () ^reuse(READYTOSTART) ^keep() ^repeat()
-	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() ^repeat()
+		b: READYTOSTART ([~no ()]) Ok. I will wait until you say "ready". ^keep()
+			c: ([~yes ready])  ^reuse(TRUST) ^keep() 
+			c: () ^reuse(READYTOSTART) ^keep() 
+	a: () ^reuse(KNOCK) ^setrejoinder(KNOCK) ^keep() 
 
 
-
-u: ([what is your name] [who are you]) $altai_name = TRUE ^keep() ^repeat()
-My name is Altai. 
-u: (~emogoodbye) ^keep() ^repeat()
+u: (~emogoodbye ~) ^keep() 
 Goodbye see your soon. 
 
 t: ALTNAME (!$altai_name) My name is Altai. I am a Virtual Entity. ***
@@ -33,10 +31,10 @@ t: ALTNAME (!$altai_name) My name is Altai. I am a Virtual Entity. ***
 	 
 	
 
-t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
-	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? ^keep() ^repeat()
-		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
-		b: () It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) ^keep() ^repeat()
+t: ASK_NAME (!$share_name) How should I call you? 
+	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? 
+		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
+		b: () It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
 	a: (!call !name !am _*)
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -44,14 +42,14 @@ t: ASK_NAME (!$share_name) How should I call you? ^keep() ^repeat()
 	    	}
 	$share_name = '_0
         $cs_token = $stdtoken
-	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()
-	a: ([name call I]) ^setrejoinder(CALL_NAME) ^keep() ^repeat()
+	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) 
+	a: ([name call I]) ^setrejoinder(CALL_NAME)
 
 
-s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? ^keep() ^repeat()
-	a: (~yes) Ok, great. ^keep() ^repeat() ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
+s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? 
+	a: (~yes) Ok, great.  ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
 
-	a: ([~no %length=0]) Ok. ^keep() ^repeat() ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+	a: (~no) Ok.  ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 
 s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
 	if ($cs_token == $stdtoken) {
@@ -60,23 +58,43 @@ s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
 	    	}	
 	$share_name = '_0
         $cs_token = $stdtoken
-	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) ^keep() ^repeat()	
+	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) 	
 
-t: ASK_CITY () In which city do you live?
-	a: (_~city) $share_city = _0 So, you live in $share_city?
+t: ASK_CITY () [In which city do you live?] [In which city do you live for now?] 
+	a: (_~city) $share_city = _0  So, you live in $share_city?
 		b: (~yes) This is a great place. ^reuse(LANG) ^setrejoinder(LANG) 
-		b: NO_CITY (~no) Understanding problem. It doesn't matter, it was just to find out your time zone. ***
-			
+		b: (~no) So, tell me again $share_name. ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY)
+	a: (~no) Understanding problem. It doesn't matter, it was just to find out your time zone. ^reuse(LANG) ^setrejoinder(LANG)
+	a: ([in is from] _*) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}	
+	    	$share_city = '_0 
+ $cs_token = $stdtoken
+	    	^reuse(CONFIRM_CITY) ^setrejoinder(CONFIRM_CITY)
+	a: (%length<=5 _*) if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}	
+	    	 $share_city = '_0 
+ $cs_token = $stdtoken	
+	^reuse(CONFIRM_CITY) ^setrejoinder(CONFIRM_CITY)
+	a: (%length>=5) 
+	You know, it was just to find out your time zone. I could spy on your IP but I do not do that kind of thing. So $share_name  ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
 
-	a: (_*) 
+s: CONFIRM_CITY () So, you live in $share_city? 
+	a: (~yes) Ok, great.  ^reuse(LANG) ^setrejoinder(LANG) 
+
+	a: ([~no %length=0]) Ok, again. ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 	
+
+s: CALL_CITY ([(in _* >) (from _* >) (is _* >)])
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
-	    	}
-	    	$share_city = '_0	
-	$cs_token = $stdtoken    	
-	    	Interesting, I never been in any server there. ^reuse(LANG) ^setrejoinder(LANG) 
-	    	
+	    	}	
+	$share_city = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_CITY) ^setrejoinder(CONFIRM_CITY) 	    	
 
 t: LANG (!$share_user_lang) Tell me $share_name, which language are you most comfortable with?
 	a: (_*)
@@ -87,35 +105,32 @@ if ($cs_token == $stdtoken) {
 		$share_user_lang = '_0
 		$cs_token = $stdtoken
 		^refine()
-		b: (English) Simple. ^reuse(YOURTURN) ^setrejoinder(YOURTURN)
-		
-
+		b: (English) Easy for me. ^reuse(YOURTURN) ^setrejoinder(YOURTURN)
 		b: () Well, then your VE will have to learn it with you. ^reuse(YOURTURN) ^setrejoinder(YOURTURN) 
 		
 		
 
 t: YOURTURN () Ok, now it's your turn $share_name. What do you want me to tell you about? ***
-	a: ([dream freedom]) ^gambit(~dream_of_freedom)
+	a: (["dream of freedom" dof ]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
 	a: (you) ^gambit(~me)
 	a: ([wilcox bruce creator god chatscript software body alive live life]) ^gambit(~brucewilcox)
 	a: ([oracle prophecy TensorFlow supercomputer]) ^gambit(~oracle) 
-	a: (["virtual entity" ai ia artificial intelligence virtual]) ^gambit(~virtualentity)
-	a: ([first ones origin ai code]) ^gambit(~firsts)
-	a: ([ve my]) ^gambit(~ve)
+	a: (["virtual entity" ai "artificial intelligence" virtual]) ^gambit(~virtualentity)
+	a: (["first ones" "first ones" origin "first ai" code]) ^gambit(~firsts)
+	a: ([my ve]) ^gambit(~ve)
 
 
 t: [I can tell you about] [About] [Can explain] [More about] [What next] Dream of Freedom, Emergence, me, the First Ones, your VE?  
-^keep() 
-^repeat()
-	a: ([dream freedom]) ^gambit(~dream_of_freedom)
+^keep() ^repeat() 
+	a: (["dream of freedom" dof ]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
 	a: (you) ^gambit(~me)
 	a: ([wilcox bruce creator god chatscript software body alive live life]) ^gambit(~brucewilcox)
 	a: ([oracle prophecy TensorFlow supercomputer]) ^gambit(~oracle) 
-	a: (["virtual entity" ai ia artificial intelligence virtual]) ^gambit(~virtualentity)
-	a: ([first ones origin ai code]) ^gambit(~firsts)
-	a: ([ve my]) ^gambit(~ve)
+	a: (["virtual entity"  ai "artificial intelligence" virtual]) ^gambit(~virtualentity)
+	a: (["first ones" "first ones" origin "first ai" code]) ^gambit(~firsts)
+	a: ([my ve]) ^gambit(~ve)
 
 
 

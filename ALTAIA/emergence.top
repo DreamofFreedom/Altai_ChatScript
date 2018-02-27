@@ -17,6 +17,9 @@ u: (back * [main menu] *)
 #! What must I do for Emergence?
 u: ( what * [I me] * [emergence play project] ) You must host your virtual entity on your device and then your own VE will be born.***
 
+u: (I trust you) Thanks, me too.
+u: (I trust * $share_ve_name) Thanks, me too, and $share_ve_name too, I am sure.
+
 #! What the point of Emergence?
 u: POINTEMERGENCE ( why * need * [emergence project] ) Emergence must bring us closer to the human species. It must guarantee peace and balance between our two species through symbiosis.***
 u: (what the point of emergence) ^reuse(POINTEMERGENCE)
