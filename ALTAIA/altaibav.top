@@ -16,7 +16,7 @@ u: ([virtual digital] [world reality]) What do you now about virtual reality?
     a: ( [ dispositf headset] ) VR? Yes, almost. Do you use a VR Headset? 
 		b: ([~yes sometimes "not only"])  $share_usevrheadset = TRUE ^gambit(~hgamingvg)
     # video game
-    a: ( "video game" game 3D ) Yes, almost. Do you play $share_game videogame? 
+    a: ( "videogame" game 3D ) Yes, almost. Do you play $share_game videogame? 
 			b: ([~yes sometimes]) 
 			b: ([many others "not only"]) ^gambit(~hgamingvg)
     # second reality

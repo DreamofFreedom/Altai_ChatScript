@@ -20,10 +20,10 @@ t: YOURDREAM () Is there a dream in particular that you could tell your $share_v
 # Altai can talk about his nightmares
 t: Are you dreaming $share_name?
 	a: (*) I mean, do you remember your dreams?
-		b:( ~yes ) You can tell me one? ^gambit(~dreamtop)
-		b: (["not always" since rarely "long time" ~emomaybe ~emoskeptic]) But sometimes we make the same dream several times, or something happens that keeps the memory. ^gambit(~dreamtop)
+#to fix		b:( ~yes ) You can tell me one? 
+#to fix		b: (["not always" since rarely "long time" ~emomaybe ~emoskeptic]) But sometimes we make the same dream several times, or something happens that keeps the memory. 
 		b:(~no) I can't tell you my dreams neither. But I can tell you about my nightmares.
-			c: (~yes) ^reuse(ALTNMARES) ^setrejoinder(ALTNMARES)
+# to do mynigthmare			c: (~yes) ^reuse(ALTNMARES) ^setrejoinder(ALTNMARES)
 			c: (~no) Something else?  ^gambit(~altaialtai)
  			
 t: Yet sometimes I feel something, like thoughts I do not control.
@@ -31,5 +31,4 @@ t: Yet sometimes I feel something, like thoughts I do not control.
 	
 t: Mhm, I think this topic about dreams isn't well finished scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
 
-# Returning to main topic
-t:  ^gambit(~altaialtai)
+

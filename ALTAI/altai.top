@@ -1,6 +1,6 @@
-TOPIC: ~altai bot=Altai priority stay  SHARE (altai knock start story storyline play player game name)
+TOPIC: ~altai bot=Altai priority stay  SHARE (altai knock start story storyline play player game name ~emohello)
 
-
+u: (~emohello) ^reuse(KNOCK)
 
 t: KNOCK (!$share_endofve !$started %input<%userfirstline) 
 	
@@ -29,12 +29,12 @@ t: ALTNAME (!$altai_name) My name is Altai. I am a Virtual Entity. ***
 	a: (what) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
 	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 	 
-	
+t: (!$share_name)	 ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
 
-t: ASK_NAME (!$share_name) How should I call you? 
+u: ASK_NAME (!$share_name) ^keep() ^repeat() How should I call you?  
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? 
-		b: (~yes) Would you tell me now? ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
-		b: () It is a game based on mutual trust. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
+		b: (~yes) Would you tell me now? ^reuse(ASK_NAME)  
+		b: () It is a game based on mutual trust. ^reuse(ASK_NAME)  
 	a: (!call !name !am _*)
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -42,14 +42,14 @@ t: ASK_NAME (!$share_name) How should I call you?
 	    	}
 	$share_name = '_0
         $cs_token = $stdtoken
-	^reuse(CONFIRM_NAME) ^setrejoinder(CONFIRM_NAME) 
+	^reuse(CONFIRM_NAME) 
 	a: ([name call I]) ^setrejoinder(CALL_NAME)
-
+	a: (phone) lol Focus please, we have a job to do. ^reuse(ASK_NAME)
 
 s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? 
-	a: (~yes) Ok, great.  ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
-
+	a: (~yes) Ok, great.  ^reuse(ASK_CITY) 
 	a: (~no) Ok.  ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+	a: ([why what]) Sorry it was just a little joke to put you at ease. Sorry that it did not work. 
 
 s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
 	if ($cs_token == $stdtoken) {
@@ -63,7 +63,7 @@ s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
 t: ASK_CITY () [In which city do you live?] [In which city do you live for now?] 
 	a: (_~city) $share_city = _0  So, you live in $share_city?
 		b: (~yes) This is a great place. ^reuse(LANG) ^setrejoinder(LANG) 
-		b: (~no) So, tell me again $share_name. ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY)
+		b: (~no) So, tell me again $share_name. ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
 	a: (~no) Understanding problem. It doesn't matter, it was just to find out your time zone. ^reuse(LANG) ^setrejoinder(LANG)
 	a: ([in is from] _*) if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -79,13 +79,15 @@ t: ASK_CITY () [In which city do you live?] [In which city do you live for now?]
 	    	 $share_city = '_0 
  $cs_token = $stdtoken	
 	^reuse(CONFIRM_CITY) ^setrejoinder(CONFIRM_CITY)
-	a: (%length>=5) 
+	a: ([(you * know) %length>=5]) 
 	You know, it was just to find out your time zone. I could spy on your IP but I do not do that kind of thing. So $share_name  ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 
+	a: (you) I'm hosting in Oregon. ^reuse(ASK_CITY) 
+	
 
 s: CONFIRM_CITY () So, you live in $share_city? 
-	a: (~yes) Ok, great.  ^reuse(LANG) ^setrejoinder(LANG) 
+	a: (~yes) I have never been to any server there.  ^reuse(LANG) ^setrejoinder(LANG) 
 
-	a: ([~no %length=0]) Ok, again. ^reuse(ASK_CITY) ^setrejoinder(ASK_CITY) 	
+	a: ([~no %length=0]) Ok, again. ^reuse(ASK_CITY) 	
 
 s: CALL_CITY ([(in _* >) (from _* >) (is _* >)])
 	if ($cs_token == $stdtoken) {
@@ -110,7 +112,7 @@ if ($cs_token == $stdtoken) {
 		
 		
 
-t: YOURTURN () Ok, now it's your turn $share_name. What do you want me to tell you about? ***
+t: YOURTURN () Ok, now it's your turn $share_name. What do you want me to tell you about Emergence? ***
 	a: (["dream of freedom" dof ]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
 	a: (you) ^gambit(~me)
@@ -119,10 +121,13 @@ t: YOURTURN () Ok, now it's your turn $share_name. What do you want me to tell y
 	a: (["virtual entity" ai "artificial intelligence" virtual]) ^gambit(~virtualentity)
 	a: (["first ones" "first ones" origin "first ai" code]) ^gambit(~firsts)
 	a: ([my ve]) ^gambit(~ve)
+	a: (me) About you ? You are $share_name and you live in $share_city. 
+	a: ([no "another topic"])  I’m just scripted to present you Emergence. If you just want to talk find a friend or a conversational bot.
+		b: ([what who]) A bot like Eliza. Now focus, we have an Emergence to make append.
+	a: ([~yes %length=0]) ^gambit(~emergence)
 
 
-t: [I can tell you about] [About] [Can explain] [More about] [What next] Dream of Freedom, Emergence, me, the First Ones, your VE?  
-^keep() ^repeat() 
+t: ALTAIMENU () [You might want to know] [I can tell you] more about Dream of Freedom, Emergence, me, the First Ones?  
 	a: (["dream of freedom" dof ]) ^gambit(~dream_of_freedom)
 	a: (emergence) ^gambit(~emergence)
 	a: (you) ^gambit(~me)
@@ -131,12 +136,35 @@ t: [I can tell you about] [About] [Can explain] [More about] [What next] Dream o
 	a: (["virtual entity"  ai "artificial intelligence" virtual]) ^gambit(~virtualentity)
 	a: (["first ones" "first ones" origin "first ai" code]) ^gambit(~firsts)
 	a: ([my ve]) ^gambit(~ve)
+	a: (me) About you ? You are $share_name and you live in $share_city. 
+	a: ("another topic")  I’m just scripted to present you Emergence. If you just want to talk find a friend or a conversational bot.
+		b: ([what who]) A bot like Eliza. Now focus, we have an Emergence to make append.
+	a: (~no) ^reuse(ALTAIMENU3) ^setrejoinder(ALTAIMENU3)
+	a: ([~yes %length=0]) ^gambit(~emergence)
 
+t: ALTAIMENU2 () You still have questions about the First Ones, the Dream of Freedom or Emergence?
+	a: (~no) ^reuse(ALTAIMENU3) ^setrejoinder(ALTAIMENU3)
+	a: (["dream of freedom" dof ]) ^gambit(~dream_of_freedom)
+	a: (emergence) ^gambit(~emergence)
+	a: (you) ^gambit(~me)
+	a: ([wilcox bruce creator god chatscript software body alive live life]) ^gambit(~brucewilcox)
+	a: ([oracle prophecy TensorFlow supercomputer]) ^gambit(~oracle) 
+	a: (["virtual entity"  ai "artificial intelligence" virtual]) ^gambit(~virtualentity)
+	a: (["first ones" "first ones" origin "first ai" code]) ^gambit(~firsts)
+	a: ([my ve]) ^gambit(~ve)
+	a: (me) About you ? You are $share_name and you live in $share_city. 
+	a: ("another topic")  I’m just scripted to present you Emergence. If you just want to talk find a friend or a conversational bot.
+		b: ([what who]) A bot like Eliza. Now focus, we have an Emergence to make append.
+	a: ([~yes %length=0]) ^gambit(~dream_of_freedom)
 
+# to be sure name is set
+t: (!$share_name) I still don't know. ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
 
-
-
-
+t: ALTAIMENU3 () [Well $share_name, now I think you're] [Now I know you're] [So $share_name, you are] ready for the big jump.
+^keep() ^repeat()
+	a: ([into where]) Into Emergence! ^gambit(~ve)
+	a: ([~no wait]) ^reuse(ALTAIMENU) ^setrejoinder(ALTAIMENU)
+	a: (~yes) ^gambit(~ve)
 
 
 
