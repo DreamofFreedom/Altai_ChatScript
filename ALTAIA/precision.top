@@ -48,18 +48,32 @@ if ($share_lang=French)
   a: (when) Since developpers make it append. Feel free to join human community in utopia-french.tech website.
 
 # change name
-u: (change ["my name" $share_name]) ^reuse(CHANGENAME)
+u: (change * ["my name" $share_name]) ^reuse(CHANGENAME)
 u: CHANGENAME (what * my name) The name you told to me is $share_name. Do you want to change?
 	a: (~yes) ok. Be careful this time I will record all the next sentence you send: so your new name will be?
-		b: (_*) $share_name = _O  $share_name : magnificent!
-			c: ([no change])  ^reuse(CHANGENAME)
+		b: (_*) 	
+		if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}	
+	    	$share_name = '_0
+		  $cs_token = $stdtoken
+		   $share_name : [magnificent!] [Great!] [Hi new you!]
+			c: ([~no change])  ^reuse(CHANGENAME)
 			
 # Change bot name
-u: (change ["ve name" $share_ve_name "bot name"]) ^reuse(CHANGEBOTNAME)
-u: CHANGEBOTNAME (what * my name) The bot name make was $share_name. Do you want to change?
+u: (change * [ve $share_ve_name bot] name) ^reuse(CHANGEBOTNAME)
+u: CHANGEBOTNAME (what * my [bot ve ai] name) Your VE name was $share_ve_name. Do you want to change?
 	a: (~yes) ok. Be careful this time I will record all the next sentence you send: so your VE new name will be?
-		b: (_*) $share_ve_name = _O  $share_ve_name : magnificent!
-			c: ([no change])  ^reuse(CHANGEBOTNAME)
+		b: (_*) 
+			if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}	
+	    	$share_ve_name = '_0
+		  $cs_token = $stdtoken
+		   $share_ve_name : [magnificent!] [Great!] [Hi new VE!]
+			c: ([~no change])  ^reuse(CHANGEBOTNAME)
 
 u: DEVELOP (I * ["do something" help develop script participate "get involved" emergence "my ve"]) You want to get involved more actively into Emergence ?
 ^keep() ^repeat()

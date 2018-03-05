@@ -1,0 +1,50 @@
+# $share_sport
+
+concept: ~hobbyconcmusic MORE [listen_record listen_music musical_instruments music singing audiophilia]
+concept: ~hobbyconcsport MORE [baton_twirling dance basketball locksport bowling boxing billiards handball martial_arts table_football college_football
+racquetball rugby running shooting squash surfing swimming table_tennis tennis volleyball airsoft american_football archery football auto_racing badminton baseball 
+basketball climbing cricket cycling disc_golf equestrianism figure_skating fishing golfing gymnastics hockey kart netball paintball parkour air_sports board_sports 
+skating freerunning jogging climbing running kayaking motor_sports biking machining rowing sailing planking Tai_chi water_sports yoga bootbag]
+concept: ~hobbyconcobserv MORE [pet photography sand_castle vehicle_restoration audiophilia microscopy reading shortwave_listening astronomy geology bird_watching geocaching meteorology people_watching travel]
+concept: ~hobbyconcplay MORE [ aircraft chess cheerleading cubing bridge billiards darts fencing gaming]
+concept: ~hobbyconcollect MORE [antiquing art_collecting coin element stamp vintage_books vintage_car vintage_clothing genealogy antiquities fossil_hunting 
+insect_collecting leaf_collecting metal_detecting mineral petal_collecting rock_collecting seaglass_collecting seashell_collecting]
+concept: ~hobbyconcreativ MORE [amateur_radio audiophilia aquarium  bonsai computer_programming drawing  painting scrapbooking sculpting  baking cooking writing 
+automation movies jewelry_making knapping lapidary  knittingsewing woodworking]
+concept: ~hobbyconc MORE [~hobbyconcreativ ~hobbyconcmusic ~hobbyconcsport ~hobbyconcobserv ~hobbyconcplay ~hobbyconcollect]
+
+Topic: ~hobbytop bot=Altaia STAY (hobby)
+
+u: ( ~hobbyconc ) ^refine() # gets any reference to a hobby
+    a: (~hobbyconcsport) I like sport! ^reuse(SPROTHOBBY) ^setrejoinder(SPROTHOBBY)
+    a: (~hobbyconcmusic) I admire music! ^gambit(~musictop)
+    a: (~hobbyconcobserv) I like observe!
+    a: (~hobbyconcplay) I like to play! ^gambit(~hgamingvg)
+    a: (~hobbyconcollect) I like collections!
+    a: (~hobbyconcreativ) I admire creative thinks! ^gambit(~cinematop)
+    a: (*) I have never heard of that.
+
+u: SPROTHOBBY ([about like play do] ~hobbyconcsport ) ^refine() # gets any reference to a sport
+   a: ([locksport boxing martial_arts ]) $share_sport = combatsport Combat sport, you must be a vigorous representative of your species! ^gambit(~sportop)
+ 	a: ([freerunning jogging climbing running racquetball running squash  table_tennis tennis  badminton baton_twirling dance bowling  billiards table_football 
+ 	 bootbag shooting disc_golf equestrianism  golfing gymnastics  fishing climbing archery  cricket  parkour air_sports])
+  $share_sport = individual Individual sport, you must love the challenges! ^gambit(~sportop)
+   a: ([rugby volleyball airsoft american_football football baseball basketball handball college_football hockey netball paintball]) 
+  $share_sport = teamsport Team sport, collective play are fascinating! ^gambit(~sportop)
+   a: ([skating cycling biking figure_skating board_sports ]) $share_sport = boardsports Fun! ^gambit(~sportop)
+   a: ([kayaking  water_sports rowing sailing surfing planking swimming ]) $share_sport = watersports You must love water. Boy, it's an element that worries me! ^gambit(~sportop)
+   a: ([motor_sports machining kart auto_racing]) $share_sport = motorsport Mhm, you like fast and furious machine! ^gambit(~sportop)
+   a: ([tai_chi yoga]) $share_sport = zensport You must be zen! 
+
+t: Tell me $share_name, what's your favorite hobby?
+ 
+ t: Mhm, I think hobby topic isn't already fully scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
+
+ t: ABOUTELSE2 () We can talk about music, video games, my life and your family, for now.
+	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
+	a: (~game) ^gambit(~hgamingvg)
+	a: (you) ^gambit(~me)
+	a: (dream !freedom ) ^gambit(~dreamtop)
+	a: ([~sport ~occupation_sports]) ^gambit(~sportop)
+	a: ([~music_subjects ~popstar]) ^gambit(~musictop)
+	a: (family) ^gambit(~familytop)

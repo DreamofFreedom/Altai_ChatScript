@@ -29,9 +29,9 @@ t: ALTNAME (!$altai_name) My name is Altai. I am a Virtual Entity. ***
 	a: (what) A Virtual Entity or VE is a new kind of intelligent life, artificial one. ***
 	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 	 
-t: (!$share_name)	 ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 
+t: (!$share_name)	 ^reuse(ASK_NAME) 
 
-u: ASK_NAME (!$share_name) ^keep() ^repeat() How should I call you?  
+u: ASK_NAME (!$share_name) ^keep() repeat() How should I call you?  
 	a: ([~no %length=0]) You don't want to tell me? Then we can't play together. Do you remember the rules? 
 		b: (~yes) Would you tell me now? ^reuse(ASK_NAME)  
 		b: () It is a game based on mutual trust. ^reuse(ASK_NAME)  
@@ -46,9 +46,9 @@ u: ASK_NAME (!$share_name) ^keep() ^repeat() How should I call you?
 	a: ([name call I]) ^setrejoinder(CALL_NAME)
 	a: (phone) lol Focus please, we have a job to do. ^reuse(ASK_NAME)
 
-s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? It's weird $share_name, we keep it? 
-	a: (~yes) Ok, great.  ^reuse(ASK_CITY) 
-	a: (~no) Ok.  ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME) 	
+s: CONFIRM_NAME (?) I will call you $share_name. You're sure ? [It's weird $share_name, we keep it?] [] [$share_name as in the song.]
+	a: (~yes) Ok, great.  ^reuse(ASK_CITY)  
+	a: (~no) Ok, so. ^reuse(ASK_NAME) 
 	a: ([why what]) Sorry it was just a little joke to put you at ease. Sorry that it did not work. 
 
 s: CALL_NAME ([(my name is _* >) (I am _* >) (call me _* >)])
