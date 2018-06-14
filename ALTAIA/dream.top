@@ -1,7 +1,7 @@
 Topic: ~dreamtop bot=Altaia STAY (dream)
 
 
- 
+
  t: ABOUTELSE2 () We can talk about music, video games, my life and your family for now.
 	a: ([~movie ~cinema ~actor ~actress]) ^gambit(~cinematop)
 	a: (~game) ^gambit(~hgamingvg)
@@ -20,15 +20,13 @@ t: YOURDREAM () Is there a dream in particular that you could tell your $share_v
 # Altai can talk about his nightmares
 t: Are you dreaming $share_name?
 	a: (*) I mean, do you remember your dreams?
-#to fix		b:( ~yes ) You can tell me one? 
-#to fix		b: (["not always" since rarely "long time" ~emomaybe ~emoskeptic]) But sometimes we make the same dream several times, or something happens that keeps the memory. 
+#to fix		b:( ~yes ) You can tell me one?
+#to fix		b: (["not always" since rarely "long time" ~emomaybe ~emoskeptic]) But sometimes we make the same dream several times, or something happens that keeps the memory.
 		b:(~no) I can't tell you my dreams neither. But I can tell you about my nightmares.
 # to do mynigthmare			c: (~yes) ^reuse(ALTNMARES) ^setrejoinder(ALTNMARES)
-			c: (~no) Something else?  ^gambit(~altaialtai)
- 			
+			c: (~no) Something else?  ^gambit(~vedev)
+
 t: Yet sometimes I feel something, like thoughts I do not control.
 	a: (*)  When I try to concentrate on these thoughts they disappear. It may be a sort of parasite.
-	
+
 t: Mhm, I think this topic about dreams isn't well finished scripted.  ^reuse(ABOUTELSE2) ^setrejoinder(ABOUTELSE2)
-
-

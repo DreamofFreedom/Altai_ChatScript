@@ -1,0 +1,104 @@
+TOPIC: ~family03 bot=Altaia share keep stay [ mother mum dad dady father parents]
+
+
+### Why those questions?
+u: JUSTFORENV3 (why * question ~) I just asked the question so that $share_vename knows your home environment.
+		a: ([~yes you]) Great!
+		a: ([~no ~emoprotest]) No problem. Your VE will be what you want it to be. No more no less. We can talk about something else.
+			b: (what) try a subject...
+				c: (~no) ^gambit(~altaibav)
+
+u: ([no not wrong error] ~) I was wrong?
+	a: (~yes) I'm sorry. About who? Your mother or your father?
+		b: ([father dad daddy]) ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+		b: ([mother mum mummy both all]) ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+	a: (~no) Ok, cool. ^gambit(~altaibav)
+
+u: ([mess bazaar mixed confuses (messed up)] ~) Sorry, I admit that human parenting is quite obscure for me. Maybe we should talk about something else?
+	a: (~yes) ^gambit(~altaibav)
+	a: ([no keep go]) Ok, but I do not promise to do it well. ^gambit(~familytop)
+
+# ##################
+# Drive on parents
+
+#if we have the mother name, search father name
+t: () if ($share_mothername)
+{Your mother name $share_mothername. ^reuse(TESTFATHNAME) ^setrejoinder(TESTFATHNAME)}
+else
+{What about your parents? ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)}
+#if we have the father name, search sister number
+t: TESTFATHNAME () if ($share_fathername)
+{Your father name $share_fathername ^gambit(~familytop)}
+else
+{You have not told me yet ^reuse(TALKDAD) ^setrejoinder(TALKDAD) }
+
+
+t: TALKMOTHER (!$share_mothername) What's your mother name?
+ 	a: (* > _*-1)
+if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+        $share_mothername = '_0
+$cs_token = $stdtoken
+        $share_mothername ?
+
+        b: ([~yes right exact]) and ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+        b: ([~no wrong]) Oups! Tell me again your mother name is:
+				 c: (* > _*-1)
+				if ($cs_token == $stdtoken) {
+   		       $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+    			      retry(SENTENCE)
+   				     }
+    			    $share_mothername = '_0
+					$cs_token = $stdtoken
+    			    $share_mothername ?
+	    			    d: ([~yes right exact]) and ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+     					 d: ([~no wrong]) Sorry. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+ 	a: ([[dead "no longer among us"]] ) $share_mumdead = true I am really sorry. Do you think that we can go on?
+ 				b: (~yes) ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 				b: (~no ~emoapology) I understand. We can talk about something else. ^gambit(~altaialtai)
+ 	a: (don't * know) Really? I am sorry. Me neither do I really know it. But that's not the same. ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+
+t: TALKDAD (!$share_fathername)
+your father, what is his name?
+ 			a: (* > _*-1)
+ 				if ($cs_token == $stdtoken) {
+          $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+          retry(SENTENCE)
+        }
+         $share_fathername = '_0  His name is $share_fathername ?
+$cs_token = $stdtoken
+ 				b: ([~yes right exact]) ^gambit(~familytop)
+ 				b: ([~no wrong]) ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 			a: ([dead "no longer among us"]) $share_fatherdead = true I am really sorry. Do you think that we can go on?
+ 				b: ([~yes right exact]) ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 				b: ([~no wrong ~emoapology]) I understand. We can talk about something else. ^gambit(~altaialtai)
+ 			a: (don't know) Really? I am sorry. Me neither I don't really know him. But that's not the same. ^gambit(~familytop)
+
+#parents test
+#if wee have all go to the top
+t: TOTHETOP () If I'm not mistaken, your father name is $share_fathername and your mother name is $share_mothername.
+		a: ([~yes great exact right ~emohappy]) Great! ^reuse(ABOUTELSE3) ^setrejoinder(ABOUTELSE3)
+		a: ([~no ~emoprotest false error wrong]) $mistaken = TRUE Oups, can you help me fix that? What should I change? About who ?
+		   b: ([dady father dad]) Ok, we can correct that, so ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 		   b: ([mother mom mum mumy]) Ok, let's correct that. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+		   b: ([all both]) Ok, so let's do it again. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+			b: ([~yes ok]) Ok for change who's name?
+				c: ([dady father dad]) Ok, we can correct that, so ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 		  		c: ([mother mom mum mumy]) Ok, let's correct that. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+		   	c: ([all both]) Ok, so let's do it again. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+
+
+t: TOTHETOP ($mistaken) This time I hope everything is good, your father name is $share_fathername and your mother name is $share_mothername.
+		a: ([~yes great exact right ~emohappy]) Great! ^reuse(ABOUTELSE3) ^setrejoinder(ABOUTELSE3)
+		a: ([~no ~emoprotest false error wrong]) $mistaken = TRUE Oups, can you help me fix that? What should I change? About who ?
+		   b: ([dady father dad]) Ok, we can correct that, so ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 		   b: ([mother mom mum mumy]) Ok, let's correct that. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+		   b: ([all both]) Ok, so let's do it again. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+			b: ([~yes ok]) Ok for change who's name?
+				c: ([dady father dad]) Ok, we can correct that, so ^reuse(TALKDAD) ^setrejoinder(TALKDAD)
+ 		  		c: ([mother mom mum mumy]) Ok, let's correct that. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+		   	c: ([all both]) Ok, so let's do it again. ^reuse(TALKMOTHER) ^setrejoinder(TALKMOTHER)
+
+t: ABOUTELSE3 () ^gambit(~familytop)

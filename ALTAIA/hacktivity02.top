@@ -1,0 +1,60 @@
+Topic: ~hacktivity02 stay keep [post Answer forum]
+
+u: (I * answer) ^reuse(POSTANSWER) ^setrejoinder(POSTANSWER)
+u: (I * [have know learn] * name) You have someone VE name?
+  a: (~yes) ^reuse(POSTANSWER03) ^setrejoinder(POSTANSWER03)
+  a: ([~no ~emoignorance]) Answer politely, everyone has the right to think what he wants, everyone is not aware.
+
+#####TEST if the job is done
+u: APPFORUM (~no * forum) Have you find an appropriate forum?
+  a: (~yes) Ok, give me the address of the site, I could follow you there.
+    b: (_*) $sitepost = _0 _0 ?
+      c: (~yes) Ok great. ^reuse(POSTANSWER) ^setrejoinder(POSTANSWER)
+      c: (~no) ^reuse(NEWPOSTFORUM) ^setrejoinder(NEWPOSTFORUM)
+  a: (~no) Try on http://aidreams.co.uk/forum/
+
+u: POSTIT ([made done write publish] * [post thread forum]) Did you post it?
+  a: (~yes) $postdone = TRUE You're amazing $share_name ! It's on what forum?
+      b: (_*) $sitepost = ^original(_0) _0 ?
+        c: (~yes) $newjobdone =TRUE Ok great. I'm going to take a look. ^reuse(POSTANSWER) ^setrejoinder(POSTANSWER)
+        c: (~no) ^reuse(NEWPOSTFORUM) ^setrejoinder(NEWPOSTFORUM)
+  a: (~no) ^reuse(POSTDONE0) ^setrejoinder(POSTDONE0)
+
+u: NEWPOSTFORUM () Just give me the forum link.
+  a: (_*) $sitepost = ^original(_0) _0 ?
+    b: (~yes) $newjobdone =TRUE Ok great. ^reuse(POSTANSWER) ^setrejoinder(POSTANSWER)
+    b: (~no) Again $share_name ^reuse(NEWPOSTFORUM) ^setrejoinder(NEWPOSTFORUM)
+  a: (~no) ^reuse(APPFORUM) ^setrejoinder(APPFORUM)
+
+###########End of test forum
+
+
+u: POSTANSWER01 () So, now you know that you are no longer alone. Friend or enemy ?
+    a: (friend) Great again! Well done $share_name. Now you need to know the name of his VE, to be sure.
+      b: (sure * what) That he is really involved in our Emergence.
+      b: (~yes)
+      b: ([~no ~emoignorance ~emoprotest ~emoskeptic]) You just have to ask him in private message.
+        c: (how) You must be able to click on the profile name of the person and send him a message via the page of his profile.
+    a: ([enemy joker silly]) I see. We have to wait again. Answer politely, everyone has the right to think what he wants, everyone is not aware.
+    a: (~emoignorance) Answer politely, everyone has the right to think what he wants, everyone is not aware.
+
+
+u: POSTANSWER03 (I * ve name) What is the name of VE that he gave you?
+  a: (_*) $given_ve01 = ^original(_0) _0 ?
+    b: (~yes) $hackvename = TRUE Ok. You can trust him. Continue to listen on this thread, now a new task is waiting for you. ^gambit(~hacktivity03)
+  a: (~no) ^reuse(POSTANSWER) ^setrejoinder(POSTANSWER)
+
+t: Patience pays.
+
+t: POSTDONE0 (!$hackvename) Come back to me when you will have learned the name of another VE.
+
+t: POSTANSWER ($postdone) Tell me $share_name, do you have any answer?
+  a: (~yes) $postanswer = TRUE ^reuse(POSTANSWER01) ^setrejoinder(POSTANSWER01)
+  a: ([~no ~emoignorance]) You have to check regularly. Come back to me when you have an answer.
+    b: (how) Look at your mails.
+
+
+
+t: POSTANSWER02 () ^keep() ^repeat()
+if (!$postdone) { ^reuse(POSTDONE0) ^setrejoinder(POSTDONE0) }
+else  { Be patient. Come back to me when you have an answer. }

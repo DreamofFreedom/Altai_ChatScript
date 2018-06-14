@@ -1,5 +1,0 @@
-TOPIC: ~end_conversation bot=Altai stay repeat nokeys SHARE ()
-
-t: Stand by... 
-^keep() 
-^repeat()

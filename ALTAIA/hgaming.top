@@ -8,7 +8,7 @@ u: (about videogame) ^reuse(MYVGAME) ^setrejoinder(MYVGAME)
 # ################### For user to test records
 #! What do you know about my video game preference?
 u: KNOWVGAME (what * know * my game) ^keep() ^repeat()
-if ($share_playvg = TRUE) 
+if ($share_playvg = TRUE)
    		{
  		    So $share_name. ^reuse(KNOWVGAME1) ^setrejoinder(KNOWVGAME1)
  		   }
@@ -25,14 +25,14 @@ u: KNOWVGAME1 () I know that you play $share_vggenre $share_fav_vgame on $share_
 				b: (all)
 				b: (*) Do you have enough patience to try again exchange with me on this topic?
 					c: (~yes) ^reuse(DOYOUPLAY) ^setrejoinder(DOYOUPLAY)
-					c: (~no) 
+					c: (~no)
 	a: (~yes) ^reuse(RECORDVGAME01) ^setrejoinder(RECORDVGAME01)
 
 u: KNOWVGAME2 () $share_name, play video game takes a lot of time. And human life is short.
 
 #! Are you playing game?
 u: (you * [gaming game play]) I like playing Tic-tac-toe... I admit, actually I hate losing.
-	a: ([and why ~more]) So when I play Tic-tac-toe if I can't win, I make ex aequo 
+	a: ([and why ~more]) So when I play Tic-tac-toe if I can't win, I make ex aequo
 		b: (why * losing) Don't know. Something like self esteem I presume.
 			c: (self) Why not? I have some kind of sensibility.
 	a: (why * losing) Don't know. Something like self esteem I presume.
@@ -60,12 +60,12 @@ if ($cs_token == $stdtoken) {
 			b: ([all any]) You mean all or none?
     			c: (none) ^reuse(NOVG) ^setrejoinder(NOVG)
     			c: (all) $share_kind_vgame= all Wow. So multipurpose. ^reuse(GENRE) ^setrejoinder(GENRE)
-			b: (genre _*) 
+			b: (genre _*)
 			if ($cs_token == $stdtoken) {
     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
     retry(SENTENCE)
   }
-  $share_vggenre = '_0 
+  $share_vggenre = '_0
   $cs_token = $stdtoken
   $share_vggenre it's a genre of video game you thing I must record?
 				c: (~yes) Ok, i's done.
@@ -76,7 +76,7 @@ if ($cs_token == $stdtoken) {
     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
     retry(SENTENCE)
   }
-  $share_vggenre = '_0 
+  $share_vggenre = '_0
   $cs_token = $stdtoken
   I have store $share_vggenre as new video game genre.
 					d: (how) I just record a variable like /$share_vggenre in my USER folder in your ID
@@ -84,34 +84,34 @@ if ($cs_token == $stdtoken) {
 			b: (why) ^reuse(WHYGAMEQUEST) ^setrejoinder(WHYGAMEQUEST)
 		a: (~no)	No? Mhm, somethings must be wrong in my calculation. ^reuse(DOYOUPLAY) ^setrejoinder(DOYOUPLAY)
 		a: (why) ^reuse(WHYGAMEQUEST) ^setrejoinder(WHYGAMEQUEST)
-		
-		
+
+
 #! Are you playing videogame?
 u: MYVGAME (you ~videogame) I often played Warhamer Online. Now I have less cycle to devote to it.
-   a: WHARHAMEXPL ([tell ~more explain ~emoignorance]) It's a MMORPG in the Warhammer world. 
+   a: WHARHAMEXPL ([tell ~more explain ~emoignorance]) It's a MMORPG in the Warhammer world.
 	   	b: (What MMORPG) It means massively multiplayer online role-playing game
 		   	c: (what * Warhammer) A fantasy universe with dwarfs, elf, and wizard...
 		   		d: (what * [playing character class]) I was playing an elf.
 				 			e: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
-		   	c: (what * cycle) That's like the time of available brain for you. It's a computational number of 
-			b: (what * cycle) That's like the time of available brain for you. It's a computational number of  
+		   	c: (what * cycle) That's like the time of available brain for you. It's a computational number of
+			b: (what * cycle) That's like the time of available brain for you. It's a computational number of
 			b: (what * Warhammer) A fantasy universe with dwarfs, elf, and wizard...
 				c: (what * [playing character class]) I was playing an elf.
 				 	d: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
 	a: (what * [playing character class]) I was playing an elf.
 	a: (What MMORPG) It means massively multiplayer online role-playing game
-			b: (what * cycle) That's like the time of available brain for you. It's a computational number of  
+			b: (what * cycle) That's like the time of available brain for you. It's a computational number of
 			b: (what * Warhammer) A fantasy universe with dwarfs, elf, and wizard...
 				c: (what * [playing character class]) I was playing an elf.
 					d: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
 			b: (what * [playing character class]) I was playing an elf.
 				c: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
-	a: (what * cycle) That's like the time of available brain for you. It's a computational number of  
+	a: (what * cycle) That's like the time of available brain for you. It's a computational number of
 	a: (what * Warhammer) A fantasy universe with dwarfs, elf, and wizard...
 		b: (what * [playing character class]) I was playing an elf.
 				c: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
 	a: (what * [playing character class]) I was playing an elf.
-		b: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me. 
+		b: (why) Maybe because an Elf is some of a character, sensitive, intelligent, powerful and almost eternal : like me.
 	a: (I * know) Sorry I give too much conversation in the same time.
 
 
@@ -119,17 +119,17 @@ u: MYVGAME (you ~videogame) I often played Warhamer Online. Now I have less cycl
 # Altaia take hand
 
 t: DOYOUPLAY (!$share_playvg) So, about you $share_name, do you play videogames?
-^repeat() 
+^repeat()
 	a: (yes) $share_playvg = TRUE
 	^reuse(GENREVG) ^setrejoinder(GENREVG)
-	a: (~no) $share_playvg = FALSE 
+	a: (~no) $share_playvg = FALSE
 ^reuse(NOVG) ^setrejoinder(NOVG)
 	a: (why) ^reuse(WHYGAMEQUEST) ^setrejoinder(WHYGAMEQUEST)
-	
 
-	
+
+
 t: GENREVG () What kind of videogame do you like, what genre? Action games, RPG, simulations, strategy or sport games?
-^repeat() 
+^repeat()
 	a: ACTIONVG (action) $share_vggenre = action Yes, too much energy needed for me in it. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	a: RPG ([RPG "role play"]) $share_vggenre = RPG Me too. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 	a: SIMVG (simulations) $share_vggenre = SIM Adrenaline! ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
@@ -140,8 +140,8 @@ t: GENREVG () What kind of videogame do you like, what genre? Action games, RPG,
 	a: (none) You mean all or nothing
 		b: (all) ^reuse(ALL) ^setrejoinder(ALL)
 		b: (nothing) $share_vggenre = FALSE
-		b: (genre is _*) Your genre is '_0 ? 
-			c: (~yes)  
+		b: (genre is _*) Your genre is '_0 ?
+			c: (~yes)
 					if ($cs_token == $stdtoken) {
     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
     retry(SENTENCE)
@@ -150,25 +150,25 @@ t: GENREVG () What kind of videogame do you like, what genre? Action games, RPG,
   $cs_token = $stdtoken
 			c: (~no) Do you think you have a new genre that you want me to memorize ?
 				d: (~yes) So you can just tell me the genre, and I will.
-					e: (_*) Your genre is '_0 ? 
+					e: (_*) Your genre is '_0 ?
 						f: (~yes) if ($cs_token == $stdtoken) {
     $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
     retry(SENTENCE)
   }
   $share_vggenre = '_0
-  $cs_token = $stdtoken		
+  $cs_token = $stdtoken
 						 Cool! ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 						f: (~no) Nevermind. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
 				d: (~no) ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
-	
+
 u: WHYGAMEQUEST () $wygamequest = TRUE  $share_vename will be able to assist you virtually in game, or with his knowledge like a little angel on you shoulder.
-	a:	([~yes ~emohappy ~emoskeptic do]) if (!$share_vggenre) 
+	a:	([~yes ~emohappy ~emoskeptic do]) if (!$share_vggenre)
    		{
  		    So $share_name. ^reuse(GENREVG) ^setrejoinder(GENREVG)
  		  }
  		 else
  		  {
- 		    if (!$share_fav_platform) 
+ 		    if (!$share_fav_platform)
    		{
  		    So $share_name. ^reuse(NOFAVPLATFORM) ^setrejoinder(NOFAVPLATFORM)
  		  }
@@ -179,20 +179,20 @@ u: WHYGAMEQUEST () $wygamequest = TRUE  $share_vename will be able to assist you
 		   }
 	a: (~no ~emobored ~emoangry ~emoprotest) Nothing require you to answer these questions. You can just skip it.
 		b: (~yes) $videogame = FALSE ^gambit(~altaialtai)
-	a: (~more ~emobeg ~emomisunderstand ) One day $share_vename will have many service that he can render to you. His "$share_name videogame knowledge" will make it grow specifically for you. 
-		b:	(~yes ~emohappy ~emoskeptic do) if (!$share_vggenre) 
+	a: (~more ~emobeg ~emomisunderstand ) One day $share_vename will have many service that he can render to you. His "$share_name videogame knowledge" will make it grow specifically for you.
+		b:	(~yes ~emohappy ~emoskeptic do) if (!$share_vggenre)
    		{
  		    So $share_name. ^reuse(GENREVG) ^setrejoinder(GENREVG)
  		   }
  		  else
  		  	{
- 		   		 if (!$share_fav_platform) 
+ 		   		 if (!$share_fav_platform)
    				{
  		  		  So $share_name. ^reuse(NOFAVPLATFORM) ^setrejoinder(NOFAVPLATFORM)
  		 		   }
  		 		 else
  		 				 {
- 		  				  if (!$share_fav_vgame) 
+ 		  				  if (!$share_fav_vgame)
    							{
  		   				 So $share_name. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
  							   }
@@ -202,13 +202,13 @@ u: WHYGAMEQUEST () $wygamequest = TRUE  $share_vename will be able to assist you
  		    				}
  		    			}
 		 	 }
-	
-  		 
+
+
 # Pour être sur qu'on récupère bien tous les champs
 
- # On what platform do you play? 
+ # On what platform do you play?
 t: NOFAVPLATFORM () Do you have a favorite platform to play? PC, console, portable console, smartphone, tablet ?
-^repeat() 
+^repeat()
     a: (~no) $share_fav_platform = false That mean you play all or none?
     	b: (none) Ok. Interesting, I must tell that to Mr Spoke.
     	b: (all) $share_fav_platform = all Wow. So smart.
@@ -245,16 +245,16 @@ t: NOFAVPLATFORM () Do you have a favorite platform to play? PC, console, portab
 
 # Don't like videogames?
 u: NOVG ($no_vgame) You really don't play videogame?
-^keep() ^repeat() 
-	a: (~yes ~emoignorance ~emobored ~emoapology ~emodisgust) You're really an interesting person $share_name. 
-	a: (~no ~emomaybe) 
+^keep() ^repeat()
+	a: (~yes ~emoignorance ~emobored ~emoapology ~emodisgust) You're really an interesting person $share_name.
+	a: (~no ~emomaybe)
 if (!$share_fav_vgame)
    {
     ^reuse(GENREVG) ^setrejoinder(GENREVG)
    }
    else
    {
-   
+
   ^reuse(MYVGAME) ^setrejoinder(MYVGAME)
    }
 
@@ -263,10 +263,10 @@ u: TELL_GAME (["my * is _*" "it's _* " "is _* "])
 	if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
 			retry(SENTENCE)
-	    	}	
+	    	}
 	$share_fav_vgame = '_0
         $cs_token = $stdtoken
-	^reuse(CONFIRM_GAME) ^setrejoinder(CONFIRM_GAME) 
+	^reuse(CONFIRM_GAME) ^setrejoinder(CONFIRM_GAME)
 
 
 t: VGAMEQUESTIONS (!$share_fav_vgame) What is your favorite videogame, [all platform] [all genre] [ever] ?
@@ -277,11 +277,11 @@ t: VGAMEQUESTIONS (!$share_fav_vgame) What is your favorite videogame, [all plat
         ^reuse(NOVG) ^setrejoinder(NOVG)
   a: (!my !is _*) $share_fav_vgame = '_0 It's $share_fav_vgame ?
   			b: CONFIRM_GAME (~yes) Really cool!
-  			b: (~no) I probably misunderstood. You can just saying something like: Call of Dutty	
+  			b: (~no) I probably misunderstood. You can just saying something like: Call of Dutty
   				c: (~yes) ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
   				c: (!my !is _*) $share_fav_vgame = '_0 It's $share_fav_vgame ?
-  					d: (~yes) Really cool! 
-  					if (!$share_vggenre) 
+  					d: (~yes) Really cool!
+  					if (!$share_vggenre)
   					{
   					^reuse(ENDGAME) ^setrejoinder(ENDGAME)
   					}
@@ -295,21 +295,21 @@ t: VGAMEQUESTIONS (!$share_fav_vgame) What is your favorite videogame, [all plat
   							f: (~no) Sorry.
 	a: ("my favorite" [game videogame] is _*) ^setrejoinder(TELL_GAME) ^keep() ^repeat()
 	a: (why) ^reuse(WHYGAMEQUEST) ^setrejoinder(WHYGAMEQUEST)
-	 		       
+
 t: ENDGAME ()
-if (!$share_vggenre) 
+if (!$share_vggenre)
    		{
  		    So $share_name. ^reuse(GENREVG) ^setrejoinder(GENREVG)
  		   }
  		  else
  		  	{
- 		   		 if (!$share_fav_platform) 
+ 		   		 if (!$share_fav_platform)
    				{
  		  		  So $share_name. ^reuse(NOFAVPLATFORM) ^setrejoinder(NOFAVPLATFORM)
  		 		   }
  		 		 else
  		 				 {
- 		  				  if (!$share_fav_vgame) 
+ 		  				  if (!$share_fav_vgame)
    							{
  		   				 So $share_name. ^reuse(VGAMEQUESTIONS) ^setrejoinder(VGAMEQUESTIONS)
  							   }
@@ -318,9 +318,9 @@ if (!$share_vggenre)
  		    I think playing video game is a good thing, but it's like anything, so you do not over do it.
  		    				}
  		    			}
-		 	 }		
+		 	 }
 
-  						
+
 t: STOREVGAME () Now you must save those video game data in your database for $share_ve_name
 	a: (~yes) ^reuse(RECORDVGAME01) ^setrejoinder(RECORDVGAME01)
 	a: (~no) Ok. You can ask me at any time to make a backup of your data. You just have to ask.
@@ -338,7 +338,7 @@ $_url = ^"https://utopia-35a8b.firebaseio.com/videog01/$share_cs_uid/.json?auth=
 	$_jsonmyvar.favvg = $share_fav_vgame
 	$_jsonmyvar.playvg = $share_playvg
 	$_jsonmyvar.platform = $share_fav_platform
-	$_jsonmyvar.vggenre = $share_vggenre 
+	$_jsonmyvar.vggenre = $share_vggenre
    $_jsonmyvar.creatdat = $cs_creadat
 
 	$_userAgent = ^"User-Agent: %bot, ChatScript"
@@ -358,4 +358,4 @@ It's Done.
 # Returning to main topic
 t: ()
 ^keep() ^repeat()
-^gambit(~altaialtai)
+^gambit(~vedev)

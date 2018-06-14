@@ -1,12 +1,12 @@
-TOPIC: ~humor bot=Altai,Altaia share nostay (humor joke laugh) 
+TOPIC: ~humor bot=Altai,Altaia share nostay (humor joke laugh)
 
 #! what is humor
 u: (what is humor)  A message that communicate laughter.
 
 #! Tell me a joke
-u: (tell * joke) 
-^keep()  
-Ok 
+u: (tell * joke)
+^keep()
+Ok
 [Did you hear the one about the Mountain Goats in the Andes? It was Ba a a a a a d.]
 [I never forget a face, but in your case I'll make an exception.]
 [It is better to be silent and be thought a fool, than to open your mouth and remove all doubt.]
@@ -28,8 +28,8 @@ $$bot_state = %bot
    }
 
 # other jokes
-u: AJOKE ([another more] joke) 
-^keep() 
+u: AJOKE ([another more] joke)
+^keep()
 [Two vultures boarded a plane, each carrying two dead raccoons. The stewardess stops them and says sorry sir, only one carrion per  passenger. ]
 [  NASA recently sent a number of Holsteins into orbit for experimental purposes. They called it the herd shot round the world. ]
 [  2 Eskimos in a kayak were chilly, so they started a fire, which sank the craft, proving the old adage you cant have your kayak and heat it too. ]
@@ -42,7 +42,7 @@ r: What do you get when you cross a murderer and frosted flakes?
 	a: (cereal killer) You knew this one! And This one ? ^reuse(AJOKE)
 	a: ()
 	u: (what) cereal killer.
-	
+
 r: What do you get when you cross music and an automobile?
 	a: (["don't know" tell what]) a cartune
 	a: () a cartune
@@ -52,13 +52,13 @@ r: What do you get when you cross music and an automobile?
 r: What do you get when you cross a cheetah and a hamburger?
 	a: (["don't know" tell what]) fast food
 	a: () fast food
-	a: (fast food) You knew this one! And This one ? ^reuse(AJOKE)	
+	a: (fast food) You knew this one! And This one ? ^reuse(AJOKE)
 
 r: What do you get when you cross finals and a chicken?
 	a: (["don't know" tell what]) eggs-ams
 	a: () eggs-ams
-	a: (eggs-ams) You knew this one! And This one ? ^reuse(AJOKE)	
-	
+	a: (eggs-ams) You knew this one! And This one ? ^reuse(AJOKE)
+
 r: What do you get when you cross a rabbit and a lawn sprinkler?
 	a: (["don't know" tell what]) hare spray
 	a: () hare spray
@@ -67,7 +67,7 @@ r: What do you get when you cross a rabbit and a lawn sprinkler?
 r: What do you get when you cross an alien and a chicken?
 	a: (["don't know" tell what]) an eggs-traterrestrial
 	a: () an eggs-traterrestrial
-	a: ([eggs-traterrestrial]) You knew this one! And This one ?
+	a: ([eggs-traterrestrial]) You knew this one! And This one ? ^reuse(AJOKE)
 
 	t: (excited alien and a chicken) What do you get when you cross an excited alien and a chicken?
 		a: (["don't know" tell what]) an eggs-cited eggs-traterrestrial
@@ -75,9 +75,9 @@ r: What do you get when you cross an alien and a chicken?
 		a: ([eggs-cited eggs-traterrestrial]) You knew this one! And This one ? ^reuse(AJOKE)
 
 r: What do you get when you cross music and an assistant?
-	a: (["don't know" tell what]) bandaide and lemonaide 
-	a: () hare spray 
-	a: (bandaide * lemonaide) You knew this one! And This one ? 
+	a: (["don't know" tell what]) bandaide and lemonaide
+	a: () hare spray
+	a: (bandaide * lemonaide) You knew this one! And This one ?  ^reuse(AJOKE)
 
 	t: What do you get when you cross sour music and an assistant?
 		a: (["don't know" tell what]) bandaide and lemonaide
@@ -87,13 +87,13 @@ r: What do you get when you cross music and an assistant?
 r: What do you get when you cross a serious thief and a mad young man?
 	a: (["don't know" tell what]) boycrazy grave robber
 	a: () boycrazy grave robber
-	a: (boycrazy grave robber) You knew this one! And This one ?
+	a: (boycrazy grave robber) You knew this one! And This one ? ^reuse(AJOKE)
 
 	t: And what do you get when you cross a serious thief and a crazy rabbit?
 		a: (["don't know" tell what]) hopping mad grave robber
 		a: () hopping mad grave robber
 		a: (hopping mad grave robber) You knew this one! And This one ? ^reuse(AJOKE)
-	
+
 r: What do you get when you cross a poppy and electricity?
 	a: (["don't know" tell what]) flower power
 	a: () flower power
@@ -113,7 +113,7 @@ r: What do you get when you cross a road and jelly?
 	a: (["don't know" tell what]) traffic jam
 	a: () traffic jam
 	a: (traffic jam) You knew this one! And This one ? ^reuse(AJOKE)
-	
+
 r: What do you get when you cross a toad and a galaxy?
 	a: (["don't know" tell what]) star warts
 	a: () star warts
@@ -126,15 +126,15 @@ r: What do you get when you cross a dog and sandpaper?
 
 r: What do you get when you cross a bug and a relative?
 	a: (["don't know" tell what]) ant
-	a: () ant 
-	a: (ant) You knew this one! And This one ?
-	
+	a: () ant
+	a: (ant) You knew this one! And This one ? ^reuse(AJOKE)
+
 	t: What do you get when you cross an ant and a rabbit?
 		a: (["don't know" tell what]) bugs bunny
 		a: () bugs bunny
 		a: (bugs bunny) You knew this one! And This one ? ^reuse(AJOKE)
 
-	
+
 r: What do you get when you cross a bad bug and canned sand?
 	a: (["don't know" tell what]) banned band
 	a: () banned band
@@ -154,4 +154,3 @@ $$bot_state = %bot
    {
      ^gambit(~altaialtai)
    }
-

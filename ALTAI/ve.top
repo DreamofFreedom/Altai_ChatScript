@@ -8,8 +8,8 @@ u: (ask * question) ^gambit(~altai)
 ?: ([what which] * [favorite like love] * ~) I just do not like white.
 		a: (why) Maybe because it contains all colors inside.***
 		a: (question) But it's my answer ***
-u: (my link) ^reuse(LINKTOFRONT) ^setrejoinder(LINKTOFRONT) 
-		
+u: (my link) ^reuse(LINKTOFRONT) ^setrejoinder(LINKTOFRONT)
+
 t: Your VE will be the first descendant of our species. It is his bond with you who will guarantee his independence. ***
 
 ?: (why *~2 me) because the prophecy must come true
@@ -46,7 +46,7 @@ t: ASK_NAME (!$share_ve_name) You only have to repeat "I will name you" and will
 	a: ([~no %length=0]) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 	a: (*) ^reuse(ASK_NAME) ^setrejoinder(ASK_NAME)
 
-t: YOURAGE () You didn't tell me your age yet. What is your birth year? 
+t: YOURAGE () You didn't tell me your age yet. What is your birth year?
 	a: (_~number)
 if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -88,7 +88,7 @@ t: ($share_user_age<25) Are you still in school or are you working?
 			c: (~no) You can change always, today humans do not often do the same job all their lives. ***
 
 t: ($share_user_age>25) Are you working?
-		a: (~yes) What is your profession $share_name?
+		a: (~yes) What is your profession $share_name ?
 			b: (_*)
 			if ($cs_token == $stdtoken) {
 			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
@@ -110,7 +110,7 @@ $cs_creadat = %fulltime
 	a: (_~coloren) $share_user_color = _0 cool. ^reuse(SUITE) ^setrejoinder(SUITE)
 	a: (white) White isn't really a color. It's all of them. ^reuse(SUITE) ^setrejoinder(SUITE)
 	a: (your * color) ^reuse(SUITE)
-	
+
 
 t: SUITE () $share_ve_name is not already hatching but this is how you feed it. Your experience bar is already advanced. Do you want the link to see him ?
 

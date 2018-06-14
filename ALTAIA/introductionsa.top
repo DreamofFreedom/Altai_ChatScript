@@ -1,21 +1,57 @@
 topic: ~INTRODUCTIONSA bot=Altaia (~emogoodbye ~emohello ~emohowzit name here )
 
-#!x will match on every return start of a conversation 
-t: ( %input<%userfirstline %input>0 ) 
-	^keep()  
+#!x will match on every return start of a conversation
+t: ( %input<%userfirstline %input>0 )
+	^keep()
 	[Welcome back] [Hello, again.][Glad you came back.][Hi.][Hi, again.] ^gambit(~altaialtai)
 
 #!x matches every time on startup of a new conversation
-t: ( %input<%userfirstline ) 
-	^keep()   
+t: ( %input<%userfirstline )
+	^keep()
 	Welcome to Emergence. ^gambit(~altaialtai)
 
 #!x issued only once, then erased
-t: A problem maybe. I know you ?
+t: 	Who am I speaking to? $share_name, is it you?
 	#! yes
-	a: (~yes) Welcome back $share_name! ^gambit(~altaialtai)
+	a: ([~yes me]) ^gambit(~altaialtai)
 	#! no
-	a: (~no) Then welcome again to Emergence. ^gambit(~altaialtai)
+	a: (~no) Then welcome to Emergence. ^reuse(NEWUSER)
 
-#! what is your name 
+#! what is your name
 u: ( what is your name ) My name is Altai. ^gambit(~altaialtai)
+
+u: NEWUSER () What's your name?
+a: ([~no %length=0]) Who are you?
+		b: (name) Would you tell me now? ^reuse(NEWUSER)
+		b: () It is a game but it's $share_name session. ^reuse(NEWUSER)
+	a: (!call !name !am _*)
+	if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	$share_namenew = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_NAME2)
+	a: (phone) lol Focus please, we have a job to do. ^reuse(NEWUSER)
+
+s: CONFIRM_NAME2 (?) I will call you $share_name. You're sure ? [It's weird $share_name, we keep it?] [] [$share_namenew as in the song.]
+	a: (~yes) Ok, great.  ^reuse(NEXTNEW)
+	a: (~no) Ok, so. ^reuse(NEWUSER)
+	a: ([why what]) Sorry it was just a little joke to put you at ease. Sorry that it did not work.
+
+s: CALL_NAME2 ([(my name is _* >) (I am _* >) (call me _* >)])
+	if ($cs_token == $stdtoken) {
+			$cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
+			retry(SENTENCE)
+	    	}
+	$share_namenew = '_0
+        $cs_token = $stdtoken
+	^reuse(CONFIRM_NAME2) ^setrejoinder(CONFIRM_NAME2)
+
+	u: NEXTNEW () Nice to know you $share_namenew. If you want to play Emergence, you have to enter the beta here: https://utopia-english.tech/en/
+		a: () Now, have a good day $share_namenew. See you latter
+			b:() ...
+				c: () ...
+					d: () ...
+
+u: ($share_name) ^gambit(~altaialtai)

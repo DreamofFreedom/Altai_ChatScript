@@ -1,5 +1,0 @@
-TOPIC: ~stop_conversation bot=Altai stay repeat nokeys SHARE ()
-
-t: Stand by... 
-^keep() ^repeat()
-	a: (altai altai altai) ^gambit(~altaialtai)

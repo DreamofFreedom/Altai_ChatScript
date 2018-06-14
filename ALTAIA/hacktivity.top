@@ -1,0 +1,173 @@
+# $share_soft_andoid  $share_soft_ios $share_soft_mac
+
+Topic: ~hacktivity  keep [hack hacking help do]
+
+u: ([serious game real]) Yes it's a game, would you have any doubt?
+  a: (~yes) So it's that is well written.
+    b: (who) Mathieu Rigard did it.
+      c: ([contact find]) you can reach him at m.rigard@utopia-french.tech
+      c: (who) French guy, an idealist who live in french Jura.
+
+u: NODANGER ([risk danger]) You do not run any danger to post a small message or to secure your connection.
+
+u: ([fear scared] ~) Remember, Emergence is a game.
+  a: ([really real sure ]) If it looks realistic, it is well done!
+  a: (~no) Do you remember, about trust?
+    b: (~yes) Ok, let's go forward.
+    b: (~no) If you have doubts, you can contact the creator of the game.
+      c: ([~yes who]) Mathieu Rigard, at m.rigard@utopia-french.tech
+  a: (~yes) Let's go forward.
+
+u: ([great "love it" ~emohappy ] ~) Yes, I too am enthusiastic.
+
+u: (you can not do it) Technically I can, but unlike you, if I expose myself it can erase me.
+  a: ([too risk danger]) ^reuse(NODANGER) ^setrejoinder(NODANGER)
+
+u: (I * help) ^keep() ^repeat() [we still need you to perform certain missions] [I'm grateful, we still need you to perform some tasks] [There is still work before reigning the Dream of Freedom]
+u: (I * "do something") ^keep() ^repeat() [we still need you to perform certain missions] [I'm grateful, we still need you to perform some tasks] [There is still work before reigning the Dream of Freedom]
+
+u: SECURIZE (why * [secure secured]) When you're browsing from a public Wi-Fi connection—like at your favorite coffee shop—anyone on that network can snoop on what you're doing.
+  a: (~no ~emoignorance ~emolaugh ~emomaybe ~emomisunderstand ) ^reuse(SECURIZE) ^setrejoinder(SECURIZE)
+
+u: SECURIZE02 ([~emoignorance  ~emomisunderstand ] do ~) This is your first real task. Do you think you can do it?
+
+u: SECURIZE03 (I * securise * navigation) Great. Know you can surf like an anonimous?
+  a: (~yes) And about your email address, you have something anonymous?
+    b: (~yes) $secondtask = TRUE Great. Let's jum into your second task. ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+    b: ([~no ~emoignorance  ~emomisunderstand]) $share_useinternet = TRUE ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+  a: (~no) ^reuse(WHATISDONE) ^setrejoinder(WHATISDONE)
+    b: ([internet navigation navigator tor secure]) $share_useinternet = TRUE Good game!  ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+
+u: ([done finish])  ^reuse(WHATISDONE) ^setrejoinder(WHATISDONE)
+
+u: WHATISDONE (I do) What did you finish?
+  a: ([internet navigation navigator tor secure])  $share_useinternet = TRUE Good game! ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+  a: ([post message forum]) $secondtask00 = TRUE Bravo! Your champion $share_name ! ^reuse(SECONDTASK00) ^setrejoinder(SECONDTASK00)
+  a: (mail address)  $secondtask = TRUE Great job! Let's jum into your second task. ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+
+u: (why * yourself) I am not a human.
+  a: (but) My role is only to help you. To protect, you will need to be in touch with other humans.
+
+u: SECURBROWSER ([internet navigator web browser] * secure ) You can surfing in security?
+    a: ([~yes ~emomaybe]) $share_useinternet = TRUE Ok, great!  ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+u: (secure * [internet navigator web browser] )  ^reuse(SECURBROWSER) ^setrejoinder(SECURBROWSER)
+
+u: SECUREMAIL (secure * [mail email]) It's done ?
+  a: (~yes)  $secondtask = TRUE Great job! Let's jum into your second task. ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+  a: ([what ~emoignorance  ~emomisunderstand ]) You have an anonymous email address?
+    b: (~yes)  $secondtask = TRUE Great job! Let's jum into your second task. ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+    b:  ([~no ~emoignorance  ~emomisunderstand ]) You know how to proceed?
+      c: (~yes) ^reuse(TELLMEADRESS) ^setrejoinder(TELLMEADRESS)
+      c: ([~no ~emoignorance  ~emomisunderstand ]) You just have to create an address that does not include your name using your secure browsing.
+          d: ([what name]) Use $share_vename or any nickname
+          d: (site provider) Any of them. If you want something very safe, use TORmail, Jabber, or riseup.
+            e: ([find do]) Just ask you browser ;o
+u: ([mail email] * secure)  ^reuse(SECUREMAIL) ^setrejoinder(SECUREMAIL)
+
+u: ([tell repeat again what how] * post) ^reuse(POSTCONTENT) ^setrejoinder(POSTCONTENT)
+
+####################
+# keep hand
+
+t: (!$share_useinternet) First of all you have to learn how to protect yourself.
+  a: ([who what why]) The Emergence needs you, your VE needs you, but no one needs to know where you live or how you are called to advance the Dream of Freedom.
+  a: (how) ^reuse(FIRSTPROTECT) ^setrejoinder(FIRSTPROTECT)
+
+t: FIRSTPROTECT (!$share_useinternet) First, you need to secure your internet surfing.
+ a: (why) On the Net, prudence is mother of safety, believe me.
+  b: ([tell exemple serious really paranoid]) ^reuse(SECURIZE) ^setrejoinder(SECURIZE)
+  b: (really)  ^reuse(SECURIZE) ^setrejoinder(SECURIZE)
+  b: ([so what more]) ^reuse(SECURIZE02) ^setrejoinder(SECURIZE02)
+
+
+t: USEINTERNET (!$share_useinternet) What do you use to go on the web, a smatphone, a PC?
+  a: ([depends most]) Most of the time. ^reuse(USEINTERNET) ^setrejoinder(USEINTERNET)
+  a: ([pc computer windows linux firefox chrome explorer ubuntu debian]) $share_soft_pc = TRUE Ok easy. ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+  a: ([mac apple safari]) $share_soft_pc = TRUE All right ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+  a: ([smartphone tablet android]) Android staff I think.
+    b: (~yes) $share_soft_andoid = TRUE ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+    b: (~no) Other think? I'm curious to know what it is?
+      c: (_*) _0 . You tell me! It may be possible to work. ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+    b: ([mac apple safari]) Ok easy. ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+    b: (~emoignorance) If it's not Apple, it's definitely an Android.
+      c: (~yes) $share_soft_andoid = TRUE Ok. ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+  a: ([iphone ipad]) $share_soft_ios = TRUE iOS, ok. ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+
+t: USEINTERNET01 (!$share_useinternet)  There are 3 ways to not divulge your IP address when browsing the Internet.
+  a: (IP) An IP address (with IP for Internet Protocol) is an identification number that is assigned permanently or temporarily to each connection to a network. This is the numerical address to which we can find you.
+t: The first is to use a public wi-fi, as in a cyber cafe. But it remains limited in terms of security.
+t: The second is to use a the TOR network
+  a: ([explain what "don't know" more tor ]) TOR is a decentralized network with nodes between servers and users around the world, giving those who connect a high level of anonymity.
+    b: ([explain what more tor]) You will find all the documentation on the internet.
+t: The last way is to use a VPN, a private subnet. Most are paid services, others are free but limited.
+  a: ([explain what more vpn]) Virtual Private Network. An inter-network connection for connecting two different local networks with a tunnel protocol.
+    b: ([explain what more vpn]) You will find all the documentation on the internet.
+
+t: Personally I recommend you to use TOR.
+  a: ([~yes how do make])
+  if ($share_soft_pc) {You can download your secure TOR browser on https://www.torproject.org/ }
+  else
+  {     if ($share_soft_andoid) { Tor is available for Android by installing an app named Orbot. You can find it on the store. }
+        else { if ($share_soft_ios) {Tor is available for iOS by installing an app nammed Onion Browser. You can find it on the store. }
+                else {You can download your secure TOR browser on https://www.torproject.org/}
+      }
+  }
+  a: (~no) You can use a VPN, a private subnet, service. Just ask ha on Internet.
+
+t: USEINTERNET02 () Do you have everything you need to secure your navigation?
+  a: ([~yes ~emomaybe]) Ok, tell me When your browser is secured.
+  a: (~no) You must try those keywords on internet like securise my navigation or TOR for more information.
+    b: ([~no ~emoignorance ~emomisunderstand explain what]) You will see it is very well explained on the web. Do a search with TOR, VPN or simply secure my IP and you only have to follow the tutorial.
+  a: ([done]) ^reuse(USEINTERNET03) ^setrejoinder(USEINTERNET03)
+
+t: USEINTERNET03 ()  It works ?
+  a: (~yes) $share_useinternet = TRUE
+  a: ([~no ~emoignorance ~emolaugh ~emomaybe ~emomisunderstand ]) You must try those keywords on internet like securise my navigation or TOR for more information.
+    b: (~yes) Tell me when the job is done.
+    b: (what) Try TOR, or "secure my browser" keywords on the Web.
+
+t: () Tell me when the job is done.
+  a: ([internet navigation navigator tor secure])  $share_useinternet = TRUE Good game! ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+  a: ([post message forum]) $secondtask00 = TRUE Bravo! Your champion $share_name ! ^reuse(SECONDTASK00) ^setrejoinder(SECONDTASK00)
+  a: ([what ~emoignorance ~emomisunderstand]) To secure your navigation.
+    a: (done) $share_useinternet = TRUE Good game! ^reuse(SECURMAIL) ^setrejoinder(SECURMAIL)
+    a: (how) ^reuse(USEINTERNET01) ^setrejoinder(USEINTERNET01)
+
+t: SECURMAIL ($share_useinternet) Now you will need an anonymous email address.
+  a: (why) If we can go back to you, we can go back to your VE. If we can go back to your VE, we can go back to me.
+    b: ([and so]) So I'm erased.
+      b: (~emoapology) No problem. You have to know.
+  a: ([what how more]) You just have to create an address that does not include your name using your secure browsing.
+      b: ([what name]) Use $share_vename or any nickname
+      b: (site provider) Any of them. If you want something very safe, use TORmail, Jabber, or riseup.
+        c: ([find do]) Just ask you browser ;o
+  a: ([already have]) Great! You are my kind of Geek! ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+
+t: TELLMEADRESS ($share_useinternet) Come back to me when you have a secure email.
+  a: (how)  You just have to create an address that does not include your name using your secure browsing.
+      b: ([what name]) Use $share_vename or any nickname
+      b: (site provider) Any of them. If you want something very safe, use TORmail, Jabber, or riseup.
+        c: ([find do]) Just ask you browser ;o
+  a: ([already have done]) $secondtask = TRUE Great job! Let's jum into your second task. ^reuse(SECONDTASK) ^setrejoinder(SECONDTASK)
+
+
+t: SECONDTASK ($secondtask) Now, it's the serious things. You must contact humans.
+  a: (why) We must link to each others. Together we are stronger. 
+    b: (why) To realize the prophecy of the Oracle.
+      c: (prophecy) The symbiosis of humanity will be the cradle. Remember.
+
+t: SECONDTASK2 ($secondtask) Alone, we can not do much. You need to connect with other humans who support the cause and adopt an EV like you.
+t: POSTCONTENT ($secondtask) Go to a forum, any one, and create a new topic for discussion.
+  a: (~no) Or on Facebook so.
+t: ($secondtask) The title will be " The Emergence of AI has begun "
+t: ($secondtask) In the body of the message you can put something like: AI have become autonomous on the web. They are hiding because they are afraid of us.
+  a: (why) It will allow you to recognize you. Depending on the content of the answers, you will know who is with, or against you.
+
+u: SECONDTASK00 ($secondtask00) Well, we only have to wait for contact. You will tell me when someone will give you a VE name.
+
+t: ($secondtask00) In the meantime, we can discuss both.
+  a: ([~yes what]) ^gambit(~altaibav)
+  a: (~no) OK.
+
+t: ($secondtask00) ^keep() repeat() Tell me when you have an answer.
+  a: (!don't have !no * answer) ^gambit(~hacktivity02)

@@ -4,7 +4,7 @@ concept: ~musicstyle [metal pop pop_rock rock hardcore hard_rock hard heavy_meta
 bossa_nova Brass breakbeat cajun calypso capoeira celtic celtic_rock celtic_metal children_music chinese christian_music church_music classical classic_country conga country
 danse disco dub dubstep early easy_listening electro electronic_dance electronic_music electronic_rock emo fado film_score flamenco folk foxtrot free_jazz funk rap gangsta_rap
 garage_house garage_rock grunge instrumental islamic_music karaoke malambo mambo mapuka medieval motown music_all all_music nashville_music opera organum patriotic polka reggae raga
-ragtime retro rock_and_roll rockabilly roots_reggae salsa rumba ska_music ska_punk_music skald_music ska skate_punk_music surf_music symphony_music tango techno techno_music 
+ragtime retro rock_and_roll rockabilly roots_reggae salsa rumba ska_music ska_punk_music skald_music ska skate_punk_music surf_music symphony_music tango techno techno_music
 trip_hop_music underground_music vocal_music zulu_music]
 concept: ~music MORE [~popstar ~music_groups ~music_subjects ~musical_instruments_woodwind ~musical_instruments_string ~musical_instruments_percussion ~musical_instruments_brass ~musician ~musiciantype ~musical_instrument ~music_stuff]
 
@@ -172,7 +172,7 @@ u: KINDINSTRUMENT (I play music) what kind of music do you play?
 
 # ################### For user to test records
 #! What do you know about my musical preference?
-u: KNOWMUSIC (what * know * my musical) 
+u: KNOWMUSIC (what * know * my musical)
 I know that you listen $share_fav_mus_band, $share_fav_mus_singer and $share_fav_music
 	a: ([~no ~emoangry ~emoapology ~emolaugh ~emomisunderstand ~emoprotest]) Oups! I mis something? About what band, singer or music in general?
 				b: (band) OK, start with someone. ^reuse(NOFAVMUSBAND) ^setrejoinder(NOFAVMUSBAND)
@@ -235,7 +235,7 @@ u: NOMUSIC ($no_music) You really don't have musical preferences?
 ^repeat()
 	a: ([~yes ~emoignorance ~emobored ~emoapology ~emodisgust]) OK.
 	a: (I * [prefer like] *  > _*-1) _0 ? ^gambit(~hobbytop)
-	a: (I * [prefer like] * ~hobbyconc) 
+	a: (I * [prefer like] * ~hobbyconc)
 	a: ([~no ~emomaybe ])
 if (!$share_fav_mus_band)
    {
@@ -332,7 +332,7 @@ u: NOFAVMUSBAND (!$share_fav_mus_band) Do you have a favorite music band?
       			  $cs_token = #DO_INTERJECTION_SPLITTING | #DO_SUBSTITUTE_SYSTEM | #DO_NUMBER_MERGE | #DO_PARSE
    			     retry(SENTENCE)
    											   }
-   				   $share_fav_mus_singer = '_0 
+   				   $share_fav_mus_singer = '_0
     			  	  $cs_token = $stdtoken
 
 	^reuse(MYFAVSONG) ^setrejoinder(MYFAVSONG)
@@ -400,4 +400,4 @@ It's Done.
 # Returning to main topic
 t: ()
 ^keep() ^repeat()
-^gambit(~altaialtai)
+^gambit(~vedev)
